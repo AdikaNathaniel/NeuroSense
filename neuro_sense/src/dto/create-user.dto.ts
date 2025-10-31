@@ -15,6 +15,6 @@ export class CreateUserDto {
   GhanaCard: string;
 
   @IsString()
-  @IsIn(['user', 'admin', 'moderator'])
+  @IsIn(['celebral-mother', 'admin', 'celebral-patient', 'celebral-caregiver'])
   role: string;
 }
