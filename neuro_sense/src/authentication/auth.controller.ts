@@ -10,6 +10,7 @@ import {
   Put, 
   Patch, 
   Query,
+  Param,
   HttpException 
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -228,8 +229,4 @@ export class AuthController {
       );
     }
   }
-}
-
-function Param(arg0: string): (target: AuthController, propertyKey: "reactivateAccount", parameterIndex: 0) => void {
-  throw new Error('Function not implemented.');
 }
