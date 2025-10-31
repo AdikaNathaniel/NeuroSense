@@ -14,7 +14,7 @@ export class User {
   @Prop({ required: true, unique: true })
   GhanaCard: string;
 
-  @Prop({ required: true, enum: ['user', 'admin', 'moderator'], default: 'user' })
+  @Prop({ required: true, enum: ['celebral-mother', 'admin', 'celebral-patient', 'celebral-caregiver'], default: 'celebral-mother' })
   role: string;
 
   @Prop()
