@@ -135,6 +135,18 @@ export class AuthService {
     return { message: 'Password reset successfully' };
   }
 
+
+    // Add this method to your AuthService class
+async getUserProfile(userId: string): Promise<any> {
+  const user = await this.userModel.findById(userId).select('-password -refreshToken');
+  
+  if (!user) {
+    throw new UnauthorizedException('User not found');
+  }
+
+  return user;
+}
+
   async changePassword(userId: string, changePasswordDto: ChangePasswordDto): Promise<{ message: string }> {
     const { currentPassword, newPassword } = changePasswordDto;
 
