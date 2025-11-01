@@ -9,6 +9,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class AuthService {
@@ -18,43 +19,72 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private jwtService: JwtService,
+    private emailService: EmailService, // Add EmailService
   ) {}
 
-  async register(createUserDto: CreateUserDto): Promise<{ message: string; user: any }> {
+  async register(createUserDto: CreateUserDto): Promise<{ 
+    success: boolean;
+    message: string; 
+    result?: any 
+  }> {
     const { username, password, GhanaCard, role } = createUserDto;
 
-    // Check if user already exists
-    const existingUser = await this.userModel.findOne({
-      $or: [{ username }, { GhanaCard }],
-    });
+    try {
+      // Check if user already exists
+      const existingUser = await this.userModel.findOne({
+        $or: [{ username }, { GhanaCard }],
+      });
 
-    if (existingUser) {
-      throw new ConflictException('User with this username or Ghana Card already exists');
+      if (existingUser) {
+        throw new ConflictException('User with this username or Ghana Card already exists');
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Generate OTP for email verification
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      const otpExpiryTime = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+      // Create user
+      const user = await this.userModel.create({
+        username,
+        password: hashedPassword,
+        GhanaCard,
+        role,
+        isVerified: false, // Email verification required
+        isActive: true,
+        failedLoginAttempts: 0,
+        otp,
+        otpExpiryTime,
+      });
+
+      // Send OTP email
+      const emailResult = await this.emailService.sendOTPEmail(username, otp);
+
+      if (!emailResult.success) {
+        // If email fails, delete the user and throw error
+        await this.userModel.findByIdAndDelete(user._id);
+        throw new Error(`Failed to send verification email: ${emailResult.message}`);
+      }
+
+      // Remove sensitive data from response
+      const userObject: any = user.toObject();
+      delete userObject.password;
+      delete userObject.refreshToken;
+      delete userObject.otp;
+
+      return {
+        success: true,
+        message: 'User registered successfully. Please check your email for verification OTP.',
+        result: {
+          user: userObject,
+          emailSent: true
+        }
+      };
+    } catch (error) {
+      throw error;
     }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const user = await this.userModel.create({
-      username,
-      password: hashedPassword,
-      GhanaCard,
-      role,
-      isVerified: true, // Since we're not using email verification in auth
-      isActive: true,
-      failedLoginAttempts: 0,
-    });
-
-    // Remove password from response
-    const userObject = user.toObject();
-    delete userObject.password;
-    delete userObject.refreshToken;
-
-    return {
-      message: 'User registered successfully',
-      user: userObject,
-    };
   }
 
   async login(loginUserDto: LoginUserDto): Promise<{ 
@@ -83,6 +113,11 @@ export class AuthService {
 
       if (!(user as any).isActive) {
         throw new Error('Your account is deactivated. Please contact support.');
+      }
+
+      // Check if email is verified
+      if (!(user as any).isVerified) {
+        throw new Error('Please verify your email before logging in.');
       }
 
       // Check password
@@ -128,7 +163,7 @@ export class AuthService {
       await this.userModel.findByIdAndUpdate(user._id, { refreshToken });
 
       // Remove sensitive data
-      const userObject = user.toObject();
+      const userObject: any = user.toObject();
       delete userObject.password;
       delete userObject.refreshToken;
 
@@ -141,7 +176,8 @@ export class AuthService {
             username: user.username,
             GhanaCard: user.GhanaCard,
             role: user.role,
-            isActive: (user as any).isActive
+            isActive: (user as any).isActive,
+            isVerified: (user as any).isVerified
           },
           token: accessToken,
           accessToken,
@@ -153,21 +189,96 @@ export class AuthService {
     }
   }
 
-
-  // Needs to be looked into
-  async forgotPassword(username: string): Promise<{ 
+  async verifyEmail(otp: string, username: string): Promise<{ 
     success: boolean; 
     message: string; 
-    result?: { resetToken: string } 
   }> {
     try {
       const user = await this.userModel.findOne({ username });
       if (!user) {
-        // Don't reveal if user exists or not for security
+        throw new Error('User not found');
+      }
+
+      if ((user as any).otp !== otp) {
+        throw new Error('Invalid OTP');
+      }
+
+      // Check if OTP is expired
+      if ((user as any).otpExpiryTime && (user as any).otpExpiryTime < new Date()) {
+        throw new Error('OTP has expired. Please request a new one.');
+      }
+
+      await this.userModel.findByIdAndUpdate(user._id, { 
+        isVerified: true, 
+        otp: null, 
+        otpExpiryTime: null,
+        isActive: true,
+        failedLoginAttempts: 0,
+        lockUntil: null
+      });
+
+      return {
+        success: true,
+        message: 'Email verified successfully. You can log in now.',
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async sendOtpEmail(username: string): Promise<{ 
+    success: boolean; 
+    message: string; 
+    result?: { email: string } 
+  }> {
+    try {
+      const user = await this.userModel.findOne({ username });
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      if ((user as any).isVerified) {
+        throw new Error('Email already verified');
+      }
+
+      // Generate new OTP
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      const otpExpiryTime = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+      await this.userModel.findByIdAndUpdate(user._id, {
+        otp,
+        otpExpiryTime
+      });
+
+      // Send OTP email
+      const emailResult = await this.emailService.sendOTPEmail(username, otp);
+
+      if (!emailResult.success) {
+        throw new Error(`Failed to send OTP: ${emailResult.message}`);
+      }
+
+      return {
+        success: true,
+        message: 'OTP sent successfully',
+        result: { email: username }
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async forgotPassword(username: string): Promise<{ 
+    success: boolean; 
+    message: string; 
+    result?: { email: string } 
+  }> {
+    try {
+      const user = await this.userModel.findOne({ username });
+      if (!user) {
+        // Don't reveal if user exists for security
         return {
           success: true,
-          message: 'If the username exists, a reset token has been sent',
-          result: { resetToken: 'dummy-token-for-security' }
+          message: 'If the username exists, a reset password has been sent to your email',
         };
       }
 
@@ -175,21 +286,27 @@ export class AuthService {
         throw new Error('Your account is deactivated. Please contact support.');
       }
 
-      // Generate reset token
-      const resetToken = crypto.randomBytes(32).toString('hex');
-      const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour
+      // Generate temporary password
+      const tempPassword = Math.random().toString(36).substring(2, 12);
+      const hashedPassword = await bcrypt.hash(tempPassword, 10);
 
-      await this.userModel.findByIdAndUpdate(user._id, {
-        resetPasswordToken: resetToken,
-        resetPasswordExpires: resetTokenExpiry,
+      await this.userModel.findByIdAndUpdate(user._id, { 
+        password: hashedPassword,
+        failedLoginAttempts: 0,
+        lockUntil: null
       });
 
-      console.log(`Reset token for ${username}: ${resetToken}`);
+      // Send forgot password email
+      const emailResponse = await this.emailService.sendForgotPasswordEmail(username, tempPassword);
+
+      if (!emailResponse.success) {
+        throw new Error(emailResponse.message);
+      }
 
       return {
         success: true,
-        message: 'If the username exists, a reset token has been sent',
-        result: { resetToken }, // Only for development
+        message: 'New password sent to your email',
+        result: { email: username },
       };
     } catch (error) {
       throw error;
@@ -237,7 +354,7 @@ export class AuthService {
     result: any 
   }> {
     try {
-      const user = await this.userModel.findById(userId).select('-password -refreshToken');
+      const user = await this.userModel.findById(userId).select('-password -refreshToken -otp');
       
       if (!user) {
         throw new Error('User not found');
@@ -251,7 +368,7 @@ export class AuthService {
           username: user.username,
           GhanaCard: user.GhanaCard,
           role: user.role,
-          // isActive: user.isActive,
+          isActive: (user as any).isActive,
           isVerified: (user as any).isVerified
         }
       };
@@ -302,17 +419,16 @@ export class AuthService {
   }> {
     try {
       const query = type ? { role: type } : {};
-      // use .lean() to return plain JS objects so TS recognizes document fields
-      const users = await this.userModel.find(query).select('-password -refreshToken').lean();
+      const users = await this.userModel.find(query).select('-password -refreshToken -otp').lean();
   
       const userList = (users as any[]).map((user) => ({
         id: user._id.toString(),
         username: user.username,
         GhanaCard: user.GhanaCard,
         role: user.role,
-        isVerified: (user as any).isVerified,
-        isActive: (user as any).isActive,
-        failedLoginAttempts: (user as any).failedLoginAttempts
+        isVerified: user.isVerified,
+        isActive: user.isActive,
+        failedLoginAttempts: user.failedLoginAttempts
       }));
   
       return {
@@ -397,7 +513,7 @@ export class AuthService {
       }
 
       // Check if account needs reactivation
-      const isLocked = (user as any).lockUntil && (user as any).lockUntil > new Date();
+      const isLocked = user.lockUntil && user.lockUntil > new Date();
       const isInactive = !user.isActive;
       const hasFailedAttempts = user.failedLoginAttempts > 0;
 

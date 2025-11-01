@@ -100,11 +100,25 @@ export class AuthController {
     }
   }
 
-  @Post('forgot-password')
-  @HttpCode(HttpStatus.OK)
-  async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+  // @Post('forgot-password')
+  // @HttpCode(HttpStatus.OK)
+  // async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+  //   try {
+  //     return await this.authService.forgotPassword(forgotPasswordDto.username);
+  //   } catch (error) {
+  //     throw new HttpException(
+  //       {
+  //         success: false,
+  //         message: error.message,
+  //       },
+  //       HttpStatus.BAD_REQUEST,
+  //     );
+  //   }
+  // }
+ @Get('forgot-password/:email')
+  async forgotPassword(@Param('email') email: string) {
     try {
-      return await this.authService.forgotPassword(forgotPasswordDto.username);
+      return await this.authService.forgotPassword(email);
     } catch (error) {
       throw new HttpException(
         {
@@ -115,6 +129,39 @@ export class AuthController {
       );
     }
   }
+
+  @Get('/verify-email/:otp/:email')
+  async verifyEmail(@Param('otp') otp: string, @Param('email') email: string) {
+    try {
+      return await this.authService.verifyEmail(otp, email);
+    } catch (error) {
+      throw new HttpException(
+        {
+          success: false,
+          message: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+
+
+   @Get('send-otp-email/:email')
+  async sendOtpEmail(@Param('email') email: string) {
+    try {
+      return await this.authService.sendOtpEmail(email);
+    } catch (error) {
+      throw new HttpException(
+        {
+          success: false,
+          message: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
 
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
