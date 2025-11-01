@@ -12,6 +12,10 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
   GhanaCard: string;
 
   @IsString()
