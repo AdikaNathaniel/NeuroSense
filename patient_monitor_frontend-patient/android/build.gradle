@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Updated AGP version to 8.6.0
+        classpath 'com.android.tools.build:gradle:8.6.0'
+        // Google Services plugin
+        classpath 'com.google.gms:google-services:4.4.0'
+        // Kotlin plugin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Redirect build directories to the root
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+// Register clean task
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
