@@ -23,9 +23,9 @@ export class EmailService {
         rejectUnauthorized: false
       },
       // Optimized timeouts for Render
-      connectionTimeout: 30000, // Increased to 30 seconds
-      greetingTimeout: 30000,   // Increased to 30 seconds  
-      socketTimeout: 30000,     // Increased to 30 seconds
+      connectionTimeout: 1000000, // Increased to 30 seconds
+      greetingTimeout: 1000000,   // Increased to 30 seconds  
+      socketTimeout: 1000000,     // Increased to 30 seconds
       // Additional reliability settings
       pool: true, // Use connection pooling
       maxConnections: 5,
