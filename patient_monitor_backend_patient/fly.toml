@@ -1,4 +1,4 @@
-app = "patient-monitor-backend-patient"
+app = "neurosense-palsy"
 
 [build]
   dockerfile = "Dockerfile"
