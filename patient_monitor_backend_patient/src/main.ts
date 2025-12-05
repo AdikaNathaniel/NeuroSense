@@ -98,7 +98,7 @@ const CONFIG = {
     enabled: process.env.DISABLE_FACE_RECOGNITION !== 'true',
   },
   server: {
-    port: parseInt(process.env.PORT, 10) || 3000,
+    port: parseInt(process.env.PORT, 10) || 9090,
     notificationPort: 3001,
     apiPrefix: process.env.APP_PREFIX || 'api/v1',
   },
