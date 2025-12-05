@@ -30,6 +30,9 @@ export class Users extends Document {
   @Prop({ required: true })
   card: string;
 
+  @Prop({ required: false, unique: true })
+  GhanaCard: string;
+
   @Prop({ required: true })
   password: string;
 
