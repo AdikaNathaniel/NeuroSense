@@ -1,0 +1,2 @@
+C:/Celebral-Monitor/Celebral-Monitor/patient_monitor_frontend-patient/android/app/.cxx/Debug/4v1s6j5h/x86_64/CMakeFiles/edit_cache.dir
+C:/Celebral-Monitor/Celebral-Monitor/patient_monitor_frontend-patient/android/app/.cxx/Debug/4v1s6j5h/x86_64/CMakeFiles/rebuild_cache.dir

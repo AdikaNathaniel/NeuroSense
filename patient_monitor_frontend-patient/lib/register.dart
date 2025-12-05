@@ -312,7 +312,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.blue, Colors.red],
+          colors: [Colors.green, Colors.red],
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
         ),
@@ -464,7 +464,7 @@ class _RegisterPageState extends State<RegisterPage> {
             iconSize: 24,
             elevation: 16,
             style: const TextStyle(color: Colors.white, fontSize: 16),
-            dropdownColor: Colors.blue[800],
+            dropdownColor: Colors.green[800],
             isExpanded: true,
             onChanged: (String? newValue) {
               setState(() {
@@ -533,7 +533,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
+        foregroundColor: Colors.green,
         padding: const EdgeInsets.symmetric(vertical: 16),
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(

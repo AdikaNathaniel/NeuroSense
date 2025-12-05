@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
+            Colors.green,
             Colors.red,
           ],
         ),
@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
               child: DropdownButton<String>(
                 value: selectedUserType,
                 isExpanded: true,
-                dropdownColor: Colors.blue.withOpacity(0.8),
+                dropdownColor: Colors.green.withOpacity(0.8),
                 style: const TextStyle(color: Colors.white, fontSize: 16),
                 hint: const Text(
                   'Login As',
@@ -236,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
+        foregroundColor: Colors.green,
         padding: const EdgeInsets.symmetric(vertical: 16),
       ),
       child: _isLoading
