@@ -62,7 +62,7 @@ class _PinUpdateScreenState extends State<PinUpdateScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final url = Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/pin');
+      final url = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/pin');
       final requestBody = {
         "userId": userIdController.text.trim(),
         "oldPin": oldPin,

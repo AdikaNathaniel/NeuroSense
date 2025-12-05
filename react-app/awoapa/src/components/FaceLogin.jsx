@@ -30,7 +30,7 @@ export default function FaceLogin() {
     formData.append('image', image);
 
     try {
-      const res = await fetch('https://patient-monitor-backend-patient.fly.dev/api/v1/face/detect', {
+      const res = await fetch('https://neurosense-palsy.fly.dev/api/v1/face/detect', {
         method: 'POST',
         body: formData,
       });

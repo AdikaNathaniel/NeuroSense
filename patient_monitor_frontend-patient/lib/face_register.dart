@@ -207,7 +207,7 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
 
     setState(() => _isLoading = true);
 
-    final uri = Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/face/register');
+    final uri = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/face/register');
     
     try {
       final request = http.MultipartRequest('POST', uri)

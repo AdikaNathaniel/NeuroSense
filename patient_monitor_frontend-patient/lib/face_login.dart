@@ -160,7 +160,7 @@ class _FaceLoginPageState extends State<FaceLoginPage> {
 
     setState(() => _isLoading = true);
 
-    final uri = Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/face/detect');
+    final uri = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/face/detect');
     final request = http.MultipartRequest('POST', uri);
 
     try {

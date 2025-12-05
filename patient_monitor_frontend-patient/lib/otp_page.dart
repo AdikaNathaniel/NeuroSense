@@ -30,7 +30,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
       _isLoading = true;
     });
 
-    final url = Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/users/verify-email/$otp/${widget.email}');
+    final url = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users/verify-email/$otp/${widget.email}');
     try {
       final response = await http.get(url);
       final data = json.decode(response.body);

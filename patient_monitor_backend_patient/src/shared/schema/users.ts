@@ -2,12 +2,12 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export enum userTypes {
-  ADMIN = 'admin',
-  CELEBRAL_MOTHER = 'celebral-mother',
-  CELEBRAL_CAREGIVER = 'celebral-caregiver',
-  CELEBRAL_PHYSICIAN = 'celebral-physician',
-  RELATIVE = 'relative',
-  GENERALUSER = 'wellness-user',
+  ADMIN = 'Admin',
+  CELEBRAL_MOTHER = 'Celebral-Mother',
+  CELEBRAL_CAREGIVER = 'Celebral-Caregiver',
+  CELEBRAL_PHYSICIAN = 'Celebral-Physician',
+  RELATIVE = 'Relative',
+  GENERALUSER = 'Regular-User',
 }
 
 

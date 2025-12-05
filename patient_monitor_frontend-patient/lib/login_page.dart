@@ -21,12 +21,19 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String selectedUserType = 'Doctor';
+  String selectedUserType = 'Admin'; // Default to 'Admin'
   bool _obscurePassword = true;
   bool _isLoading = false;
   int _remainingAttempts = 3; // Track remaining attempts
 
-  final List<String> userTypes = ['Doctor', 'Pregnant Woman', 'Family Relative', 'Admin', 'Wellness User'];
+  final List<String> userTypes = [
+    'Admin',
+    'Celebral-Mother',
+    'Celebral-Caregiver',
+    'Celebral-Physician',
+    'Relative',
+    'Regular-User'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
+            Colors.green,
             Colors.red,
           ],
         ),
@@ -181,10 +188,12 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 items: userTypes.map((String userType) {
+                  // Format display names for better readability
+                  String displayName = _formatUserTypeName(userType);
                   return DropdownMenuItem<String>(
                     value: userType,
                     child: Text(
-                      userType,
+                      displayName,
                       style: const TextStyle(color: Colors.white),
                     ),
                   );
@@ -200,6 +209,25 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  String _formatUserTypeName(String userType) {
+    switch (userType) {
+      case 'Admin':
+        return 'Admin';
+      case 'Celebral-Mother':
+        return 'Cerebral Mother';
+      case 'Celebral-Caregiver':
+        return 'Cerebral Caregiver';
+      case 'Celebral-Physician':
+        return 'Cerebral Physician';
+      case 'Relative':
+        return 'Relative';
+      case 'Regular-User':
+        return 'Regular User';
+      default:
+        return userType;
+    }
   }
 
   Widget _loginBtn() {
@@ -263,7 +291,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/users/login'),
+        Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users/login'),
         headers: {"Content-Type": "application/json"},
         body: json.encode({
           'email': email,
@@ -284,7 +312,7 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(
               builder: (context) => LoginPinPage(
                 userEmail: email,
-                userType: selectedUserType.toLowerCase(),
+                userType: selectedUserType, // Already in lowercase format
               ),
             ),
           );
@@ -441,7 +469,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/users/send-otp-email/$email'),
+        Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users/send-otp-email/$email'),
       );
 
       final responseData = json.decode(response.body);
@@ -633,7 +661,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _forgotPassword(String email) async {
     try {
       final response = await http.get(
-        Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/users/forgot-password/$email'),
+        Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users/forgot-password/$email'),
         headers: {"Content-Type": "application/json"},
       );
 

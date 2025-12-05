@@ -1,0 +1,22 @@
+name: Fly.io Usage Monitor
+
+on:
+  schedule:
+    - cron: '0 9 * * *' # every day at 9AM UTC
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  check-usage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Check Fly.io billing
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          echo "Checking Fly.io usage..."
+          fly billing show
+          fly machines list -a neurosense-palsy
+          fly status -a neurosense-palsy

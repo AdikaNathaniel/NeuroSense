@@ -37,7 +37,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
     });
 
     try {
-      final url = Uri.parse('https://patient-monitor-backend-patient.fly.dev/api/v1/pin/verify');
+      final url = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/pin/verify');
       final body = jsonEncode({
         'userId': widget.userEmail,
         'pin': pinController.text.trim(),

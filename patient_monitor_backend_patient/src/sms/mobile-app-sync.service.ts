@@ -21,7 +21,7 @@ export class MobileAppSyncService {
     @InjectModel(OfflineReminder.name)
     private readonly offlineReminderModel: Model<OfflineReminderDocument>,
   ) {
-    this.apiBaseUrl = this.configService.get<string>('API_BASE_URL') || 'https://patient-monitor-backend-patient.fly.dev';
+    this.apiBaseUrl = this.configService.get<string>('API_BASE_URL') || 'https://neurosense-palsy.fly.dev';
   }
 
   /**
