@@ -28,7 +28,7 @@ export class Users extends Document {
   email: string;
 
   @Prop({ required: true })
-  card: string;
+  NeuroSenseCard: string;
 
   @Prop({ required: false, unique: true })
   GhanaCard: string;
