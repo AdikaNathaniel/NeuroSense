@@ -89,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       child: ClipOval(
         child: Image.asset(
-          'assets/pregnant.png', // Update the path as needed
+          'assets/celebral.png', // Update the path as needed
           width: 120,
           height: 120,
           fit: BoxFit.cover,

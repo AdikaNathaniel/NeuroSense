@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.green,
+            Colors.blue,
             Colors.red,
           ],
         ),
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: ClipOval(
         child: Image.asset(
-          'assets/pregnant.png',
+          'assets/celebral.png',
           width: 120,
           height: 120,
           fit: BoxFit.cover,

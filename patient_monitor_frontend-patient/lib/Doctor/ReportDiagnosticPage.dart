@@ -112,7 +112,7 @@ class _DiagnosticToolPageState extends State<DiagnosticToolPage> {
 
     // Load the image from assets
     final image = pw.MemoryImage(
-      (await rootBundle.load('assets/pregnant.png')).buffer.asUint8List(),
+      (await rootBundle.load('assets/celebral.png')).buffer.asUint8List(),
     );
 
     // Define theme colors for consistency

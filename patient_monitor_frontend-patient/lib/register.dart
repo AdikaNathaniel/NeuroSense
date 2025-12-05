@@ -312,7 +312,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.green, Colors.red],
+          colors: [Colors.blue, Colors.red],
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
         ),
@@ -344,7 +344,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     child: ClipOval(
                       child: Image.asset(
-                        'assets/pregnant.png',
+                        'assets/celebral.png',
                         width: 120,
                         height: 120,
                         fit: BoxFit.cover,

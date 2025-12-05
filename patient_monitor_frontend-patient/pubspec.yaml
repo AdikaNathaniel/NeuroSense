@@ -85,7 +85,7 @@ dependencies:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/pregnant.png"
+  image_path: "assets/celebral.png"
 
   
   
@@ -122,7 +122,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
  
   assets:
-    - assets/pregnant.png
+    - assets/celebral.png
     - assets/pregnancy.png
     - assets/lotties/Pregnancy.json
     - assets/lotties/yogablack.json

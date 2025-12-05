@@ -98,9 +98,9 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
     final dateFormat = DateFormat('MMMM d, yyyy - h:mm a');
     final formattedDate = dateFormat.format(DateTime.now());
 
-    // Load the pregnant.png image from assets
+    // Load the celebral.png image from assets
     final pregnantImage = pw.MemoryImage(
-      (await rootBundle.load('pregnant.png')).buffer.asUint8List(),
+      (await rootBundle.load('celebral.png')).buffer.asUint8List(),
     );
 
     // Create the circular grey person icon
