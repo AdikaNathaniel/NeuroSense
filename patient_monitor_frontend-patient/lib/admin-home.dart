@@ -187,7 +187,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 20, color: Colors.blue),
+              Icon(icon, size: 20, color: Colors.green),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -216,7 +216,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ? AppBar(
               title: const Text('All Users'),
               centerTitle: true,
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               leading: Builder(
                 builder: (context) => IconButton(
@@ -230,7 +230,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     radius: 16,
                     child: Text(
                       widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'A',
-                      style: const TextStyle(color: Colors.blue, fontSize: 16),
+                      style: const TextStyle(color: Colors.green, fontSize: 16),
                     ),
                     backgroundColor: Colors.white,
                   ),
@@ -243,7 +243,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           : AppBar(
               title: Text(_selectedPage),
               centerTitle: true,
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.greenAccent,
               foregroundColor: Colors.white,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
@@ -259,7 +259,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     radius: 16,
                     child: Text(
                       widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'A',
-                      style: const TextStyle(color: Colors.blue, fontSize: 16),
+                      style: const TextStyle(color: Colors.green, fontSize: 16),
                     ),
                     backgroundColor: Colors.white,
                   ),
@@ -276,7 +276,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
             children: <Widget>[
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 child: Center(
                   child: Text(
@@ -290,7 +290,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.supervised_user_circle, color: Colors.blue),
+                leading: const Icon(Icons.supervised_user_circle, color: Colors.green),
                 title: const Text('All Users'),
                 selected: _selectedPage == 'Users',
                 onTap: () {
@@ -301,7 +301,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.notifications, color: Colors.blue),
+                leading: const Icon(Icons.notifications, color: Colors.green),
                 title: const Text('Notifications'),
                 selected: _selectedPage == 'Notifications',
                 onTap: () {
@@ -312,7 +312,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.support_agent, color: Colors.blue),
+                leading: const Icon(Icons.support_agent, color: Colors.green),
                 title: const Text('Support'),
                 selected: _selectedPage == 'Support',
                 onTap: () {
@@ -365,19 +365,83 @@ class _UserListPageState extends State<UserListPage> {
   }
 
   Future<void> fetchUsers() async {
-    final response = await http.get(Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users'));
+    try {
+      print('DEBUG: Fetching users from API...');
+      final response = await http.get(
+        Uri.parse('https://neurosense-palsy.fly.dev/api/v1/users'),
+        headers: {'Content-Type': 'application/json'},
+      );
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body)['result'];
+      print('DEBUG: Response status: ${response.statusCode}');
+      
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        
+        if (responseData['success'] == true) {
+          final List<dynamic> data = responseData['result'];
+          print('DEBUG: Total users from API: ${data.length}');
+          
+          // Filter and parse only complete users
+          List<User> completeUsers = [];
+          
+          for (var userData in data) {
+            try {
+              // Check if user has all required fields
+              if (userData['name'] != null && 
+                  userData['email'] != null && 
+                  userData['type'] != null &&
+                  userData['name'].toString().isNotEmpty &&
+                  userData['email'].toString().isNotEmpty &&
+                  userData['type'].toString().isNotEmpty) {
+                
+                final user = User.fromJson(userData);
+                completeUsers.add(user);
+              } else {
+                print('DEBUG: Skipping incomplete user: ${userData['id']}');
+              }
+            } catch (e) {
+              print('DEBUG: Error parsing user: $e');
+            }
+          }
+          
+          print('DEBUG: Complete users found: ${completeUsers.length}');
+          
+          setState(() {
+            users = completeUsers;
+            isLoading = false;
+          });
+        } else {
+          print('DEBUG: API returned success: false');
+          setState(() {
+            isLoading = false;
+          });
+          _showSnackbar(
+            context, 
+            "Failed to load users: ${responseData['message']}", 
+            Colors.red
+          );
+        }
+      } else {
+        print('DEBUG: HTTP error: ${response.statusCode}');
+        setState(() {
+          isLoading = false;
+        });
+        _showSnackbar(
+          context, 
+          "Server error: ${response.statusCode}", 
+          Colors.red
+        );
+      }
+    } catch (e) {
+      print('DEBUG: Exception caught: $e');
       setState(() {
-        users = data.map((userData) => User.fromJson(userData)).toList();
         isLoading = false;
       });
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      print('Failed to load users');
+      _showSnackbar(
+        context, 
+        "Network error: ${e.toString()}", 
+        Colors.red
+      );
     }
   }
 
@@ -390,40 +454,117 @@ class _UserListPageState extends State<UserListPage> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
+  Future<void> _refreshData() async {
+    setState(() {
+      isLoading = true;
+    });
+    await fetchUsers();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : users.isEmpty
-            ? const Center(
-                child: Text(
-                  'No users found',
-                  style: TextStyle(fontSize: 18, color: Colors.grey),
+    return RefreshIndicator(
+      onRefresh: _refreshData,
+      child: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : users.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.people_outline, size: 64, color: Colors.grey),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'No complete user profiles found',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Only users with name, email, and type are displayed',
+                        style: TextStyle(fontSize: 14, color: Colors.grey[500]),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        onPressed: _refreshData,
+                        icon: const Icon(Icons.refresh),
+                        label: const Text('Refresh'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : Column(
+                  children: [
+                    // Header with count
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      color: Colors.grey[50],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total Users: ${users.length}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    // Users list
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          return UserCard(user: users[index]);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              )
-            : ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (context, index) {
-                  return UserCard(user: users[index]);
-                },
-              );
+    );
   }
 }
 
 class User {
+  final String id;
   final String name;
   final String email;
   final String type;
+  final String? card;
   final bool isVerified;
+  final bool isActive;
+  final int failedLoginAttempts;
 
-  User({required this.name, required this.email, required this.type, required this.isVerified});
+  User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.type,
+    this.card,
+    required this.isVerified,
+    required this.isActive,
+    required this.failedLoginAttempts,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      name: json['name'],
-      email: json['email'],
-      type: json['type'],
-      isVerified: json['isVerified'],
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      email: json['email']?.toString() ?? '',
+      type: json['type']?.toString() ?? '',
+      card: json['card']?.toString(),
+      isVerified: json['isVerified'] ?? false,
+      isActive: json['isActive'] ?? false,
+      failedLoginAttempts: json['failedLoginAttempts'] ?? 0,
     );
   }
 }
@@ -435,30 +576,42 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    IconData userTypeIcon = Icons.account_circle;
-    String userTypeText = 'Unknown';
-    Color userTypeColor = Colors.grey;
+    // Determine icon, text and color based on user type
+    IconData userTypeIcon;
+    String userTypeText;
+    Color userTypeColor;
 
-    if (user.type == 'doctor') {
-      userTypeIcon = Icons.medical_services;
-      userTypeText = 'Doctor';
-      userTypeColor = Colors.blue;
-    } else if (user.type == 'admin') {
+    // Handle different user types with case-insensitive matching
+    final typeLower = user.type.toLowerCase();
+    
+    if (typeLower.contains('admin')) {
       userTypeIcon = Icons.admin_panel_settings;
       userTypeText = 'Admin';
       userTypeColor = Colors.red;
-    } else if (user.type == 'relative') {
+    } else if (typeLower.contains('doctor') || typeLower.contains('physician')) {
+      userTypeIcon = Icons.medical_services;
+      userTypeText = 'Medic';
+      userTypeColor = Colors.green;
+    } else if (typeLower.contains('relative')) {
       userTypeIcon = Icons.family_restroom;
       userTypeText = 'Relative';
-      userTypeColor = Colors.green;
-    } else if (user.type == 'pregnantWoman') {
+      userTypeColor = Colors.blue;
+    } else if (typeLower.contains('pregnant') || typeLower.contains('mother')) {
       userTypeIcon = Icons.pregnant_woman;
-      userTypeText = 'Pregnant Woman';
+      userTypeText = 'Mother';
       userTypeColor = Colors.pink;
+    } else if (typeLower.contains('caregiver')) {
+      userTypeIcon = Icons.health_and_safety;
+      userTypeText = 'Caregiver';
+      userTypeColor = Colors.orange;
+    } else {
+      userTypeIcon = Icons.account_circle;
+      userTypeText = user.type;
+      userTypeColor = Colors.grey;
     }
 
     return Card(
-      elevation: 4,
+      elevation: 3,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -466,35 +619,99 @@ class UserCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: userTypeColor.withOpacity(0.2),
-              ),
-              child: Icon(
-                userTypeIcon,
-                color: userTypeColor,
-                size: 28,
-              ),
+            // Avatar/Icon with status indicator
+            Stack(
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: userTypeColor.withOpacity(0.15),
+                  ),
+                  child: Icon(
+                    userTypeIcon,
+                    color: userTypeColor,
+                    size: 32,
+                  ),
+                ),
+                // Active/Inactive indicator
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: user.isActive ? Colors.green : Colors.grey,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            
             const SizedBox(width: 16),
+            
+            // User Information
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    user.name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  // Name row
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          user.name,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      // Verification badge
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: user.isVerified ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: user.isVerified ? Colors.green : Colors.orange,
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              user.isVerified ? Icons.verified : Icons.pending,
+                              size: 12,
+                              color: user.isVerified ? Colors.green : Colors.orange,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              user.isVerified ? 'Verified' : 'Pending',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: user.isVerified ? Colors.green : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
+                  
                   const SizedBox(height: 4),
+                  
+                  // Email
                   Text(
                     user.email,
                     style: const TextStyle(
@@ -504,22 +721,89 @@ class UserCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    userTypeText,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: userTypeColor,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  
+                  const SizedBox(height: 8),
+                  
+                  // Type and card row
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: userTypeColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          userTypeText,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: userTypeColor,
+                          ),
+                        ),
+                      ),
+                      
+                      if (user.card != null && user.card!.isNotEmpty) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            'Card: ${user.card}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[700],
+                            ),
+                          ),
+                        ),
+                      ],
+                      
+                      const Spacer(),
+                      
+                      // Failed login attempts indicator (if any)
+                      if (user.failedLoginAttempts > 0)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.red.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.warning_amber,
+                                size: 12,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                '${user.failedLoginAttempts} fails',
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
                   ),
+                  
+                  // ID (small and discreet)
+                  // const SizedBox(height: 6),
+                  // Text(
+                  //   'ID: ${user.id.substring(0, 8)}...',
+                  //   style: TextStyle(
+                  //     fontSize: 10,
+                  //     color: Colors.grey[500],
+                  //   ),
+                  // ),
                 ],
               ),
-            ),
-            Icon(
-              user.isVerified ? Icons.verified : Icons.pending,
-              color: user.isVerified ? Colors.green : Colors.orange,
-              size: 24,
             ),
           ],
         ),

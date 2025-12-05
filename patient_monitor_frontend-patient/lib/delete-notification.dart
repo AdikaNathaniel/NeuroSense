@@ -103,7 +103,7 @@ class _DeleteNotificationPageState extends State<DeleteNotificationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Delete Notification"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -126,7 +126,7 @@ class _DeleteNotificationPageState extends State<DeleteNotificationPage> {
                       const Icon(
                         Icons.search,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -155,7 +155,7 @@ class _DeleteNotificationPageState extends State<DeleteNotificationPage> {
                         child: ElevatedButton(
                           onPressed: _onDeletePressed,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

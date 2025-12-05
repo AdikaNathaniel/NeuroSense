@@ -14,13 +14,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'User List',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         textTheme: TextTheme(
           bodyMedium: TextStyle(color: Colors.white),
         ),   
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
           iconTheme: IconThemeData(color: Colors.white),
         ),
       ),
@@ -154,7 +154,7 @@ class _UserListPageState extends State<UserListPage> {
             icon: CircleAvatar(
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: const TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.green),
               ),
               backgroundColor: Colors.white,
             ),
@@ -170,7 +170,7 @@ class _UserListPageState extends State<UserListPage> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.blue,
+              Colors.green,
               Colors.red,
             ],
           ),
@@ -231,7 +231,7 @@ class UserCard extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       elevation: 5,
       child: ListTile(
-        leading: Icon(userTypeIcon, color: Colors.blue, size: 40),
+        leading: Icon(userTypeIcon, color: Colors.green, size: 40),
         title: Text(user.name, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

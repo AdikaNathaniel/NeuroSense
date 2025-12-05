@@ -37,7 +37,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
   BluetoothCharacteristic? vitalsCharacteristic;
   BluetoothCharacteristic? instantCharacteristic;
   StreamSubscription<List<ScanResult>>? scanSubscription;
-  StreamSubscription<BluetoothConnectionState>? connectionSubscription;
+  StreamSubscription< BluetoothConnectionState>? connectionSubscription;
   StreamSubscription<List<int>>? characteristicSubscription;
   StreamSubscription<List<int>>? instantCharacteristicSubscription;
 
@@ -55,7 +55,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
   void initState() {
     super.initState();
     _loadSavedDevice();
-    _checkBluetoothState();
+    _checkbluetoothState();
     
     // Auto-request data if parameter is true
     if (widget.autoRequestRunningAverages) {
@@ -229,21 +229,21 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
     );
   }
 
-  // Check Bluetooth state
-  Future<void> _checkBluetoothState() async {
+  // Check bluetooth state
+  Future<void> _checkbluetoothState() async {
     try {
       if (Platform.isAndroid) {
         final adapterState = await FlutterBluePlus.adapterState.first;
         if (adapterState != BluetoothAdapterState.on) {
-          _showBluetoothDialog();
+          _showbluetoothDialog();
         }
       }
     } catch (e) {
-      print('Error checking Bluetooth state: $e');
+      print('Error checking bluetooth state: $e');
     }
   }
 
-  void _showBluetoothDialog() {
+  void _showbluetoothDialog() {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -251,10 +251,10 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
           children: [
             Icon(Icons.bluetooth_disabled, color: Colors.orange),
             SizedBox(width: 8),
-            Text('Bluetooth Off'),
+            Text('bluetooth Off'),
           ],
         ),
-        content: const Text('Please turn on Bluetooth to scan for devices.'),
+        content: const Text('Please turn on bluetooth to scan for devices.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -265,7 +265,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
     );
   }
 
-  // Request Bluetooth permissions
+  // Request bluetooth permissions
   Future<bool> _requestPermissions() async {
     if (Platform.isAndroid) {
       Map<Permission, PermissionStatus> statuses = await [
@@ -277,7 +277,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
       bool allGranted = statuses.values.every((status) => status.isGranted);
       
       if (!allGranted) {
-        _showErrorDialog('Bluetooth permissions are required to scan for devices.');
+        _showErrorDialog('bluetooth permissions are required to scan for devices.');
         return false;
       }
       return true;
@@ -345,7 +345,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
     _showSuccessDialog('Device reset successfully');
   }
 
-  // Start scanning for Bluetooth devices
+  // Start scanning for bluetooth devices
   Future<void> _startScan() async {
     bool hasPermissions = await _requestPermissions();
     if (!hasPermissions) return;
@@ -357,14 +357,14 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
 
     try {
       if (await FlutterBluePlus.isSupported == false) {
-        _showErrorDialog('Bluetooth is not supported on this device');
+        _showErrorDialog('bluetooth is not supported on this device');
         setState(() => isScanning = false);
         return;
       }
 
       final adapterState = await FlutterBluePlus.adapterState.first;
       if (adapterState != BluetoothAdapterState.on) {
-        _showBluetoothDialog();
+        _showbluetoothDialog();
         setState(() => isScanning = false);
         return;
       }
@@ -408,10 +408,10 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
       connectionSubscription = device.connectionState.listen((state) {
         print('🔗 Connection state changed: $state');
         setState(() {
-          isConnected = state == BluetoothConnectionState.connected;
+          isConnected = state ==  BluetoothConnectionState.connected;
         });
         
-        if (state == BluetoothConnectionState.disconnected) {
+        if (state ==  BluetoothConnectionState.disconnected) {
           _showErrorDialog('Device disconnected');
         }
       });
@@ -424,7 +424,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
       final currentState = await device.connectionState.first;
       print('✅ Final connection state: $currentState');
       
-      if (currentState == BluetoothConnectionState.connected) {
+      if (currentState ==  BluetoothConnectionState.connected) {
         // Add service discovery with timeout
         try {
           print('🔍 Discovering services...');
@@ -681,7 +681,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
     );
   }
 
-  // Navigate to BluetoothHealthMetricsPage
+  // Navigate to bluetoothHealthMetricsPage
   void _navigateToHealthMetrics() {
     if (lastReceivedData == null) {
       _showErrorDialog('No data received yet');
@@ -694,9 +694,9 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => BluetoothHealthMetricsPage(
+          builder: (context) => bluetoothHealthMetricsPage(
             userEmail: widget.userEmail,
-            initialBluetoothData: vitals,
+            initialbluetoothData: vitals,
           ),
         ),
       );
@@ -710,8 +710,8 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Bluetooth Connect'),
-        backgroundColor: Colors.blue,
+        title: const Text('bluetooth Connect'),
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
@@ -811,7 +811,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
                   icon: const Icon(Icons.show_chart, size: 18),
                   label: const Text('View Latest Data'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   ),
@@ -843,7 +843,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
               : const Icon(Icons.search),
           label: Text(isScanning ? 'Scanning...' : 'Scan for Devices'),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.green,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
@@ -864,7 +864,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.green,
           ),
         ),
         const SizedBox(height: 16),
@@ -918,7 +918,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
                 : const Icon(Icons.refresh),
             label: const Text('Reconnect to Device'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
@@ -934,8 +934,8 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
           icon: const Icon(Icons.search),
           label: const Text('Scan for New Device'),
           style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.blue,
-            side: const BorderSide(color: Colors.blue),
+            foregroundColor: Colors.green,
+            side: const BorderSide(color: Colors.green),
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -971,7 +971,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.green,
           ),
         ),
         const SizedBox(height: 12),
@@ -1012,7 +1012,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
               color: isESP32 ? Colors.green[50] : Colors.white,
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: isESP32 ? Colors.green : Colors.blue,
+                  backgroundColor: isESP32 ? Colors.green : Colors.green,
                   child: Icon(
                     isESP32 ? Icons.monitor_heart : Icons.bluetooth,
                     color: Colors.white,
@@ -1034,7 +1034,7 @@ class _WearableDevicePairingPageState extends State<WearableDevicePairingPage> {
                     : IconButton(
                         icon: Icon(
                           Icons.link,
-                          color: isESP32 ? Colors.green : Colors.blue,
+                          color: isESP32 ? Colors.green : Colors.green,
                         ),
                         onPressed: () => _connectToDevice(result.device),
                       ),

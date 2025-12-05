@@ -106,7 +106,7 @@ class _EmergencyContactsListState extends State<EmergencyContactsList> {
   Widget _buildContactInfoRow(IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, color: Colors.blueAccent),
+        Icon(icon, color: Colors.greenAccent),
         const SizedBox(width: 16),
         Expanded(
           child: Text(
@@ -124,7 +124,7 @@ class _EmergencyContactsListState extends State<EmergencyContactsList> {
       appBar: AppBar(
         title: const Text('Emergency Contacts'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         elevation: 2,
         actions: [

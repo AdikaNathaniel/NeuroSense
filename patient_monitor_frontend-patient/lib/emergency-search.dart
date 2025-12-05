@@ -233,7 +233,7 @@ class _EmergencyContactSearchState extends State<EmergencyContactSearch> {
                       const Icon(
                         Icons.search,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(

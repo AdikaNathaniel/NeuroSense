@@ -146,7 +146,7 @@ class _MedicsListPageState extends State<MedicsListPage> {
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: Colors.blue),
+          Icon(icon, size: 20, color: Colors.green),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -194,7 +194,7 @@ class _MedicsListPageState extends State<MedicsListPage> {
         title: const Text('Doctor Directory'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(

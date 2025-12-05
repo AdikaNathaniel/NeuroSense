@@ -90,7 +90,7 @@ class _PregnancyCalculatorScreenState extends State<PregnancyCalculatorScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.blue,
+              Colors.green,
               Colors.red,
             ],
             begin: Alignment.topLeft,
@@ -159,7 +159,7 @@ class _PregnancyCalculatorScreenState extends State<PregnancyCalculatorScreen> {
                             padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                             textStyle: TextStyle(fontSize: 16),
                             backgroundColor: Colors.white,
-                            foregroundColor: Colors.blue,
+                            foregroundColor: Colors.green,
                           ),
                         ),
                       ),

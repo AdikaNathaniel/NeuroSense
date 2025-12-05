@@ -156,7 +156,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Create Your PIN"),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         centerTitle: true,
         foregroundColor: Colors.white,
       ),
@@ -178,7 +178,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+                    borderSide: BorderSide(color: Colors.greenAccent, width: 2),
                   ),
                 ),
                 validator: (value) =>
@@ -192,7 +192,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+                    borderSide: BorderSide(color: Colors.greenAccent, width: 2),
                   ),
                 ),
                 keyboardType: TextInputType.phone,
@@ -211,7 +211,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
               SizedBox(height: 24),
 
               _isLoading
-                  ? CircularProgressIndicator(color: Colors.blue)
+                  ? CircularProgressIndicator(color: Colors.green)
                   : ElevatedButton.icon(
                       onPressed: _submitPin,
                       icon: Icon(Icons.lock_open, color: Colors.white),
@@ -222,7 +222,7 @@ class _CreatePinPageState extends State<CreatePinPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        backgroundColor: Colors.blueAccent, // Fixed: use backgroundColor instead of primary
+                        backgroundColor: Colors.greenAccent, // Fixed: use backgroundColor instead of primary
                       ),
                     ),
             ],

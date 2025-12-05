@@ -16,6 +16,7 @@ import 'doctor-chat.dart';
 import 'pregnant-woman-chat.dart';
 import 'auth_screen.dart';
 import 'video_call_page.dart';
+import 'splash-screen.dart';
 
 
 
@@ -38,13 +39,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'PregMonitor',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       //  home:  WellnessTipsScreen(userEmail: 'example@example.com'),
       // home: CreateCancelAppointmentPage(),
       //  home: ViewAppointmentsPage(),
       // home: UserListPage(),
-      home: LoginPage(),
+      // home: LoginPage(),
+       home: AnimatedSplashScreen(
+         nextScreen: LoginPage(),
+         durationSeconds: 4,
+       ),
       // home: VideoCallPage(),
       //  home: const AuthScreen(),  // This contains the fingerprint SetUp
       //  home: PregnantWomanChatPage(),

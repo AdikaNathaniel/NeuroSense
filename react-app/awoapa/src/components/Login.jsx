@@ -29,7 +29,7 @@ export default function Login() {
       </div>
 
       {/* Right side */}
-      <div className='bg-gradient-to-br from-blue-500 to-red-500 flex flex-col justify-center items-center'>
+      <div className='bg-gradient-to-br from-green-500 to-red-500 flex flex-col justify-center items-center'>
         <form className='max-w-[400px] w-full mx-auto rounded-lg bg-cyan-600 p-8 px-8 shadow-xl'>
           <h2 className="text-4xl text-white font-bold text-center">SIGN IN</h2>
 
@@ -37,7 +37,7 @@ export default function Login() {
           <div className='flex flex-col py-2'>
             <label className='text-white'>Email</label>
             <input 
-              className='rounded-lg bg-white mt-2 p-2 focus:border-blue-500 focus:outline-none text-black' 
+              className='rounded-lg bg-white mt-2 p-2 focus:border-green-500 focus:outline-none text-black' 
               type="text" 
             />
           </div>
@@ -46,7 +46,7 @@ export default function Login() {
           <div className='flex flex-col py-2'>
             <label className='text-white'>Password</label>
             <input 
-              className='p-2 rounded-lg bg-white mt-2 focus:border-blue-500 focus:outline-none text-black' 
+              className='p-2 rounded-lg bg-white mt-2 focus:border-green-500 focus:outline-none text-black' 
               type="password" 
             />
           </div>
@@ -54,7 +54,7 @@ export default function Login() {
           {/* User Type */}
           <div className='flex flex-col py-2'>
             <label className='text-white'>User Type</label>
-            <select className='mt-2 p-2 rounded-lg bg-white text-black focus:border-blue-500 focus:outline-none'>
+            <select className='mt-2 p-2 rounded-lg bg-white text-black focus:border-green-500 focus:outline-none'>
               <option>Doctor</option>
               <option>Pregnant Woman</option>
               <option>Family Relative</option>

@@ -174,7 +174,7 @@ class _AnaemiaRiskStatisticsPageState extends State<AnaemiaRiskStatisticsPage>
             children: [
               Row(
                 children: [
-                  Icon(Icons.donut_large, color: Colors.blue.shade600, size: 28),
+                  Icon(Icons.donut_large, color: Colors.green.shade600, size: 28),
                   const SizedBox(width: 12),
                   const Text(
                     "Risk Distribution",
@@ -466,7 +466,7 @@ class _AnaemiaRiskStatisticsPageState extends State<AnaemiaRiskStatisticsPage>
                     child: _buildAnalysisMetric(
                       "Std Deviation",
                       riskSpread["standardDeviation"].toStringAsFixed(2),
-                      Colors.blue.shade400,
+                      Colors.green.shade400,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -560,7 +560,7 @@ class _AnaemiaRiskStatisticsPageState extends State<AnaemiaRiskStatisticsPage>
                       "First Assessment",
                       _formatDate(timeline["earliest"]),
                       Icons.play_arrow,
-                      Colors.blue.shade400,
+                      Colors.green.shade400,
                     ),
                   ),
                   Container(
@@ -568,7 +568,7 @@ class _AnaemiaRiskStatisticsPageState extends State<AnaemiaRiskStatisticsPage>
                     height: 40, // Reduced height
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.blue.shade400, Colors.green.shade400],
+                        colors: [Colors.green.shade400, Colors.green.shade400],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),

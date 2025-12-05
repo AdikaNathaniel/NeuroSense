@@ -137,7 +137,7 @@ class _NotificationsByRolePageState extends State<NotificationsByRolePage> {
                     : Icons.mark_email_unread,
                   size: 16,
                   color: notification['isRead'] == true 
-                    ? Colors.blue 
+                    ? Colors.green 
                     : Colors.grey,
                 ),
                 const SizedBox(width: 4),
@@ -145,7 +145,7 @@ class _NotificationsByRolePageState extends State<NotificationsByRolePage> {
                   notification['isRead'] == true ? 'Read' : 'Unread',
                   style: TextStyle(
                     color: notification['isRead'] == true 
-                      ? Colors.blue 
+                      ? Colors.green 
                       : Colors.grey,
                   ),
                 ),
@@ -179,7 +179,7 @@ class _NotificationsByRolePageState extends State<NotificationsByRolePage> {
       appBar: AppBar(
         title: const Text('Notifications by Role'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -199,7 +199,7 @@ class _NotificationsByRolePageState extends State<NotificationsByRolePage> {
                     const Icon(
                       Icons.group,
                       size: 48,
-                      color: Colors.blue,
+                      color: Colors.green,
                     ),
                     const SizedBox(height: 16),
                     const Text(

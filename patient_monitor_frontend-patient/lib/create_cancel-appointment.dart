@@ -235,8 +235,8 @@ class _CreateCancelAppointmentPageState
       margin: const EdgeInsets.only(bottom: 16),
       child: ListTile(
         leading: label.contains("Time") 
-            ? Icon(Icons.access_time, color: Colors.blue)
-            : Icon(Icons.calendar_today, color: Colors.blue),
+            ? Icon(Icons.access_time, color: Colors.green)
+            : Icon(Icons.calendar_today, color: Colors.green),
         title: Text('$label: $value'),
         trailing: Icon(Icons.arrow_drop_down, color: Colors.grey),
         onTap: onTap,
@@ -256,7 +256,7 @@ class _CreateCancelAppointmentPageState
         ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -264,7 +264,7 @@ class _CreateCancelAppointmentPageState
               backgroundColor: Colors.white,
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.green),
               ),
             ),
             onPressed: () {
@@ -355,14 +355,14 @@ class _CreateCancelAppointmentPageState
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.blue),
+        prefixIcon: Icon(icon, color: Colors.green),
         labelText: label,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.blue, width: 2),
+          borderSide: const BorderSide(color: Colors.green, width: 2),
         ),
         filled: true,
         fillColor: Colors.grey[50],

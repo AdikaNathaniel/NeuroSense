@@ -196,7 +196,7 @@ class _CsvPageState extends State<CsvPage> {
       builder: (context) => AlertDialog(
         title: Row(
           children: [
-            Icon(Icons.table_chart, color: Colors.blue),
+            Icon(Icons.table_chart, color: Colors.green),
             SizedBox(width: 8),
             Text('CSV File: $id'),
           ],
@@ -264,7 +264,7 @@ class _CsvPageState extends State<CsvPage> {
             icon: Icon(Icons.copy, size: 18),
             label: Text('Copy All'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             ),
@@ -295,7 +295,7 @@ class _CsvPageState extends State<CsvPage> {
             icon: Icon(Icons.fullscreen, size: 18),
             label: Text('View Full'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             ),
@@ -328,7 +328,7 @@ class _CsvPageState extends State<CsvPage> {
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.green,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                 ),
                 child: Row(
@@ -442,7 +442,7 @@ class _CsvPageState extends State<CsvPage> {
     return Scaffold(
       backgroundColor: Colors.white, // Default white background
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         title: Text("Vitals In CSV"),
         centerTitle: true, 
         foregroundColor: Colors.white,
@@ -465,7 +465,7 @@ class _CsvPageState extends State<CsvPage> {
                   children: [
                     Row(
                       children: const [
-                        Icon(Icons.description, color: Colors.blue, size: 32),
+                        Icon(Icons.description, color: Colors.green, size: 32),
                         SizedBox(width: 10),
                         Text(
                           "Get Latest CSV Readings",
@@ -477,7 +477,7 @@ class _CsvPageState extends State<CsvPage> {
                     const SizedBox(height: 12),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                       ),
@@ -498,12 +498,12 @@ class _CsvPageState extends State<CsvPage> {
                       Container(
                         padding: EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.blue.shade50,
+                          color: Colors.green.shade50,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [
-                            Icon(Icons.info_outline, color: Colors.blue),
+                            Icon(Icons.info_outline, color: Colors.green),
                             SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -549,7 +549,7 @@ class _CsvPageState extends State<CsvPage> {
                   children: [
                     Row(
                       children: const [
-                        Icon(Icons.list, color: Colors.blue, size: 32),
+                        Icon(Icons.list, color: Colors.green, size: 32),
                         SizedBox(width: 10),
                         Text(
                           "All CSV IDs",
@@ -561,7 +561,7 @@ class _CsvPageState extends State<CsvPage> {
                     const SizedBox(height: 12),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                       ),
@@ -606,7 +606,7 @@ class _CsvPageState extends State<CsvPage> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           IconButton(
-                                            icon: const Icon(Icons.copy, color: Colors.blue),
+                                            icon: const Icon(Icons.copy, color: Colors.green),
                                             tooltip: "Copy ID",
                                             onPressed: () {
                                               Clipboard.setData(ClipboardData(text: id));
@@ -652,7 +652,7 @@ class _CsvPageState extends State<CsvPage> {
                   children: [
                     Row(
                       children: const [
-                        Icon(Icons.search, color: Colors.blue, size: 32),
+                        Icon(Icons.search, color: Colors.green, size: 32),
                         SizedBox(width: 10),
                         Text(
                           "Download CSV by ID",
@@ -672,9 +672,9 @@ class _CsvPageState extends State<CsvPage> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: BorderSide(color: Colors.blue, width: 2),
+                          borderSide: BorderSide(color: Colors.green, width: 2),
                         ),
-                        prefixIcon: Icon(Icons.fingerprint, color: Colors.blue),
+                        prefixIcon: Icon(Icons.fingerprint, color: Colors.green),
                       ),
                       onSubmitted: (value) {
                         if (value.trim().isNotEmpty) {
@@ -685,7 +685,7 @@ class _CsvPageState extends State<CsvPage> {
                     const SizedBox(height: 12),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                       ),
@@ -712,14 +712,14 @@ class _CsvPageState extends State<CsvPage> {
                   color: downloadMessage!.contains("Error") || downloadMessage!.contains("Failed")
                       ? Colors.red.shade100
                       : downloadMessage!.contains("Downloading")
-                          ? Colors.blue.shade100
+                          ? Colors.green.shade100
                           : Colors.green.shade100,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: downloadMessage!.contains("Error") || downloadMessage!.contains("Failed")
                         ? Colors.red
                         : downloadMessage!.contains("Downloading")
-                            ? Colors.blue
+                            ? Colors.green
                             : Colors.green,
                   ),
                 ),
@@ -734,7 +734,7 @@ class _CsvPageState extends State<CsvPage> {
                       color: downloadMessage!.contains("Error") || downloadMessage!.contains("Failed")
                           ? Colors.red
                           : downloadMessage!.contains("Downloading")
-                              ? Colors.blue
+                              ? Colors.green
                               : Colors.green,
                     ),
                     SizedBox(width: 12),
@@ -746,7 +746,7 @@ class _CsvPageState extends State<CsvPage> {
                           color: downloadMessage!.contains("Error") || downloadMessage!.contains("Failed")
                               ? Colors.red.shade800
                               : downloadMessage!.contains("Downloading")
-                                  ? Colors.blue.shade800
+                                  ? Colors.green.shade800
                                   : Colors.green.shade800,
                         ),
                       ),
@@ -757,7 +757,7 @@ class _CsvPageState extends State<CsvPage> {
                         height: 16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
                         ),
                       ),
                   ],

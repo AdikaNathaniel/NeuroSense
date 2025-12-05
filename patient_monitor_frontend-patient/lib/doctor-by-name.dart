@@ -201,7 +201,7 @@ class _FindDoctorByNamePageState extends State<FindDoctorByNamePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Find Doctor by Name'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -224,7 +224,7 @@ class _FindDoctorByNamePageState extends State<FindDoctorByNamePage> {
                       const Icon(
                         Icons.search,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -253,7 +253,7 @@ class _FindDoctorByNamePageState extends State<FindDoctorByNamePage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowDoctor,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

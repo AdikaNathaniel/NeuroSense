@@ -123,7 +123,7 @@ class _PinVerifyScreenState extends State<PinVerifyScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: const Text("Login To Awopa", style: TextStyle(color: Colors.white)),
+              child: const Text("Login To Palsy", style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
@@ -173,7 +173,7 @@ class _PinVerifyScreenState extends State<PinVerifyScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Verify PIN"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
         foregroundColor: Colors.white,
         elevation: 2,
@@ -195,7 +195,7 @@ class _PinVerifyScreenState extends State<PinVerifyScreen> {
                 children: [
                   const SizedBox(height: 20),
                   const Center(
-                    child: Icon(Icons.lock, size: 60, color: Colors.blueAccent),
+                    child: Icon(Icons.lock, size: 60, color: Colors.greenAccent),
                   ),
                   const SizedBox(height: 30),
                   TextFormField(
@@ -239,7 +239,7 @@ class _PinVerifyScreenState extends State<PinVerifyScreen> {
                     onPressed: _isLoading ? null : verifyPin,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 56),
-                      backgroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.greenAccent,
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                         fontSize: 18,

@@ -507,11 +507,11 @@ class GlucoseSummaryCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: reading.timeContext == 'Not Set' 
                           ? Colors.orange.withOpacity(0.1)
-                          : Colors.blue.withOpacity(0.1),
+                          : Colors.green.withOpacity(0.1),
                       border: Border.all(
                         color: reading.timeContext == 'Not Set' 
                             ? Colors.orange
-                            : Colors.blue,
+                            : Colors.green,
                       ),
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -521,7 +521,7 @@ class GlucoseSummaryCard extends StatelessWidget {
                         fontSize: 11,
                         color: reading.timeContext == 'Not Set' 
                             ? Colors.orange[700]
-                            : Colors.blue[700],
+                            : Colors.green[700],
                         fontWeight: FontWeight.w500,
                       ),
                     ),

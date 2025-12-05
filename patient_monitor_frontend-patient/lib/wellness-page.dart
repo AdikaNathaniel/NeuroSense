@@ -123,7 +123,7 @@ class _WellnessTipsScreenState extends State<WellnessTipsScreen> {
   //               padding: const EdgeInsets.symmetric(vertical: 8),
   //               child: Row(
   //                 children: [
-  //                   const Icon(Icons.email_outlined, size: 20, color: Colors.blue),
+  //                   const Icon(Icons.email_outlined, size: 20, color: Colors.green),
   //                   const SizedBox(width: 12),
   //                   Flexible(
   //                     child: Text(
@@ -201,11 +201,11 @@ class _WellnessTipsScreenState extends State<WellnessTipsScreen> {
   //                 },
   //                 child: Row(
   //                   children: [
-  //                     const Icon(Icons.bluetooth, size: 20, color: Colors.blue),
+  //                     const Icon(Icons.bluetooth, size: 20, color: Colors.green),
   //                     const SizedBox(width: 12),
   //                     const Flexible(
   //                       child: Text(
-  //                         'Pair With Bluetooth Device',
+  //                         'Pair With bluetooth Device',
   //                         style: TextStyle(
   //                           color: Colors.black,
   //                           fontSize: 12,
@@ -375,7 +375,7 @@ class _WellnessTipsScreenState extends State<WellnessTipsScreen> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         centerTitle: true,
         // actions: [
         //   IconButton(
@@ -383,7 +383,7 @@ class _WellnessTipsScreenState extends State<WellnessTipsScreen> {
         //       backgroundColor: Colors.white,
         //       child: Text(
         //         widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-        //         style: TextStyle(color: Colors.blue),
+        //         style: TextStyle(color: Colors.green),
         //       ),
         //     ),
         //     onPressed: () {
@@ -429,7 +429,7 @@ class _WellnessTipsScreenState extends State<WellnessTipsScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(tip["icon"], size: 40, color: Colors.blue),
+                          Icon(tip["icon"], size: 40, color: Colors.green),
                           SizedBox(height: 8),
                           Text(
                             tip["title"],

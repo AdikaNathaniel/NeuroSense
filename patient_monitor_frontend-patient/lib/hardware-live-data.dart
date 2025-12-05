@@ -131,7 +131,7 @@ class _LiveVitalsHardwareDataPageState extends State<LiveVitalsHardwareDataPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text("Live Vitals Monitor"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
         actions: [
           IconButton(
@@ -143,13 +143,13 @@ class _LiveVitalsHardwareDataPageState extends State<LiveVitalsHardwareDataPage>
       ),
       body: RefreshIndicator(
         onRefresh: fetchVitals,
-        color: Colors.blueAccent,
+        color: Colors.greenAccent,
         child: Builder(
           builder: (context) {
             if (isLoading) {
               return const Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.greenAccent),
                 ),
               );
             }
@@ -169,7 +169,7 @@ class _LiveVitalsHardwareDataPageState extends State<LiveVitalsHardwareDataPage>
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.greenAccent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -193,7 +193,7 @@ class _LiveVitalsHardwareDataPageState extends State<LiveVitalsHardwareDataPage>
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blueAccent,
+                        backgroundColor: Colors.greenAccent,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -246,7 +246,7 @@ class _LiveVitalsHardwareDataPageState extends State<LiveVitalsHardwareDataPage>
                         title: 'Oxygen Saturation',
                         value: '${vitalData?['spo2']?.toStringAsFixed(0) ?? 'N/A'}%',
                         icon: Icons.air,
-                        color: Colors.blue,
+                        color: Colors.green,
                         lastUpdated: _getTimeAgo(vitalData?['updatedAt'] ?? ''),
                       ),
                       

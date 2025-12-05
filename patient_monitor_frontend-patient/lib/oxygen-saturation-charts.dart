@@ -132,7 +132,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               SizedBox(height: 8),
@@ -254,7 +254,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                   LineChartBarData(
                     spots: spots,
                     isCurved: true,
-                    color: Colors.blue,
+                    color: Colors.green,
                     barWidth: 3,
                     belowBarData: BarAreaData(
                       show: true,
@@ -262,8 +262,8 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.blue.withOpacity(0.3),
-                          Colors.blue.withOpacity(0.05),
+                          Colors.green.withOpacity(0.3),
+                          Colors.green.withOpacity(0.05),
                         ],
                       ),
                     ),
@@ -272,7 +272,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                       getDotPainter: (spot, percent, barData, index) {
                         return FlDotCirclePainter(
                           radius: 4,
-                          color: Colors.blue,
+                          color: Colors.green,
                           strokeWidth: 2,
                           strokeColor: Colors.white,
                         );
@@ -299,7 +299,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         centerTitle: true,
       ),
@@ -309,7 +309,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: Colors.green.shade50,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
@@ -332,7 +332,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+                      prefixIcon: Icon(Icons.calendar_today, color: Colors.green),
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                   ),
@@ -340,11 +340,11 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                 SizedBox(width: 12),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blue.withOpacity(0.3),
+                        color: Colors.green.withOpacity(0.3),
                         blurRadius: 4,
                         offset: Offset(0, 2),
                       ),
@@ -353,7 +353,7 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                   child: ElevatedButton(
                     onPressed: isLoading ? null : fetchOxygenSaturationData,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       shadowColor: Colors.transparent,
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -398,14 +398,14 @@ class _OxygenSaturationPageState extends State<OxygenSaturationPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
                         ),
                         SizedBox(height: 16),
                         Text(
                           "Loading Oxygen Saturation Data...",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.blue,
+                            color: Colors.green,
                           ),
                         ),
                       ],

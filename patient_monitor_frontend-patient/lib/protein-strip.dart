@@ -9,7 +9,7 @@ class UrineStripColorSelector extends StatefulWidget {
 
 class _UrineStripColorSelectorState extends State<UrineStripColorSelector> {
   final List<Color> colors = [
-    Color(0xFF00C2C7), // Cyan Blue
+    Color(0xFF00C2C7), // Cyan green
     Color(0xFFE5B7A5), // Light Pink
     Color(0xFFB794C0), // Light Purple
     Color(0xFFD8D8D8), // Light Gray
@@ -207,7 +207,7 @@ class _UrineStripColorSelectorState extends State<UrineStripColorSelector> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: selectedIndex == index ? Colors.blueAccent : Colors.transparent,
+                        color: selectedIndex == index ? Colors.greenAccent : Colors.transparent,
                         width: 3,
                       ),
                     ),

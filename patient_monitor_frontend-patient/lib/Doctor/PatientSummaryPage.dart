@@ -197,7 +197,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(16),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(8),
               ),
               child: pw.Column(
@@ -208,7 +208,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
                     style: pw.TextStyle(
                       fontSize: 16,
                       fontWeight: pw.FontWeight.bold,
-                      color: PdfColors.blue800,
+                      color: PdfColors.green800,
                     ),
                   ),
                   pw.SizedBox(height: 8),
@@ -242,7 +242,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(16),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(8),
               ),
               child: pw.Column(
@@ -253,7 +253,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
                     style: pw.TextStyle(
                       fontSize: 16,
                       fontWeight: pw.FontWeight.bold,
-                      color: PdfColors.blue800,
+                      color: PdfColors.green800,
                     ),
                   ),
                   pw.SizedBox(height: 12),
@@ -279,7 +279,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(16),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(8),
               ),
               child: pw.Column(
@@ -290,7 +290,7 @@ class _PatientSummaryPageState extends State<PatientSummaryPage> {
                     style: pw.TextStyle(
                       fontSize: 16,
                       fontWeight: pw.FontWeight.bold,
-                      color: PdfColors.blue800,
+                      color: PdfColors.green800,
                     ),
                   ),
                   pw.SizedBox(height: 12),

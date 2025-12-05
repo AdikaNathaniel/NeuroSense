@@ -63,7 +63,7 @@ class _SymptomListPageState extends State<SymptomListPage> {
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.person, color: Colors.blue),
+                const Icon(Icons.person, color: Colors.green),
                 const SizedBox(width: 8),
                 Text(
                   symptom['username'],
@@ -96,7 +96,7 @@ class _SymptomListPageState extends State<SymptomListPage> {
             ]),
             const SizedBox(height: 8),
             Row(children: [
-              const Icon(Icons.calendar_today, color: Colors.blue),
+              const Icon(Icons.calendar_today, color: Colors.green),
               const SizedBox(width: 8),
               Text("Created: ${DateTime.parse(symptom['createdAt']).toLocal().toString().split('.')[0]}"),
             ]),
@@ -111,7 +111,7 @@ class _SymptomListPageState extends State<SymptomListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Patient Symptom Checker'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),

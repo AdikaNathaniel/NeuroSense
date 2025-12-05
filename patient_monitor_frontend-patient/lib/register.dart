@@ -20,18 +20,18 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isLoading = false;
   bool _obscurePassword = true;
   bool _allowRelative = false;
-  String _selectedUserType = 'celebral-mother'; // Changed default
+  String _selectedUserType = 'Celebral-Mother'; // Changed default
 
   static const String _baseUrl = 'https://neurosense-palsy.fly.dev';
 
   // Updated user type options
   final List<String> _userTypes = [
-    'admin',
-    'celebral-mother',
-    'celebral-caregiver', 
-    'celebral-physician',
-    'relative',
-    'regular-user'
+    'Admin',
+    'Celebral-Mother',
+    'Celebral-Caregiver', 
+    'Celebral-Physician',
+    'Relative',
+    'Regular-User'
   ];
 
   bool _isValidEmail(String email) {
@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
     name = _sanitizeInput(name);
     email = _sanitizeInput(email.toLowerCase());
     password = _sanitizeInput(password);
-    type = _sanitizeInput(type.toLowerCase());
+    type = _sanitizeInput(type);
     ghanaCard = _sanitizeInput(ghanaCard);
     card = _sanitizeInput(card);
     username = _sanitizeInput(username);
@@ -70,8 +70,8 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     // Updated valid types
-    List<String> validTypes = ['admin', 'celebral-mother', 'celebral-caregiver', 
-                              'celebral-physician', 'relative', 'regular-user'];
+    List<String> validTypes = ['Admin', 'Celebral-Mother', 'Celebral-Caregiver', 
+                              'Celebral-Physician', 'Relative', 'Regular-User'];
     if (!validTypes.contains(type)) {
       _showError("Please select a valid user type");
       return;
@@ -215,7 +215,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final _relativeUsernameController = TextEditingController();
     final _relativeGhanaCardController = TextEditingController();
     final _relativeCardController = TextEditingController();
-    String _relativeSelectedType = 'relative';
+    String _relativeSelectedType = 'Relative';
 
     return showDialog(
       context: context,
@@ -369,7 +369,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   _inputField("Card Number", _cardController, Icons.card_membership,
                     keyboardType: TextInputType.number),
                   const SizedBox(height: 20),
-                  if (_selectedUserType == 'celebral-mother')
+                  if (_selectedUserType == 'Celebral-Mother')
                     SwitchListTile(
                       title: const Text("Allow relative to view vitals", style: TextStyle(color: Colors.white)),
                       value: _allowRelative,
@@ -490,17 +490,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
   String _formatUserTypeName(String userType) {
     switch (userType) {
-      case 'admin':
+      case 'Admin':
         return 'Admin';
-      case 'celebral-mother':
+      case 'Celebral-Mother':
         return 'Cerebral Mother';
-      case 'celebral-caregiver':
+      case 'Celebral-Caregiver':
         return 'Cerebral Caregiver';
-      case 'celebral-physician':
+      case 'Celebral-Physician':
         return 'Cerebral Physician';
-      case 'relative':
+      case 'Relative':
         return 'Relative';
-      case 'regular-user':
+      case 'Regular-User':
         return 'Regular User';
       default:
         return userType.replaceAll('-', ' ').toUpperCase();

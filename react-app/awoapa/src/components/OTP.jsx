@@ -56,7 +56,7 @@ export default function OTPVerification() {
 
       {/* Content */}
       <div className="relative z-20 flex justify-center items-center h-full">
-        <div className="bg-gradient-to-br from-blue-600 to-red-500 p-8 rounded-xl shadow-lg w-full max-w-md">
+        <div className="bg-gradient-to-br from-green-600 to-red-500 p-8 rounded-xl shadow-lg w-full max-w-md">
           <h2 className="text-white text-3xl font-bold mb-4 text-center">
             Verify Your Email
           </h2>
@@ -76,7 +76,7 @@ export default function OTPVerification() {
           <button
             onClick={handleVerify}
             disabled={isLoading}
-            className="w-full py-3 bg-white text-blue-600 font-bold rounded hover:bg-blue-100"
+            className="w-full py-3 bg-white text-green-600 font-bold rounded hover:bg-green-100"
           >
             {isLoading ? 'Verifying...' : 'VERIFY'}
           </button>

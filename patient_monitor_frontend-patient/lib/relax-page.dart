@@ -20,7 +20,7 @@ class RelaxPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -41,7 +41,7 @@ class RelaxPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -90,13 +90,13 @@ class RelaxPage extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     elevation: 5,
-                    shadowColor: Colors.blue.withOpacity(0.3),
+                    shadowColor: Colors.green.withOpacity(0.3),
                   ),
                   child: const Text(
                     'Continue',

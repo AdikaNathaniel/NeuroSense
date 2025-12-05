@@ -84,7 +84,7 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue[50]!, Colors.indigo[50]!],
+              colors: [Colors.green[50]!, Colors.indigo[50]!],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -95,14 +95,14 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
             children: [
               Row(
                 children: [
-                  Icon(Icons.info_outline, color: Colors.blue[700], size: 24),
+                  Icon(Icons.info_outline, color: Colors.green[700], size: 24),
                   const SizedBox(width: 8),
                   Text(
                     'RISK INDICATOR GUIDE',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue[800],
+                      color: Colors.green[800],
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -252,14 +252,14 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
-                        color: Colors.blue[50],
+                        color: Colors.green[50],
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.blue[200]!),
+                        border: Border.all(color: Colors.green[200]!),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.person, size: 14, color: Colors.blue[600]),
+                          Icon(Icons.person, size: 14, color: Colors.green[600]),
                           const SizedBox(width: 4),
                           Flexible(
                             child: Text(
@@ -267,7 +267,7 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.blue[700],
+                                color: Colors.green[700],
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -413,25 +413,25 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.blue[50],
+                        color: Colors.green[50],
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.blue[200]!),
+                        border: Border.all(color: Colors.green[200]!),
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.info_outline, color: Colors.blue[600], size: 18),
+                          Icon(Icons.info_outline, color: Colors.green[600], size: 18),
                           const SizedBox(width: 6),
                           Expanded(
                             child: Text(
                               'Tap for detailed assessment breakdown',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.blue[700],
+                                color: Colors.green[700],
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          Icon(Icons.arrow_forward_ios, color: Colors.blue[600], size: 14),
+                          Icon(Icons.arrow_forward_ios, color: Colors.green[600], size: 14),
                         ],
                       ),
                     ),
@@ -610,15 +610,15 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.blue[50],
+                        color: Colors.green[50],
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.blue[200]!),
+                        border: Border.all(color: Colors.green[200]!),
                       ),
                       child: Center(
                         child: Row(
                           mainAxisSize: MainAxisSize.min, // Row wraps content
                           children: [
-                            Icon(Icons.person, size: 18, color: Colors.blue[600]),
+                            Icon(Icons.person, size: 18, color: Colors.green[600]),
                             const SizedBox(width: 6),
                             Flexible(
                               child: Text(
@@ -626,7 +626,7 @@ class _AnaemiaResultsScreenState extends State<AnaemiaResultsScreen>
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue[700],
+                                  color: Colors.green[700],
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -1408,7 +1408,7 @@ Report Generated: ${DateTime.now().toString()}
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
         actions: [
           IconButton(

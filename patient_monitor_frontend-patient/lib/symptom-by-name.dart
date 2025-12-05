@@ -69,7 +69,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Colors.green,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -98,7 +98,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -141,7 +141,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
             children: [
               const CircleAvatar(
                 radius: 20,
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
                 child: Icon(Icons.person, color: Colors.white, size: 18),
               ),
               const SizedBox(width: 10),
@@ -202,7 +202,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
               ),
               _buildSymptomChip(
                 Icons.medical_services, 
-                Colors.blue, 
+                Colors.green, 
                 'Tummy Pain', 
                 formatYesNo(symptom['painAtTopOfTommy']),
               ),
@@ -309,7 +309,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Find Patient Symptoms'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -332,7 +332,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
                       const Icon(
                         Icons.search,
                         size: 48, // Matches the doctor page icon size
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -369,7 +369,7 @@ class _FindSymptomPageState extends State<FindSymptomPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowSymptoms,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue, // Using blue instead of pink
+                            backgroundColor: Colors.green, // Using green instead of pink
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8), // Matches doctor page

@@ -61,7 +61,7 @@ class _PaystackInitiatePageState extends State<PaystackInitiatePage> {
       builder: (_) => AlertDialog(
         title: Row(
           children: const [
-            Icon(Icons.payment, color: Colors.blue),
+            Icon(Icons.payment, color: Colors.green),
             SizedBox(width: 10),
             Text("Payment Link"),
           ],
@@ -109,7 +109,7 @@ class _PaystackInitiatePageState extends State<PaystackInitiatePage> {
         title: const Text('Paystack Payment'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -150,7 +150,7 @@ class _PaystackInitiatePageState extends State<PaystackInitiatePage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -193,7 +193,7 @@ class _PaystackInitiatePageState extends State<PaystackInitiatePage> {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Colors.blue, width: 2),
+            borderSide: const BorderSide(color: Colors.green, width: 2),
           ),
           filled: true,
           fillColor: Colors.grey[50],

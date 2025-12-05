@@ -40,7 +40,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
             ),
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         color: Colors.white, // Default white background
@@ -96,7 +96,7 @@ class _PrescriptionPageState extends State<PrescriptionPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: Colors.blue),
+          Icon(icon, color: Colors.green),
           SizedBox(width: 12),
           Expanded(
             child: Text(

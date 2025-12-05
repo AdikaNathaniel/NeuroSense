@@ -60,11 +60,11 @@ class _PatientVitalsPageState extends State<PatientVitalsPage> {
                       height: 60,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: color?.withOpacity(0.2) ?? Colors.blue.withOpacity(0.2),
+                        color: color?.withOpacity(0.2) ?? Colors.green.withOpacity(0.2),
                       ),
                       child: Icon(
                         icon,
-                        color: color ?? Colors.blue,
+                        color: color ?? Colors.green,
                         size: 36,
                       ),
                     ),
@@ -107,12 +107,12 @@ class _PatientVitalsPageState extends State<PatientVitalsPage> {
       appBar: AppBar(
         title: Text("Patient Vitals", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.red], // Gradient background
+            colors: [Colors.green, Colors.red], // Gradient background
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -165,7 +165,7 @@ class _PatientVitalsPageState extends State<PatientVitalsPage> {
                           buildAnimatedCard("Blood Glucose (mg/dL)", 
                             signs['blood_glucose_mg_dL'].toString(), Icons.bloodtype, 7, color: Colors.redAccent),
                           buildAnimatedCard("Oxygen Saturation (%)", 
-                            signs['oxygen_saturation_percent'].toString(), Icons.air, 8, color: Colors.lightBlue),
+                            signs['oxygen_saturation_percent'].toString(), Icons.air, 8, color: Colors.lightgreen),
                           buildAnimatedCard("Heart Rate (bpm)", 
                             signs['heart_rate_bpm'].toString(), Icons.favorite_rounded, 9, color: Colors.red),
                         ],

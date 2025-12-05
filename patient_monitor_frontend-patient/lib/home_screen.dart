@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               title: Row(
                 children: [
-                  Icon(Icons.notifications_active, color: Colors.blue),
+                  Icon(Icons.notifications_active, color: Colors.green),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     });
                   },
-                  child: Text('OK', style: TextStyle(color: Colors.blue)),
+                  child: Text('OK', style: TextStyle(color: Colors.green)),
                 ),
               ],
             );

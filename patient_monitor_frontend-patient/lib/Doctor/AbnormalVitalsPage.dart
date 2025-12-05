@@ -12,7 +12,7 @@ class AbnormalVitalsApp extends StatelessWidget {
     return MaterialApp(
       title: 'Abnormal Vitals Dashboard',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         fontFamily: 'Roboto',
       ),
       home: AbnormalVitalsScreen(),
@@ -71,7 +71,7 @@ class _AbnormalVitalsScreenState extends State<AbnormalVitalsScreen> {
       appBar: AppBar(
         title: Text(
           'Abnormal Vitals Dashboard',
-          style: TextStyle(color: Colors.blue),
+          style: TextStyle(color: Colors.green),
         ),
         centerTitle: true,
         elevation: 0,
@@ -85,7 +85,7 @@ class _AbnormalVitalsScreenState extends State<AbnormalVitalsScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -128,7 +128,7 @@ class _AbnormalVitalsScreenState extends State<AbnormalVitalsScreen> {
                                   ),
                                   backgroundColor: vitalData['status'] == 'above normal'
                                       ? Colors.orange[800]
-                                      : Colors.blue[800],
+                                      : Colors.green[800],
                                 ),
                               ),
                             ],

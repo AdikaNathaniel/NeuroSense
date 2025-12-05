@@ -59,12 +59,12 @@ class _DoctorInputPageState extends State<DoctorInputPage> {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

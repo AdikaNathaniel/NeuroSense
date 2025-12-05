@@ -92,7 +92,7 @@ class _ViewAppointmentsPageState extends State<ViewAppointmentsPage> {
                   Text(
                     'Settings',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.green,
                       decoration: TextDecoration.underline,
                     ),
                   ),
@@ -151,7 +151,7 @@ class _ViewAppointmentsPageState extends State<ViewAppointmentsPage> {
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
-          colors: [Colors.blue, Colors.red],
+          colors: [Colors.green, Colors.red],
         ),
       ),
       child: Scaffold(
@@ -159,13 +159,13 @@ class _ViewAppointmentsPageState extends State<ViewAppointmentsPage> {
         appBar: AppBar(
           title: Text('All Appointments', style: TextStyle(color: Colors.white)),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
           actions: [
             IconButton(
               icon: CircleAvatar(
                 child: Text(
                   widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                  style: TextStyle(color: Colors.blue),
+                  style: TextStyle(color: Colors.green),
                 ),
                 backgroundColor: Colors.white,
               ),
@@ -193,7 +193,7 @@ class _ViewAppointmentsPageState extends State<ViewAppointmentsPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         child: ListTile(
                           contentPadding: EdgeInsets.all(15),
-                          leading: Icon(Icons.person, color: Colors.blueAccent, size: 30),
+                          leading: Icon(Icons.person, color: Colors.greenAccent, size: 30),
                           title: Text(
                             appointment['details']?['patient_name'] ?? 'Unknown',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

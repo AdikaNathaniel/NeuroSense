@@ -195,7 +195,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Anaemia Risk Assessment'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -218,7 +218,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                       const Icon(
                         Icons.health_and_safety,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -247,7 +247,7 @@ class _RiskAssessmentPageState extends State<RiskAssessmentPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchRiskAssessment,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

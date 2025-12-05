@@ -174,7 +174,7 @@ class _SupportByNamePageState extends State<SupportByNamePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Support By Name'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -197,7 +197,7 @@ class _SupportByNamePageState extends State<SupportByNamePage> {
                       const Icon(
                         Icons.support_agent,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -226,7 +226,7 @@ class _SupportByNamePageState extends State<SupportByNamePage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowSupportTickets,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

@@ -90,7 +90,7 @@ class NotificationSettingsPage extends StatelessWidget {
             _buildNotificationCard(
   icon: Icons.add_alert,
   title: 'Create Notification',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -105,7 +105,7 @@ class NotificationSettingsPage extends StatelessWidget {
   _buildNotificationCard(
   icon: Icons.group,
   title: 'Notifications by Role',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -131,7 +131,7 @@ class NotificationSettingsPage extends StatelessWidget {
                 _buildNotificationCard(
   icon: Icons.notifications_active,
   title: 'Get All Notifications',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -145,7 +145,7 @@ class NotificationSettingsPage extends StatelessWidget {
             // _buildNotificationCard(
             //   icon: Icons.edit_notifications,
             //   title: 'Update Notification',
-            //   iconColor: Colors.blue,
+            //   iconColor: Colors.green,
             //   onTap: () => _onOptionSelected(context, 'Update Notification'),
             // ),
 
@@ -154,7 +154,7 @@ class NotificationSettingsPage extends StatelessWidget {
              _buildNotificationCard(
   icon: Icons.info_outline,
   title: 'Update Notification ',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -170,7 +170,7 @@ class NotificationSettingsPage extends StatelessWidget {
                   _buildNotificationCard(
   icon: Icons.info_outline,
   title: 'Notification by ID',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -183,7 +183,7 @@ class NotificationSettingsPage extends StatelessWidget {
                           _buildNotificationCard(
   icon: Icons.check_circle_outline,
   title: 'Mark Notification as Sent',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -198,7 +198,7 @@ class NotificationSettingsPage extends StatelessWidget {
           _buildNotificationCard(
   icon: Icons.delete_forever,
   title: 'Delete Notifications',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,

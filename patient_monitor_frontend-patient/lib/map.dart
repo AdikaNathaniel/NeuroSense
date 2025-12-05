@@ -100,7 +100,7 @@ class _MapPageState extends State<MapPage> {
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 4),
                   child: ListTile(
-                    leading: Icon(_getPlaceIcon(placeType), color: Colors.blue),
+                    leading: Icon(_getPlaceIcon(placeType), color: Colors.green),
                     title: Text(place['name']),
                     subtitle: Text('${place['distance']} km away'),
                     trailing: IconButton(
@@ -396,7 +396,7 @@ class _MapPageState extends State<MapPage> {
       appBar: AppBar(
         title: const Text('Location Of PregMama'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           // IconButton(
@@ -535,7 +535,7 @@ class _DirectionsMapPageState extends State<DirectionsMapPage> {
       Polyline(
         polylineId: const PolylineId('route'),
         points: [widget.currentLocation, widget.destination],
-        color: Colors.blue,
+        color: Colors.green,
         width: 5,
         patterns: [PatternItem.dash(20), PatternItem.gap(10)],
       ),
@@ -592,7 +592,7 @@ class _DirectionsMapPageState extends State<DirectionsMapPage> {
       appBar: AppBar(
         title: const Text('Directions'),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -610,7 +610,7 @@ class _DirectionsMapPageState extends State<DirectionsMapPage> {
             color: Colors.white,
             child: Row(
               children: [
-                const Icon(Icons.directions_car, color: Colors.blue, size: 30),
+                const Icon(Icons.directions_car, color: Colors.green, size: 30),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(
@@ -680,7 +680,7 @@ class _DirectionsMapPageState extends State<DirectionsMapPage> {
               icon: const Icon(Icons.my_location),
               label: const Text('My Location'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
               ),
             ),

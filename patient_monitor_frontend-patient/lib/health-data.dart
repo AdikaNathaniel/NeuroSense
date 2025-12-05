@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pregnancy History',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: HealthDataPage(),
     );
@@ -64,7 +64,7 @@ class _HealthDataPageState extends State<HealthDataPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -89,7 +89,7 @@ class _HealthDataPageState extends State<HealthDataPage> {
                         children: [
                           Row(
                             children: [
-                              Icon(Icons.person, color: Colors.blue),
+                              Icon(Icons.person, color: Colors.green),
                               SizedBox(width: 10),
                               Text(
                                 'Age: ${item['age']}',

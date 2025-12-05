@@ -118,13 +118,13 @@ class _LiveFaceLoginPageState extends State<LiveFaceLoginPage> {
                       width: 100,
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       decoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.1),
+                        color: Colors.green.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                        border: Border.all(color: Colors.green.withOpacity(0.3)),
                       ),
                       child: const Column(
                         children: [
-                          Icon(Icons.camera_alt, size: 40, color: Colors.blue),
+                          Icon(Icons.camera_alt, size: 40, color: Colors.green),
                           SizedBox(height: 8),
                           Text(
                             'Camera',
@@ -146,13 +146,13 @@ class _LiveFaceLoginPageState extends State<LiveFaceLoginPage> {
                       width: 100,
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       decoration: BoxDecoration(
-                        color: Colors.blue.withOpacity(0.1),
+                        color: Colors.green.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                        border: Border.all(color: Colors.green.withOpacity(0.3)),
                       ),
                       child: const Column(
                         children: [
-                          Icon(Icons.photo_library, size: 40, color: Colors.blue),
+                          Icon(Icons.photo_library, size: 40, color: Colors.green),
                           SizedBox(height: 8),
                           Text(
                             'Gallery',
@@ -392,7 +392,7 @@ class _LiveFaceLoginPageState extends State<LiveFaceLoginPage> {
       appBar: AppBar(
         title: const Text('Live Face Login'),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
         actions: [
           if (_webImage != null)
@@ -408,7 +408,7 @@ class _LiveFaceLoginPageState extends State<LiveFaceLoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
           ),
         ),
         child: Padding(

@@ -37,7 +37,7 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView( // Added SingleChildScrollView to prevent overflow
@@ -66,7 +66,7 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
             const Icon(
               Icons.lock_open_rounded,
               size: 48,
-              color: Colors.blue,
+              color: Colors.green,
             ),
             const SizedBox(height: 16),
             const Text(
@@ -93,20 +93,20 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
                 margin: const EdgeInsets.only(bottom: 20),
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: Colors.green.shade50,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.blue.shade200),
+                  border: Border.all(color: Colors.green.shade200),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.person_outline, color: Colors.blue),
+                    const Icon(Icons.person_outline, color: Colors.green),
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         'Account to reactivate: ${widget.userEmail}',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: Colors.blue.shade800,
+                          color: Colors.green.shade800,
                         ),
                       ),
                     ),
@@ -131,7 +131,7 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _reactivateAccount,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

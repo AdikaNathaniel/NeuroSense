@@ -108,7 +108,7 @@ class _ChatPageState extends State<ChatPage> {
               ? Colors.grey.shade300
               : isSelf
                   ? Colors.green.shade100
-                  : Colors.blue.shade100,
+                  : Colors.green.shade100,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

@@ -75,7 +75,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
       appBar: AppBar(
         title: const Text("All Notifications"),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -150,7 +150,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
                               // Role Row
                               Row(
                                 children: [
-                                  const Icon(Icons.verified_user, size: 20, color: Colors.blue),
+                                  const Icon(Icons.verified_user, size: 20, color: Colors.green),
                                   const SizedBox(width: 6),
                                   Text(
                                     "Role: ${notif["role"] ?? "N/A"}",

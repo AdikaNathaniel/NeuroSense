@@ -64,7 +64,7 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Colors.blue, // Primary color for selected date
+              primary: Colors.green, // Primary color for selected date
               onPrimary: Colors.white, // Text color on primary
               surface: Colors.white, // Background color
               onSurface: Colors.black, // Text color on surface
@@ -472,7 +472,7 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
           children: [
             Row(
               children: [
-                Icon(icon, color: Colors.blue),
+                Icon(icon, color: Colors.green),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
@@ -497,10 +497,10 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
-                        color: riskFactors[key] == false ? Colors.blue : Colors.grey[200],
+                        color: riskFactors[key] == false ? Colors.green : Colors.grey[200],
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: riskFactors[key] == false ? Colors.blue : Colors.grey,
+                          color: riskFactors[key] == false ? Colors.green : Colors.grey,
                           width: 2,
                         ),
                       ),
@@ -526,10 +526,10 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: BoxDecoration(
-                        color: riskFactors[key] == true ? Colors.blue : Colors.grey[200],
+                        color: riskFactors[key] == true ? Colors.green : Colors.grey[200],
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: riskFactors[key] == true ? Colors.blue : Colors.grey,
+                          color: riskFactors[key] == true ? Colors.green : Colors.grey,
                           width: 2,
                         ),
                       ),
@@ -564,7 +564,7 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
           ),
         ),
         centerTitle: true,        
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 4,             
       ),
       body: SingleChildScrollView(
@@ -634,7 +634,7 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
                   hintText: 'Select your date of birth',
                   prefixIcon: const Icon(Icons.cake),
                   suffixIcon: IconButton(
-                    icon: const Icon(Icons.calendar_today, color: Colors.blue),
+                    icon: const Icon(Icons.calendar_today, color: Colors.green),
                     onPressed: _selectDate,
                   ),
                   border: const OutlineInputBorder(),
@@ -720,7 +720,7 @@ class _AnaemiaAssessmentScreenState extends State<AnaemiaAssessmentScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

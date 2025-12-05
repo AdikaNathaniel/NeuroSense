@@ -132,7 +132,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               SizedBox(height: 8),
@@ -253,7 +253,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                 LineChartBarData(
                   spots: spots,
                   isCurved: true,
-                  color: Colors.blue,
+                  color: Colors.green,
                   barWidth: 4,
                   belowBarData: BarAreaData(
                     show: true,
@@ -261,8 +261,8 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.blue.withOpacity(0.3),
-                        Colors.blue.withOpacity(0.1),
+                        Colors.green.withOpacity(0.3),
+                        Colors.green.withOpacity(0.1),
                       ],
                     ),
                   ),
@@ -271,7 +271,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                     getDotPainter: (spot, percent, barData, index) {
                       return FlDotCirclePainter(
                         radius: 4,
-                        color: Colors.blue,
+                        color: Colors.green,
                         strokeWidth: 2,
                         strokeColor: Colors.white,
                       );
@@ -279,8 +279,8 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                   ),
                   gradient: LinearGradient(
                     colors: [
-                      Colors.blue,
-                      Colors.blue,
+                      Colors.green,
+                      Colors.green,
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
@@ -313,7 +313,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         centerTitle: true,
       ),
@@ -323,7 +323,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: Colors.green.shade50,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
@@ -346,7 +346,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+                      prefixIcon: Icon(Icons.calendar_today, color: Colors.green),
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                   ),
@@ -354,11 +354,11 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                 SizedBox(width: 12),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blue.withOpacity(0.3),
+                        color: Colors.green.withOpacity(0.3),
                         blurRadius: 4,
                         offset: Offset(0, 2),
                       ),
@@ -367,7 +367,7 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                   child: ElevatedButton(
                     onPressed: isLoading ? null : fetchBloodGlucoseData,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       shadowColor: Colors.transparent,
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -412,14 +412,14 @@ class _BloodGlucosePageState extends State<BloodGlucosePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
                         ),
                         SizedBox(height: 16),
                         Text(
                           "Loading Blood Glucose Data...",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.blue,
+                            color: Colors.green,
                           ),
                         ),
                       ],

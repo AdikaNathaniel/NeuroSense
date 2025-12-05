@@ -88,7 +88,7 @@ class _PatientQueryPageState extends State<PatientQueryPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Patient Query Tool'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),

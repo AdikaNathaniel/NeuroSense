@@ -65,7 +65,7 @@ class _SupportFormPageState extends State<SupportFormPage> {
     style: TextStyle(color: Colors.white),
   ),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -105,7 +105,7 @@ class _SupportFormPageState extends State<SupportFormPage> {
              ElevatedButton(
   style: ElevatedButton.styleFrom(
     padding: EdgeInsets.symmetric(vertical: 16),
-    backgroundColor: Colors.blue,
+    backgroundColor: Colors.green,
     foregroundColor: Colors.white,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),

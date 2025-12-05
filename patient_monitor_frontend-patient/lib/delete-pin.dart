@@ -133,7 +133,7 @@ class _PinDeleteScreenState extends State<PinDeleteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Delete PIN'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -156,7 +156,7 @@ class _PinDeleteScreenState extends State<PinDeleteScreen> {
                       const Icon(
                         Icons.delete_outline,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -187,7 +187,7 @@ class _PinDeleteScreenState extends State<PinDeleteScreen> {
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : deletePin,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

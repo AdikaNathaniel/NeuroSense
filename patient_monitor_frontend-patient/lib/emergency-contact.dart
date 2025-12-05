@@ -59,7 +59,7 @@ class EmergencyContactsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Manage Contacts'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         elevation: 2,
       ),
@@ -72,7 +72,7 @@ class EmergencyContactsPage extends StatelessWidget {
             _buildSettingCard(
               icon: Icons.contact_emergency,
               title: 'Add Emergency Contact',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,
@@ -84,7 +84,7 @@ class EmergencyContactsPage extends StatelessWidget {
             _buildSettingCard(
               icon: Icons.contact_emergency,
               title: 'View All Emergency Contacts',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,
@@ -96,7 +96,7 @@ class EmergencyContactsPage extends StatelessWidget {
             _buildSettingCard(
               icon: Icons.contact_page,
               title: 'Find An Emergency Contact',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,
@@ -108,7 +108,7 @@ class EmergencyContactsPage extends StatelessWidget {
             _buildSettingCard(
               icon: Icons.edit,
               title: 'Edit Emergency Contact',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,
@@ -120,7 +120,7 @@ class EmergencyContactsPage extends StatelessWidget {
             _buildSettingCard(
               icon: Icons.delete_forever,
               title: 'Remove Emergency Contact',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,

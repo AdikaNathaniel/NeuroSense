@@ -90,7 +90,7 @@ class SupportSettingsPage extends StatelessWidget {
             _buildSupportCard(
               icon: Icons.list_alt,
               title: 'All Support Requests',
-              iconColor: Colors.blue,
+              iconColor: Colors.green,
               onTap: () {
                 Navigator.push(
                   context,
@@ -102,7 +102,7 @@ class SupportSettingsPage extends StatelessWidget {
              _buildSupportCard(
   icon: Icons.find_in_page, 
   title: 'Request By Id',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -114,7 +114,7 @@ class SupportSettingsPage extends StatelessWidget {
  _buildSupportCard(
   icon: Icons.lock_open,
   title: 'Account Reactivation',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -126,7 +126,7 @@ class SupportSettingsPage extends StatelessWidget {
  _buildSupportCard(
   icon: Icons.receipt_long, 
   title: 'Request By Name',
-  iconColor: Colors.blue,
+  iconColor: Colors.green,
   onTap: () {
     Navigator.push(
       context,
@@ -140,7 +140,7 @@ class SupportSettingsPage extends StatelessWidget {
             // _buildSupportCard(
             //   icon: Icons.numbers,
             //   title: 'Get Support by ID',
-            //   iconColor: Colors.blue,
+            //   iconColor: Colors.green,
             //   onTap: () {
             //     Navigator.push(
             //       context,

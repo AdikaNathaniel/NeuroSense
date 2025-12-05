@@ -103,7 +103,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               const Divider(),
@@ -118,7 +118,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               const Divider(),
@@ -131,7 +131,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               const Divider(),
@@ -303,7 +303,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Assessment by ID'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -326,7 +326,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
                       const Icon(
                         Icons.medical_services,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -355,7 +355,7 @@ class _GetAnaemiaByIdPageState extends State<GetAnaemiaByIdPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowAnaemiaAssessment,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

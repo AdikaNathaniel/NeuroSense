@@ -99,7 +99,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color: Colors.green,
               ),
             ),
             const SizedBox(height: 12),
@@ -115,7 +115,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildStatItem(Icons.cancel, 'Canceled', stats['canceled']?.toString() ?? '0', Colors.red),
-                _buildStatItem(Icons.trending_up, 'Confirmation Rate', stats['confirmationRate']?.toString() ?? '0%', Colors.blue),
+                _buildStatItem(Icons.trending_up, 'Confirmation Rate', stats['confirmationRate']?.toString() ?? '0%', Colors.green),
               ],
             ),
             const SizedBox(height: 8),
@@ -158,12 +158,12 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
     }
 
     return ExpansionTile(
-      leading: const Icon(Icons.calendar_today, color: Colors.blue),
+      leading: const Icon(Icons.calendar_today, color: Colors.green),
       title: Text(
         title,
         style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.blue,
+          color: Colors.green,
         ),
       ),
       children: [
@@ -237,7 +237,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
             // Patient Name Row
             Row(
               children: [
-                const Icon(Icons.person, size: 18, color: Colors.blue),
+                const Icon(Icons.person, size: 18, color: Colors.green),
                 const SizedBox(width: 8),
                 Text(
                   appointment['patientName'] ?? 'No name',
@@ -365,7 +365,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
     return Scaffold(
       appBar: AppBar(
         title: const Text('Appointment Stats'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -388,7 +388,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
                       const Icon(
                         Icons.medical_services,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -417,7 +417,7 @@ class _DoctorAppointmentsStatsPageState extends State<DoctorAppointmentsStatsPag
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowStats,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

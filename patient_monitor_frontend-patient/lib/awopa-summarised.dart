@@ -177,7 +177,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.medical_services, color: Colors.blue, size: 24),
+                      Icon(Icons.medical_services, color: Colors.green, size: 24),
                       SizedBox(width: 8),
                       Flexible(
                         child: Text(
@@ -186,7 +186,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue,
+                            color: Colors.green,
                           ),
                         ),
                       ),
@@ -577,12 +577,12 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: Colors.green.shade50,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         'Input: $input',
-                        style: const TextStyle(fontSize: 10, color: Colors.blue),
+                        style: const TextStyle(fontSize: 10, color: Colors.green),
                       ),
                     ),
                     Container(
@@ -646,7 +646,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
-                color: Colors.blue,
+                color: Colors.green,
               ),
             ),
             const SizedBox(height: 8),
@@ -776,7 +776,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 
     final normalTextStyle = pw.TextStyle(fontSize: 10);
     final boldTextStyle = pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold);
-    final titleTextStyle = pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold, color: PdfColors.blue800);
+    final titleTextStyle = pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold, color: PdfColors.green800);
     final headerTextStyle = pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold, color: PdfColors.indigo700);
 
     pdf.addPage(
@@ -848,7 +848,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(12),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(6),
               ),
               child: pw.Column(
@@ -865,7 +865,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(12),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(6),
               ),
               child: pw.Column(
@@ -882,7 +882,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(12),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(6),
               ),
               child: pw.Column(
@@ -899,7 +899,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             pw.Container(
               padding: const pw.EdgeInsets.all(12),
               decoration: pw.BoxDecoration(
-                color: PdfColors.blue50,
+                color: PdfColors.green50,
                 borderRadius: pw.BorderRadius.circular(6),
               ),
               child: pw.Column(
@@ -1211,7 +1211,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 20, color: Colors.blue),
+              Icon(icon, size: 20, color: Colors.green),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -1270,7 +1270,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         actions: [
           Row(
@@ -1282,7 +1282,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             icon: CircleAvatar(
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: const TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.green),
               ),
               backgroundColor: Colors.white,
             ),
@@ -1296,7 +1296,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
+                decoration: BoxDecoration(color: Colors.green),
                 child: Center(
                   child: Text(
                     'MEDICAL OFFICER',
@@ -1306,7 +1306,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                 ),
               ),
               ListTile(
-                leading: const Icon(Icons.calendar_today, color: Colors.blue),
+                leading: const Icon(Icons.calendar_today, color: Colors.green),
                 title: const Text('Prescriptions'),
                 onTap: () {
                   Navigator.push(
@@ -1318,7 +1318,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 
 
                 ListTile(
-              leading: const Icon(Icons.video_call, color: Colors.blue),
+              leading: const Icon(Icons.video_call, color: Colors.green),
               title: const Text('Video Call'),
               onTap: () {
                 Navigator.push(
@@ -1334,7 +1334,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 
 
               ListTile(
-                leading: const Icon(Icons.show_chart, color: Colors.blue),
+                leading: const Icon(Icons.show_chart, color: Colors.green),
                 title: const Text('Retrieve Readings'),
                 onTap: () {
                   Navigator.push(
@@ -1345,7 +1345,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               ),
 
               // ListTile(
-              //   leading: const Icon(Icons.medication, color: Colors.blue),
+              //   leading: const Icon(Icons.medication, color: Colors.green),
               //   title: const Text('Doctor Chat'),
               //   onTap: () {
               //     Navigator.push(
@@ -1355,7 +1355,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               //   },
               // ),
               ListTile(
-                leading: const Icon(Icons.help_outline, color: Colors.blue),
+                leading: const Icon(Icons.help_outline, color: Colors.green),
                 title: const Text('Support Desk'),
                 onTap: () {
                   Navigator.push(
@@ -1365,7 +1365,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.medical_services, color: Colors.blue),
+                leading: const Icon(Icons.medical_services, color: Colors.green),
                 title: const Text('Create A Profile'),
                 onTap: () {
                   Navigator.push(
@@ -1378,7 +1378,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               ),
 
               // ListTile(
-              //   leading: const Icon(Icons.monitor_heart, color: Colors.blue),
+              //   leading: const Icon(Icons.monitor_heart, color: Colors.green),
               //   title: const Text('Preeclampsia Symptoms'),
               //   onTap: () {
               //     Navigator.push(
@@ -1391,7 +1391,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               // ),
 
               ListTile(
-                leading: const Icon(Icons.calendar_today, color: Colors.blue),
+                leading: const Icon(Icons.calendar_today, color: Colors.green),
                 title: const Text('Appointments'),
                 onTap: () {
                   Navigator.push(
@@ -1402,7 +1402,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               ),
 
               ListTile(
-                leading: const Icon(Icons.monitor_heart, color: Colors.blue),
+                leading: const Icon(Icons.monitor_heart, color: Colors.green),
                 title: const Text('Anaemia Prediction'),
                 onTap: () {
                   Navigator.push(
@@ -1413,7 +1413,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               ),
 
               // ListTile(
-              //   leading: const Icon(Icons.monitor_heart, color: Colors.blue),
+              //   leading: const Icon(Icons.monitor_heart, color: Colors.green),
               //   title: const Text('Live Preeclampsia Predictions'),
               //   onTap: () {
               //     Navigator.push(
@@ -1426,7 +1426,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
               // ),
 
                 ListTile(
-                leading: Icon(Icons.bloodtype, color: Colors.blue),
+                leading: Icon(Icons.bloodtype, color: Colors.green),
                 title: Text('Charts Data'),
                 onTap: () {
                   Navigator.push(
@@ -1438,7 +1438,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 
 
               ListTile(
-                leading: const Icon(Icons.bloodtype, color: Colors.blue),
+                leading: const Icon(Icons.bloodtype, color: Colors.green),
                 title: const Text('Glucose Monitoring'),
                 onTap: () {
                   Navigator.push(
@@ -1450,7 +1450,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.edit, color: Colors.blue),
+                leading: const Icon(Icons.edit, color: Colors.green),
                 title: const Text('Manual Vitals'),
                 onTap: () {
                   Navigator.push(
@@ -1460,7 +1460,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.history, color: Colors.blue),
+                leading: const Icon(Icons.history, color: Colors.green),
                 title: const Text('View Vitals History'),
                 onTap: () {
                   Navigator.push(
@@ -1470,7 +1470,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.monitor_heart, color: Colors.blue),
+                leading: const Icon(Icons.monitor_heart, color: Colors.green),
                 title: const Text('Live Vitals'),
                 onTap: () {
                   Navigator.push(
@@ -1482,7 +1482,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 
 
 //               ListTile(
-//   leading: Icon(Icons.medical_services, color: Colors.blue),
+//   leading: Icon(Icons.medical_services, color: Colors.green),
 //   title: Text('Patient Consultations'),
 //   onTap: () {
 //     Navigator.push(
@@ -1497,7 +1497,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
 //   },
 // ),
               ListTile(
-                leading: const Icon(Icons.health_and_safety, color: Colors.blue),
+                leading: const Icon(Icons.health_and_safety, color: Colors.green),
                 title: const Text('Preeclampsia Prediction'),
                 onTap: () {
                   Navigator.push(
@@ -1529,7 +1529,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                       const Icon(
                         Icons.medical_information,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -1559,7 +1559,7 @@ class _AWOPASummarisedPageState extends State<AWOPASummarisedPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _fetchAndShowPatientSummary,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

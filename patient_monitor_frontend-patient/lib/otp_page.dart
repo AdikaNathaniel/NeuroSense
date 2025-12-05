@@ -58,7 +58,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Icon(Icons.check_circle, color: Colors.blue, size: 50),
+          title: Icon(Icons.check_circle, color: Colors.green, size: 50),
           content: Text("Email verified successfully!Please create a new PIN"),
           actions: [
             TextButton(
@@ -87,7 +87,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
+            Colors.green,
             Colors.red,
           ],
         ),
@@ -96,7 +96,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           automaticallyImplyLeading: false, // Remove back button
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.green,
           title: Container(
             width: double.infinity, // Take full width
             child: Center(
@@ -133,7 +133,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
                       onPressed: verifyOTP,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: Colors.blue,
+                        foregroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                       child: const Text("Verify"),

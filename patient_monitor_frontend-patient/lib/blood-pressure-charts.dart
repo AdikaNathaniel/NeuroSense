@@ -163,7 +163,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.green,
                 ),
               ),
               SizedBox(height: 8),
@@ -190,7 +190,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                     width: 16,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -341,7 +341,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                   LineChartBarData(
                     spots: systolicSpots,
                     isCurved: true,
-                    color: Colors.blue,
+                    color: Colors.green,
                     barWidth: 3,
                     belowBarData: BarAreaData(
                       show: true,
@@ -349,8 +349,8 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.blue.withOpacity(0.2),
-                          Colors.blue.withOpacity(0.05),
+                          Colors.green.withOpacity(0.2),
+                          Colors.green.withOpacity(0.05),
                         ],
                       ),
                     ),
@@ -359,7 +359,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                       getDotPainter: (spot, percent, barData, index) {
                         return FlDotCirclePainter(
                           radius: 3,
-                          color: Colors.blue,
+                          color: Colors.green,
                           strokeWidth: 2,
                           strokeColor: Colors.white,
                         );
@@ -414,7 +414,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         centerTitle: true,
       ),
@@ -424,7 +424,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
           Container(
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.blue.shade50,
+              color: Colors.green.shade50,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
@@ -447,7 +447,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                       ),
                       filled: true,
                       fillColor: Colors.white,
-                      prefixIcon: Icon(Icons.calendar_today, color: Colors.blue),
+                      prefixIcon: Icon(Icons.calendar_today, color: Colors.green),
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                   ),
@@ -455,11 +455,11 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                 SizedBox(width: 12),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Colors.green,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blue.withOpacity(0.3),
+                        color: Colors.green.withOpacity(0.3),
                         blurRadius: 4,
                         offset: Offset(0, 2),
                       ),
@@ -468,7 +468,7 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                   child: ElevatedButton(
                     onPressed: isLoading ? null : fetchBloodPressureData,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.green,
                       shadowColor: Colors.transparent,
                       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       shape: RoundedRectangleBorder(
@@ -513,14 +513,14 @@ class _BloodPressurePageState extends State<BloodPressurePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
                         ),
                         SizedBox(height: 16),
                         Text(
                           "Loading Blood Pressure Data...",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.blue,
+                            color: Colors.green,
                           ),
                         ),
                       ],

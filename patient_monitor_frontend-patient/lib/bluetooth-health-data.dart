@@ -37,11 +37,11 @@ enum GlucoseUnit {
   mmolL
 }
 
-// ✅ FIXED: Bluetooth Service Singleton with proper instance handling
-class BluetoothHealthService {
-  static final BluetoothHealthService _instance = BluetoothHealthService._internal();
-  factory BluetoothHealthService() => _instance;
-  BluetoothHealthService._internal();
+// ✅ FIXED: bluetooth Service Singleton with proper instance handling
+class bluetoothHealthService {
+  static final bluetoothHealthService _instance = bluetoothHealthService._internal();
+  factory bluetoothHealthService() => _instance;
+  bluetoothHealthService._internal();
 
   BluetoothDevice? _connectedDevice;
   BluetoothCharacteristic? _vitalsCharacteristic;
@@ -84,7 +84,7 @@ class BluetoothHealthService {
               _isConnected = true;
               _connectionController.add(true);
               
-              print('✅ Bluetooth connected and notifications enabled');
+              print('✅ bluetooth connected and notifications enabled');
               return true;
             }
           }
@@ -96,7 +96,7 @@ class BluetoothHealthService {
       _isConnected = false;
       return false;
     } catch (e) {
-      print('❌ Bluetooth connection error: $e');
+      print('❌ bluetooth connection error: $e');
       _isConnected = false;
       return false;
     }
@@ -107,10 +107,10 @@ class BluetoothHealthService {
       String jsonString = utf8.decode(data);
       Map<String, dynamic> parsedData = json.decode(jsonString);
       
-      print('📱 Received Bluetooth data: $parsedData');
+      print('📱 Received bluetooth data: $parsedData');
       _dataController.add(parsedData);
     } catch (e) {
-      print('❌ Error parsing Bluetooth data: $e');
+      print('❌ Error parsing bluetooth data: $e');
     }
   }
 
@@ -127,7 +127,7 @@ class BluetoothHealthService {
     _vitalsCharacteristic = null;
     _connectionController.add(false);
     
-    print('🔌 Bluetooth disconnected');
+    print('🔌 bluetooth disconnected');
   }
 
   bool get isConnected => _isConnected;
@@ -270,7 +270,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
     return sqrt(
       pow(c1.red - c2.red, 2) +
       pow(c1.green - c2.green, 2) +
-      pow(c1.blue - c2.blue, 2)
+      pow(c1.green - c2.green, 2)
     );
   }
 
@@ -378,7 +378,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
         title: Text('Scan Urine Strip'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: _isLoading
@@ -469,7 +469,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
                               icon: Icon(_isCapturing ? Icons.camera : Icons.camera_alt),
                               label: Text(_isCapturing ? 'Processing...' : 'Capture & Analyze'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
+                                backgroundColor: Colors.green,
                                 foregroundColor: Colors.white,
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),
@@ -491,23 +491,23 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
   }
 }
 
-class BluetoothHealthMetricsPage extends StatefulWidget {
+class bluetoothHealthMetricsPage extends StatefulWidget {
   final String userEmail;
-  final Map<String, dynamic>? initialBluetoothData;
+  final Map<String, dynamic>? initialbluetoothData;
 
-  const BluetoothHealthMetricsPage({
+  const bluetoothHealthMetricsPage({
     Key? key, 
     required this.userEmail,
-    this.initialBluetoothData
+    this.initialbluetoothData
   }) : super(key: key);
 
   @override
-  _BluetoothHealthMetricsPageState createState() => _BluetoothHealthMetricsPageState();
+  _bluetoothHealthMetricsPageState createState() => _bluetoothHealthMetricsPageState();
 }
 
-class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage> {
+class _bluetoothHealthMetricsPageState extends State<bluetoothHealthMetricsPage> {
   final TextEditingController _emergencyMessageController = TextEditingController();
-  final BluetoothHealthService _bluetoothService = BluetoothHealthService();
+  final bluetoothHealthService _BluetoothService = bluetoothHealthService();
   
   Map<String, dynamic>? vitalData;
   Map<String, dynamic>? bluetoothVitalData;
@@ -546,21 +546,21 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
     super.initState();
     _isOnDashboardPage = true;
     
-    // Initialize with initial Bluetooth data if provided
-    if (widget.initialBluetoothData != null) {
+    // Initialize with initial bluetooth data if provided
+    if (widget.initialbluetoothData != null) {
       setState(() {
-        bluetoothVitalData = widget.initialBluetoothData;
-        vitalData = _convertBluetoothData(widget.initialBluetoothData!);
+        bluetoothVitalData = widget.initialbluetoothData;
+        vitalData = _convertbluetoothData(widget.initialbluetoothData!);
         isLoading = false;
       });
-      // Auto-post initial Bluetooth data to server
-      _postBluetoothDataToServer(widget.initialBluetoothData!);
+      // Auto-post initial bluetooth data to server
+      _postbluetoothDataToServer(widget.initialbluetoothData!);
     } else {
       _fetchVitalData();
     }
     
-    // Set up Bluetooth listeners
-    _setupBluetoothListeners();
+    // Set up bluetooth listeners
+    _setupbluetoothListeners();
     
     // Start periodic tasks
     Timer.periodic(const Duration(seconds: 120), (Timer t) => _fetchVitalData());
@@ -605,12 +605,12 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
     });
   }
 
-  // ✅ FIXED: Post Bluetooth data to Render server
-  Future<void> _postBluetoothDataToServer(Map<String, dynamic> bluetoothData) async {
+  // ✅ FIXED: Post bluetooth data to Render server
+  Future<void> _postbluetoothDataToServer(Map<String, dynamic> bluetoothData) async {
     try {
-      print('📤 Posting Bluetooth data to server...');
+      print('📤 Posting bluetooth data to server...');
       
-      // Convert Bluetooth data format to match server expectations
+      // Convert bluetooth data format to match server expectations
       final Map<String, dynamic> postData = {
         'g': bluetoothData['glucose']?.toDouble() ?? bluetoothData['g']?.toDouble(),
         's': bluetoothData['systolic_bp']?.toDouble() ?? bluetoothData['s']?.toDouble(),
@@ -641,7 +641,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseData = json.decode(response.body);
         if (responseData['success'] == true) {
-          print('✅ Bluetooth data posted successfully to server');
+          print('✅ bluetooth data posted successfully to server');
         } else {
           print('❌ Server returned error: ${responseData['message']}');
         }
@@ -649,7 +649,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
         print('❌ HTTP error: ${response.statusCode}');
       }
     } catch (e) {
-      print('❌ Error posting Bluetooth data: $e');
+      print('❌ Error posting bluetooth data: $e');
     }
   }
 
@@ -676,35 +676,35 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
     _showCameraColorScanner(context);
   }
 
-  // Set up Bluetooth event listeners
-  void _setupBluetoothListeners() {
+  // Set up bluetooth event listeners
+  void _setupbluetoothListeners() {
     // Listen for connection state changes
-    _connectionSubscription = _bluetoothService.connectionStream.listen((connected) {
+    _connectionSubscription = _BluetoothService.connectionStream.listen((connected) {
       if (mounted) {
         setState(() {});
       }
     });
 
-    // Listen for incoming Bluetooth data
-    _dataSubscription = _bluetoothService.dataStream.listen((data) {
+    // Listen for incoming bluetooth data
+    _dataSubscription = _BluetoothService.dataStream.listen((data) {
       if (mounted) {
-        _handleBluetoothData(data);
+        _handlebluetoothData(data);
       }
     });
   }
 
-  // Handle incoming Bluetooth data
-  void _handleBluetoothData(Map<String, dynamic> data) {
-    print('🔄 Processing Bluetooth data: $data');
+  // Handle incoming bluetooth data
+  void _handlebluetoothData(Map<String, dynamic> data) {
+    print('🔄 Processing bluetooth data: $data');
     
     setState(() {
       bluetoothVitalData = data;
-      vitalData = _convertBluetoothData(data);
+      vitalData = _convertbluetoothData(data);
       isLoading = false;
     });
 
-    // Post Bluetooth data to server
-    _postBluetoothDataToServer(data);
+    // Post bluetooth data to server
+    _postbluetoothDataToServer(data);
     
     _checkAlarmingValues();
     _checkForZeroVitals();
@@ -726,8 +726,8 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
     }
   }
 
-  // Helper method to convert Bluetooth data format
-  Map<String, dynamic> _convertBluetoothData(Map<String, dynamic> data) {
+  // Helper method to convert bluetooth data format
+  Map<String, dynamic> _convertbluetoothData(Map<String, dynamic> data) {
     return {
       'glucose': data['glucose']?.toDouble() ?? data['g']?.toDouble(),
       'systolicBP': data['systolic_bp']?.toDouble() ?? data['s']?.toDouble(),
@@ -746,7 +746,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
     _alertTimer?.cancel();
     _connectionSubscription?.cancel();
     _dataSubscription?.cancel();
-    _bluetoothService.dispose();
+    _BluetoothService.dispose();
     super.dispose();
   }
 
@@ -1185,7 +1185,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
         ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.white),
@@ -1199,7 +1199,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               radius: 16,
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: const TextStyle(color: Colors.blue, fontSize: 16),
+                style: const TextStyle(color: Colors.green, fontSize: 16),
               ),
               backgroundColor: Colors.white,
             ),
@@ -1215,7 +1215,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.green,
               ),
               child: Center(
                 child: Text(
@@ -1229,7 +1229,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.calendar_today, color: Colors.blue),
+              leading: const Icon(Icons.calendar_today, color: Colors.green),
               title: const Text('Schedule Appointment'),
               onTap: () {
                 Navigator.push(
@@ -1241,7 +1241,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.health_and_safety, color: Colors.blue),
+              leading: const Icon(Icons.health_and_safety, color: Colors.green),
               title: const Text('Pregnancy Tips'),
               onTap: () {
                 Navigator.push(
@@ -1253,7 +1253,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.pregnant_woman, color: Colors.blue),
+              leading: const Icon(Icons.pregnant_woman, color: Colors.green),
               title: const Text('Pregnancy Chatbot'),
               onTap: () {
                 Navigator.push(
@@ -1265,7 +1265,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.emergency, color: Colors.blue), 
+              leading: const Icon(Icons.emergency, color: Colors.green), 
               title: const Text('Emergency Contacts'),
               onTap: () {
                 Navigator.push(
@@ -1277,7 +1277,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.attach_money, color: Colors.blue),
+              leading: const Icon(Icons.attach_money, color: Colors.green),
               title: const Text('Make Payment'), 
               onTap: () {
                 Navigator.push(
@@ -1289,7 +1289,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.medical_services, color: Colors.blue),
+              leading: const Icon(Icons.medical_services, color: Colors.green),
               title: const Text('View All Medics Profile'), 
               onTap: () {
                 Navigator.push(
@@ -1301,7 +1301,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.pregnant_woman, color: Colors.blue),
+              leading: const Icon(Icons.pregnant_woman, color: Colors.green),
               title: const Text('Anemia Assessment'),
               onTap: () {
                 Navigator.push(
@@ -1313,7 +1313,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.healing, color: Colors.blue),
+              leading: const Icon(Icons.healing, color: Colors.green),
               title: const Text('How Are You Feeling?'), 
               onTap: () {
                 Navigator.push(
@@ -1325,7 +1325,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: Icon(Icons.bloodtype, color: Colors.blue),
+              leading: Icon(Icons.bloodtype, color: Colors.green),
               title: Text('Charts'),
               onTap: () {
                 Navigator.push(
@@ -1335,7 +1335,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
               },
             ),
             ListTile(
-              leading: const Icon(Icons.search, color: Colors.blue),
+              leading: const Icon(Icons.search, color: Colors.green),
               title: const Text(
                 'Find Your Favorite Medic',
                 style: TextStyle(
@@ -1359,7 +1359,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
         child: Container(
           padding: const EdgeInsets.all(12),
           child: isLoading 
-            ? const Center(child: CircularProgressIndicator(color: Colors.blueAccent))
+            ? const Center(child: CircularProgressIndicator(color: Colors.greenAccent))
             : errorMessage.isNotEmpty
               ? Center(
                   child: Text(
@@ -1411,7 +1411,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
                           title: 'Oxygen Saturation',
                           value: '${vitalData?['spo2']?.toStringAsFixed(0) ?? 'N/A'}%',
                           icon: Icons.air,
-                          color: Colors.blue,
+                          color: Colors.green,
                           lastUpdated: _getTimeAgo(vitalData?['updatedAt'] ?? ''),
                         ),
                         
@@ -1506,7 +1506,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
 
                   _buildProfileItem(
                     icon: Icons.bluetooth,
-                    text: 'Pair With Bluetooth Device',
+                    text: 'Pair With bluetooth Device',
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.push(
@@ -1571,7 +1571,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
                       if (response.statusCode == 200) {
                         final responseData = json.decode(response.body);
                         if (responseData['success']) {
-                          await _bluetoothService.disconnect();
+                          await _BluetoothService.disconnect();
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => LoginPage()),
@@ -1634,7 +1634,7 @@ class _BluetoothHealthMetricsPageState extends State<BluetoothHealthMetricsPage>
           ),
           child: Row(
             children: [
-              Icon(icon, size: 20, color: Colors.blue),
+              Icon(icon, size: 20, color: Colors.green),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(

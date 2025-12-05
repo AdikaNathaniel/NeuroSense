@@ -134,7 +134,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.greenAccent,
                       foregroundColor: Colors.white,
                     ),
                     child: const Text('Close'),
@@ -222,7 +222,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                             'SpO₂',
                             item["spO2"] != null ? '${item["spO2"]}%' : 'N/A',
                             Icons.air,
-                            Colors.blue,
+                            Colors.green,
                           ),
                         ),
                         const SizedBox(width: 4),
@@ -417,7 +417,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vitals History'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -441,7 +441,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                         const Icon(
                           Icons.history,
                           size: 48,
-                          color: Colors.blueAccent,
+                          color: Colors.greenAccent,
                         ),
                         const SizedBox(height: 16),
                         const Text(
@@ -476,7 +476,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueAccent,
+                                  backgroundColor: Colors.greenAccent,
                                   foregroundColor: Colors.white,
                                 ),
                                 onPressed: () async {
@@ -500,7 +500,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.blueAccent,
+                                  backgroundColor: Colors.greenAccent,
                                   foregroundColor: Colors.white,
                                 ),
                                 onPressed: () async {
@@ -518,7 +518,7 @@ class _VitalsHistoryPageState extends State<VitalsHistoryPage> {
                           child: ElevatedButton(
                             onPressed: isLoading ? null : _fetchVitals,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blueAccent,
+                              backgroundColor: Colors.greenAccent,
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),

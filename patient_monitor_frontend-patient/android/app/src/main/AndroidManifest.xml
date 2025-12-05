@@ -4,12 +4,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
 
-    <!-- Bluetooth Permissions for Android 12+ (API 31+) -->
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <!-- bluetooth Permissions for Android 12+ (API 31+) -->
+    <uses-permission android:name="android.permission.bluetooth" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.bluetooth_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.bluetooth_SCAN" android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.bluetooth_CONNECT" />
+    <uses-permission android:name="android.permission.bluetooth_ADVERTISE" />
 
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -18,11 +18,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- Location Permissions (required for Bluetooth scanning on Android 10-11) -->
+    <!-- Location Permissions (required for bluetooth scanning on Android 10-11) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- Bluetooth Hardware Features -->
+    <!-- bluetooth Hardware Features -->
     <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
 

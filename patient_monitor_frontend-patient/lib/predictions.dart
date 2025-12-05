@@ -104,7 +104,7 @@ class _PregnancyComplicationsPageState extends State<PregnancyComplicationsPage>
             style: TextStyle(color: Colors.white),
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         elevation: 0,
         actions: [
           Row(
@@ -116,7 +116,7 @@ class _PregnancyComplicationsPageState extends State<PregnancyComplicationsPage>
             icon: CircleAvatar(
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.green),
               ),
               backgroundColor: Colors.white,
             ),
@@ -129,7 +129,7 @@ class _PregnancyComplicationsPageState extends State<PregnancyComplicationsPage>
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
+              decoration: BoxDecoration(color: Colors.green),
               child: Center(
                 child: Text(
                   'MEDICAL OFFICER',
@@ -278,7 +278,7 @@ class _PregnancyComplicationsPageState extends State<PregnancyComplicationsPage>
             ),
 
 // ListTile(
-//   leading: Icon(Icons.medical_services, color: Colors.blue),
+//   leading: Icon(Icons.medical_services, color: Colors.green),
 //   title: Text('Patient Consultations'),
 //   onTap: () {
 //     Navigator.push(
@@ -311,7 +311,7 @@ class _PregnancyComplicationsPageState extends State<PregnancyComplicationsPage>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),

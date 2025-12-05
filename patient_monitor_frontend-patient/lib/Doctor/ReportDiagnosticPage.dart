@@ -117,9 +117,9 @@ class _DiagnosticToolPageState extends State<DiagnosticToolPage> {
 
     // Define theme colors for consistency
     final themeColor = PdfColors.indigo700;
-    final accentColor = PdfColors.blue800;
-    final bgColor = PdfColors.blue50;
-    final borderColor = PdfColors.blue200;
+    final accentColor = PdfColors.green800;
+    final bgColor = PdfColors.green50;
+    final borderColor = PdfColors.green200;
     final subtleColor = PdfColors.grey600;
     
     // Define consistent text styles

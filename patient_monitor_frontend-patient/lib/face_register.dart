@@ -157,16 +157,16 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
         width: 100,
         padding: const EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
-          color: Colors.blue.withOpacity(0.1),
+          color: Colors.green.withOpacity(0.1),
           borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.blue.withOpacity(0.3)),
+          border: Border.all(color: Colors.green.withOpacity(0.3)),
         ),
         child: Column(
           children: [
             Icon(
               icon,
               size: 40,
-              color: Colors.blue,
+              color: Colors.green,
             ),
             const SizedBox(height: 8),
             Text(
@@ -283,7 +283,7 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: Colors.greenAccent,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
@@ -301,7 +301,7 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
                     );
                   },
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.blueAccent,
+                    foregroundColor: Colors.greenAccent,
                   ),
                   child: const Text('Return to Login Page'),
                 ),
@@ -334,7 +334,7 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
           style: TextStyle(color: Colors.white), 
         ),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent, 
+        backgroundColor: Colors.greenAccent, 
         iconTheme: const IconThemeData(color: Colors.white), 
       ),
       body: Container(
@@ -342,7 +342,7 @@ class _FaceRegisterPageState extends State<FaceRegisterPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
           ),
         ),
         child: Padding(

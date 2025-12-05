@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       title: 'Health Metrics',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         fontFamily: 'Roboto',
         cardTheme: CardTheme(
           elevation: 8,
@@ -645,7 +645,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
         ),
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh, color: Colors.white),
@@ -659,7 +659,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               radius: 16,
               child: Text(
                 widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'U',
-                style: const TextStyle(color: Colors.blue, fontSize: 16),
+                style: const TextStyle(color: Colors.green, fontSize: 16),
               ),
               backgroundColor: Colors.white,
             ),
@@ -675,7 +675,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
           children: <Widget>[
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.green,
               ),
               child: Center(
                 child: Text(
@@ -689,7 +689,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.calendar_today, color: Colors.blue),
+              leading: const Icon(Icons.calendar_today, color: Colors.green),
               title: const Text('Schedule Appointment'),
               onTap: () {
                 Navigator.push(
@@ -733,7 +733,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
             //   },
             // ),
             ListTile(
-              leading: const Icon(Icons.video_call, color: Colors.blue),
+              leading: const Icon(Icons.video_call, color: Colors.green),
               title: const Text('Video Call'),
               onTap: () {
                 Navigator.push(
@@ -748,7 +748,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
             ),
             // To be worked on
             // ListTile(
-            //   leading: Icon(Icons.chat, color: Colors.blue),
+            //   leading: Icon(Icons.chat, color: Colors.green),
             //   title: Text('Chat with Doctors'),
             //   onTap: () {
             //     Navigator.push(
@@ -764,7 +764,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
             // ),
             // ListTile(
             ListTile(
-              leading: const Icon(Icons.health_and_safety, color: Colors.blue),
+              leading: const Icon(Icons.health_and_safety, color: Colors.green),
               title: const Text('Pregnancy Tips'),
               onTap: () {
                 Navigator.push(
@@ -776,7 +776,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.pregnant_woman, color: Colors.blue),
+              leading: const Icon(Icons.pregnant_woman, color: Colors.green),
               title: const Text('Pregnancy Chatbot'),
               onTap: () {
                 Navigator.push(
@@ -788,7 +788,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.emergency, color: Colors.blue), 
+              leading: const Icon(Icons.emergency, color: Colors.green), 
               title: const Text('Emergency Contacts'),
               onTap: () {
                 Navigator.push(
@@ -800,7 +800,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.attach_money, color: Colors.blue),
+              leading: const Icon(Icons.attach_money, color: Colors.green),
               title: const Text('Make Payment'), 
               onTap: () {
                 Navigator.push(
@@ -812,7 +812,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.medical_services, color: Colors.blue),
+              leading: const Icon(Icons.medical_services, color: Colors.green),
               title: const Text('View All Medics Profile'), 
               onTap: () {
                 Navigator.push(
@@ -824,7 +824,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.pregnant_woman, color: Colors.blue),
+              leading: const Icon(Icons.pregnant_woman, color: Colors.green),
               title: const Text('Anemia Assessment'),
               onTap: () {
                 Navigator.push(
@@ -836,7 +836,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.healing, color: Colors.blue),
+              leading: const Icon(Icons.healing, color: Colors.green),
               title: const Text('How Are You Feeling?'), 
               onTap: () {
                 Navigator.push(
@@ -848,7 +848,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.bloodtype, color: Colors.blue),
+              leading: Icon(Icons.bloodtype, color: Colors.green),
               title: Text('Charts Data'),
               onTap: () {
                 Navigator.push(
@@ -858,7 +858,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.search, color: Colors.blue),
+              leading: const Icon(Icons.search, color: Colors.green),
               title: const Text('Find Your Favorite Medic'),
               onTap: () {
                 Navigator.push(
@@ -876,7 +876,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
         child: Container(
           padding: const EdgeInsets.all(12),
           child: isLoading 
-            ? const Center(child: CircularProgressIndicator(color: Colors.blueAccent))
+            ? const Center(child: CircularProgressIndicator(color: Colors.greenAccent))
             : errorMessage.isNotEmpty
               ? Center(
                   child: Text(
@@ -925,7 +925,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
                           title: 'Oxygen Saturation',
                           value: '${vitalData?['spo2']?.toStringAsFixed(0) ?? 'N/A'}%',
                           icon: Icons.air,
-                          color: Colors.blue,
+                          color: Colors.green,
                           lastUpdated: _getTimeAgo(vitalData?['updatedAt'] ?? ''),
                         ),
                         MetricCard(
@@ -1015,7 +1015,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
                   ),
                   _buildProfileItem(
                     icon: Icons.bluetooth,
-                    text: 'Pair With Bluetooth Device',
+                    text: 'Pair With bluetooth Device',
                     onTap: () {
                       Navigator.pop(context);
                       Navigator.push(
@@ -1137,7 +1137,7 @@ class _HealthDashboardState extends State<HealthDashboard> {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 20, color: Colors.blue),
+              Icon(icon, size: 20, color: Colors.green),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -1437,7 +1437,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
     return sqrt(
       pow(c1.red - c2.red, 2) +
       pow(c1.green - c2.green, 2) +
-      pow(c1.blue - c2.blue, 2)
+      pow(c1.green - c2.green, 2)
     );
   }
 
@@ -1545,7 +1545,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
         title: Text('Scan Urine Strip'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: _isLoading
@@ -1636,7 +1636,7 @@ class _CameraColorScannerState extends State<CameraColorScanner> {
                               icon: Icon(_isCapturing ? Icons.camera : Icons.camera_alt),
                               label: Text(_isCapturing ? 'Processing...' : 'Capture & Analyze'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
+                                backgroundColor: Colors.green,
                                 foregroundColor: Colors.white,
                                 padding: EdgeInsets.symmetric(vertical: 15),
                               ),

@@ -313,7 +313,7 @@ class VitalCard extends StatelessWidget {
                         label: 'SpO2',
                         value: '${vital.spo2}',
                         unit: '%',
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                     ),
                     const SizedBox(width: 8),

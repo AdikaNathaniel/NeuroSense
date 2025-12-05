@@ -259,7 +259,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
               ? Colors.grey.shade300
               : isSelf
                   ? Colors.teal.shade100
-                  : Colors.blue.shade100,
+                  : Colors.green.shade100,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -287,7 +287,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
                     Icon(
                       msg['isRead'] ? Icons.done_all : Icons.done,
                       size: 14,
-                      color: msg['isRead'] ? Colors.blue : Colors.black45,
+                      color: msg['isRead'] ? Colors.green : Colors.black45,
                     ),
                   ],
                 ],

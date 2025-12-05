@@ -152,7 +152,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                         'SpO₂',
                         item["spO2"] != null ? '${item["spO2"]}%' : 'N/A',
                         Icons.air,
-                        Colors.blue,
+                        Colors.green,
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -297,7 +297,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vitals Data List'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -319,7 +319,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                       const Icon(
                         Icons.analytics,
                         size: 48,
-                        color: Colors.blueAccent,
+                        color: Colors.greenAccent,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -342,7 +342,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.greenAccent,
                                 foregroundColor: Colors.white,
                               ),
                               onPressed: () async {
@@ -362,7 +362,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.greenAccent,
                                 foregroundColor: Colors.white,
                               ),
                               onPressed: () async {
@@ -380,7 +380,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : fetchVitals,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
+                            backgroundColor: Colors.greenAccent,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
@@ -443,7 +443,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                                     }
                                   : null,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.greenAccent,
                                 foregroundColor: Colors.white,
                               ),
                               child: const Text(
@@ -467,7 +467,7 @@ class _VitalsHealthDataListPageState extends State<VitalsHealthDataListPage> {
                                     }
                                   : null,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.greenAccent,
                                 foregroundColor: Colors.white,
                               ),
                               child: const Text(

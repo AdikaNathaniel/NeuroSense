@@ -144,7 +144,7 @@ class _CreateNotificationPageState extends State<CreateNotificationPage> {
       appBar: AppBar(
         title: const Text('Create Notification'),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: Padding(
@@ -164,7 +164,7 @@ class _CreateNotificationPageState extends State<CreateNotificationPage> {
                     const Icon(
                       Icons.edit_note, // Writing hand with note icon
                       size: 48,
-                      color: Colors.blue,
+                      color: Colors.green,
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -208,7 +208,7 @@ class _CreateNotificationPageState extends State<CreateNotificationPage> {
                       child: ElevatedButton(
                         onPressed: _isFormValid ? _submitNotification : null,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: Colors.green,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),

@@ -127,12 +127,12 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.1),
+                      color: Colors.green.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.calendar_today, color: Colors.blue),
+                        const Icon(Icons.calendar_today, color: Colors.green),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
@@ -143,7 +143,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
+                                  color: Colors.green,
                                 ),
                               ),
                               Text(
@@ -261,7 +261,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                             _fetchAppointments(); // Refresh search
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                           ),
                           child: const Text('Refresh'),
@@ -406,7 +406,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
         title: const Text('Doctor Appointments'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: LayoutBuilder(
@@ -438,7 +438,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Colors.blue, width: 2),
+                                borderSide: const BorderSide(color: Colors.green, width: 2),
                               ),
                               filled: true,
                               fillColor: Colors.grey[50],
@@ -461,7 +461,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Colors.blue, width: 2),
+                                borderSide: const BorderSide(color: Colors.green, width: 2),
                               ),
                               filled: true,
                               fillColor: Colors.grey[50],
@@ -495,7 +495,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Colors.blue, width: 2),
+                                borderSide: const BorderSide(color: Colors.green, width: 2),
                               ),
                               filled: true,
                               fillColor: Colors.grey[50],
@@ -520,7 +520,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
-                                borderSide: const BorderSide(color: Colors.blue, width: 2),
+                                borderSide: const BorderSide(color: Colors.green, width: 2),
                               ),
                               filled: true,
                               fillColor: Colors.grey[50],
@@ -535,17 +535,17 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                           //   Container(
                           //     padding: const EdgeInsets.all(12),
                           //     decoration: BoxDecoration(
-                          //       color: Colors.blue.withOpacity(0.1),
+                          //       color: Colors.green.withOpacity(0.1),
                           //       borderRadius: BorderRadius.circular(8),
                           //     ),
                           //     // child: Row(
                           //     //   children: [
-                          //     //     const Icon(Icons.date_range, color: Colors.blue),
+                          //     //     const Icon(Icons.date_range, color: Colors.green),
                           //     //     // const SizedBox(width: 8),
                           //     //     // Text(
                           //     //     //   'Selected Range: ${dateFormatter.format(startDate!)} to ${dateFormatter.format(endDate!)}',
                           //     //     //   style: const TextStyle(
-                          //     //     //     color: Colors.blue,
+                          //     //     //     color: Colors.green,
                           //     //     //     fontWeight: FontWeight.w500,
                           //     //     //   ),
                           //     //     // ),
@@ -561,7 +561,7 @@ class _DoctorAppointmentsPageState extends State<DoctorAppointmentsPage> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 16),
-                                backgroundColor: Colors.blue,
+                                backgroundColor: Colors.green,
                                 foregroundColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),

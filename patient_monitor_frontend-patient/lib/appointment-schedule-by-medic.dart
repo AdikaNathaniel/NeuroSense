@@ -171,7 +171,7 @@ class _AppointmentScheduleByMedicPageState
         title: const Text('Schedule Appointment'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
@@ -225,7 +225,7 @@ class _AppointmentScheduleByMedicPageState
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -265,7 +265,7 @@ class _AppointmentScheduleByMedicPageState
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: const BorderSide(color: Colors.blue, width: 2),
+            borderSide: const BorderSide(color: Colors.green, width: 2),
           ),
           filled: true,
           fillColor: Colors.grey[50],

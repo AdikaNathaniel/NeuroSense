@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            Colors.blue,
+            Colors.green,
             Colors.red,
           ],
         ),
@@ -39,7 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.greenAccent,
         ),
         backgroundColor: Colors.transparent,
         body: _page(),
@@ -163,7 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
       style: ElevatedButton.styleFrom(
         shape: const StadiumBorder(),
         backgroundColor: Colors.white,
-        foregroundColor: Colors.blue,
+        foregroundColor: Colors.green,
         padding: const EdgeInsets.symmetric(vertical: 16),
       ),
       child: const SizedBox(

@@ -264,7 +264,7 @@ class _FaceLoginPageState extends State<FaceLoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Colors.blue, Colors.red],
+            colors: [Colors.green, Colors.red],
           ),
         ),
         child: Padding(

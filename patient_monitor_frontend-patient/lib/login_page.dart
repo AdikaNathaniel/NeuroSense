@@ -560,7 +560,7 @@ class _LoginPageState extends State<LoginPage> {
               const Text(
                 "adikanathniel2@gmail.com",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -570,7 +570,7 @@ class _LoginPageState extends State<LoginPage> {
               const Text(
                 "0241744703",
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
               ),

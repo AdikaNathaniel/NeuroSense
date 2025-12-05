@@ -266,7 +266,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: isMe ? Colors.blue : Colors.grey[200],
+                color: isMe ? Colors.green : Colors.grey[200],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -293,7 +293,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
           if (isMe) ...[
             SizedBox(width: 8),
             CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.green,
               child: Text('D', style: TextStyle(color: Colors.white)),
               radius: 16,
             ),
@@ -468,7 +468,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
         title: _currentPatientId.isEmpty
             ? Text('Patient Consultations')
             : Text('Chat with $_currentPatientName'),
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Colors.green[100],
         elevation: 0,
       ),
       body: Column(
@@ -538,7 +538,7 @@ class _DoctorChatPageState extends State<DoctorChatPage> {
                             ),
                             SizedBox(width: 8),
                             CircleAvatar(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: Colors.green,
                               child: IconButton(
                                 icon: Icon(Icons.send, color: Colors.white),
                                 onPressed: _sendMessage,

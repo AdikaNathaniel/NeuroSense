@@ -59,7 +59,7 @@ class _GetAllRecordsPageState extends State<GetAllRecordsPage>
       case 'severe preeclampsia':
         return const Color(0xFFF44336);
       default:
-        return const Color(0xFF2196F3); // Blue for unknown/default
+        return const Color(0xFF2196F3); // green for unknown/default
     }
   }
 
@@ -396,7 +396,7 @@ class _GetAllRecordsPageState extends State<GetAllRecordsPage>
                                               borderRadius: BorderRadius.circular(20),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.blue.withOpacity(0.3),
+                                                  color: Colors.green.withOpacity(0.3),
                                                   blurRadius: 8,
                                                   offset: const Offset(0, 4),
                                                 ),
@@ -437,7 +437,7 @@ class _GetAllRecordsPageState extends State<GetAllRecordsPage>
                                         Icons.water_drop,
                                         'Protein in Urine',
                                         proteinUrine.toStringAsFixed(1),
-                                        Colors.blue[600]!,
+                                        Colors.green[600]!,
                                       ),
                                       _buildVitalRow(
                                         Icons.speed,

@@ -91,7 +91,7 @@ class _UpdateAppointmentStatusPageState extends State<UpdateAppointmentStatusPag
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Status'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -114,7 +114,7 @@ class _UpdateAppointmentStatusPageState extends State<UpdateAppointmentStatusPag
                       const Icon(
                         Icons.calendar_today,
                         size: 48,
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
                       const Text(
@@ -177,7 +177,7 @@ class _UpdateAppointmentStatusPageState extends State<UpdateAppointmentStatusPag
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _updateAppointmentStatus,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),

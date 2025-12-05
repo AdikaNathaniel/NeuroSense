@@ -198,7 +198,7 @@ class _PinUpdateScreenState extends State<PinUpdateScreen> {
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
                       color: _pinFocusNodes[index].hasFocus 
-                          ? Colors.blueAccent 
+                          ? Colors.greenAccent 
                           : Colors.grey,
                       width: 2,
                     ),
@@ -209,7 +209,7 @@ class _PinUpdateScreenState extends State<PinUpdateScreen> {
                   ),
                   filled: true,
                   fillColor: _pinFocusNodes[index].hasFocus
-                      ? Colors.blue
+                      ? Colors.green
                       : Colors.grey.shade100,
                   contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 ),
@@ -245,7 +245,7 @@ class _PinUpdateScreenState extends State<PinUpdateScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Update PIN"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
         foregroundColor: Colors.white,
       ),
@@ -339,7 +339,7 @@ class _PinUpdateScreenState extends State<PinUpdateScreen> {
                     onPressed: _isLoading ? null : updatePin,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 56),
-                      backgroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.greenAccent,
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                         fontSize: 18,

@@ -256,7 +256,7 @@ class _PregnantChatPageState extends State<PregnantChatPage> {
         children: [
           if (!isMe) ...[
             CircleAvatar(
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.green,
               child: Text('D', style: TextStyle(color: Colors.white)),
               radius: 16,
             ),
@@ -266,7 +266,7 @@ class _PregnantChatPageState extends State<PregnantChatPage> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: isMe ? Colors.blue : Colors.grey[200],
+                color: isMe ? Colors.green : Colors.grey[200],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -332,17 +332,17 @@ class _PregnantChatPageState extends State<PregnantChatPage> {
               margin: EdgeInsets.all(8),
               padding: EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: _currentDoctorId == doctor['id'] ? Colors.blue[100] : Colors.blue[50],
+                color: _currentDoctorId == doctor['id'] ? Colors.green[100] : Colors.green[50],
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: _currentDoctorId == doctor['id'] ? Colors.blue : Colors.blue[200]!,
+                  color: _currentDoctorId == doctor['id'] ? Colors.green : Colors.green[200]!,
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.green,
                     child: Text(
                       doctor['name']?.substring(0, 1) ?? 'D',
                       style: TextStyle(color: Colors.white),
@@ -416,7 +416,7 @@ class _PregnantChatPageState extends State<PregnantChatPage> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.green,
             child: Text('D', style: TextStyle(color: Colors.white)),
             radius: 16,
           ),
@@ -538,7 +538,7 @@ class _PregnantChatPageState extends State<PregnantChatPage> {
                             ),
                             SizedBox(width: 8),
                             CircleAvatar(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: Colors.green,
                               child: IconButton(
                                 icon: Icon(Icons.send, color: Colors.white),
                                 onPressed: _sendMessage,

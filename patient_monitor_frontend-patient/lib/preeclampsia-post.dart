@@ -89,12 +89,12 @@ class _CreateRecordPageState extends State<CreateRecordPage> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: Colors.green.shade50,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.check_circle,
-                        color: Colors.blue.shade700,
+                        color: Colors.green.shade700,
                         size: 48,
                       ),
                     ),
@@ -157,7 +157,7 @@ class _CreateRecordPageState extends State<CreateRecordPage> {
                     decoration: BoxDecoration(
                       color: responseData['result']['status'] == 'preeclampsia' 
                           ? Colors.orange.shade100 
-                          : Colors.blue.shade100,
+                          : Colors.green.shade100,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -170,7 +170,7 @@ class _CreateRecordPageState extends State<CreateRecordPage> {
                               : Icons.check_circle,
                           color: responseData['result']['status'] == 'preeclampsia' 
                               ? Colors.orange.shade700 
-                              : Colors.blue.shade700,
+                              : Colors.green.shade700,
                           size: 18,
                         ),
                         const SizedBox(width: 6),
@@ -181,7 +181,7 @@ class _CreateRecordPageState extends State<CreateRecordPage> {
                               fontWeight: FontWeight.bold,
                               color: responseData['result']['status'] == 'preeclampsia' 
                                   ? Colors.orange.shade700 
-                                  : Colors.blue.shade700,
+                                  : Colors.green.shade700,
                               fontSize: 14,
                             ),
                             overflow: TextOverflow.ellipsis,

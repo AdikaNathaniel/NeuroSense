@@ -297,7 +297,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login with PIN"),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.greenAccent,
         centerTitle: true,
         foregroundColor: Colors.white,
         elevation: 2,
@@ -319,7 +319,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                 children: [
                   const SizedBox(height: 20),
                   const Center(
-                    child: Icon(Icons.lock, size: 60, color: Colors.blueAccent),
+                    child: Icon(Icons.lock, size: 60, color: Colors.greenAccent),
                   ),
                   const SizedBox(height: 30),
                   Card(
@@ -337,7 +337,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                               const Icon(
                                 Icons.account_circle,
                                 size: 24,
-                                color: Colors.blueAccent,
+                                color: Colors.greenAccent,
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -374,7 +374,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                               const Icon(
                                 Icons.badge,
                                 size: 24,
-                                color: Colors.blueAccent,
+                                color: Colors.greenAccent,
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -434,7 +434,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     onPressed: _isLoading ? null : verifyPin,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 56),
-                      backgroundColor: Colors.blueAccent,
+                      backgroundColor: Colors.greenAccent,
                       foregroundColor: Colors.white,
                       textStyle: const TextStyle(
                         fontSize: 18,

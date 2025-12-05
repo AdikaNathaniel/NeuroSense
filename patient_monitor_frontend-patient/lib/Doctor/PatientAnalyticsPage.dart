@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Health Analytics Dashboard',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.greenAccent),
         useMaterial3: true,
       ),
       home: const PatientAnalyticsPage(),
@@ -215,7 +215,7 @@ class _PatientAnalyticsPageState extends State<PatientAnalyticsPage> {
           padding: EdgeInsets.symmetric(vertical: 8.0),
           child: Row(
             children: [
-              Icon(Icons.bar_chart, color: Colors.blue),
+              Icon(Icons.bar_chart, color: Colors.green),
               SizedBox(width: 8),
               Text(
                 'Health Charts',
