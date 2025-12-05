@@ -2,7 +2,7 @@ name: Fly Deploy
 on:
   push:
     branches:
-      - awopa
+      - neuro
     paths:
       - 'patient_monitor_backend_patient/**'
 jobs:
