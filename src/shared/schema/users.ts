@@ -3,11 +3,11 @@ import { Document } from 'mongoose';
 
 export enum userTypes {
   ADMIN = 'admin',
-  PREGNANT = 'pregnant-woman',
-  DOCTOR = 'doctor',
+  CELEBRAL_MOTHER = 'celebral-mother',
+  CELEBRAL_PHYSICIAN = 'celebral-physician',
   RELATIVE = 'relative',
   GENERALUSER = 'wellness-user',
-  MIDWIFE = 'midwife',
+  CELEBRAL_CAREGIVER = 'celebral-caregiver',
 }
 
 @Schema({
@@ -30,11 +30,11 @@ export class Users extends Document {
     required: true,
     enum: [
       userTypes.ADMIN,
-      userTypes.PREGNANT,
-      userTypes.DOCTOR,
+      userTypes.CELEBRAL_MOTHER,
+      userTypes.CELEBRAL_PHYSICIAN,
       userTypes.RELATIVE,
       userTypes.GENERALUSER,
-      userTypes.MIDWIFE,
+      userTypes.CELEBRAL_CAREGIVER,
     ],
   })
   type: string;

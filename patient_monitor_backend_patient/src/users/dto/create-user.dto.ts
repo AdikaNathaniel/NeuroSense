@@ -28,11 +28,11 @@ export class CreateUserDto {
   @IsString()
   @IsIn([
     userTypes.ADMIN,
-    userTypes.PREGNANT,
-    userTypes.DOCTOR,
+    userTypes.CELEBRAL_MOTHER,
+    userTypes.CELEBRAL_PHYSICIAN,
     userTypes.RELATIVE,
     userTypes.GENERALUSER,
-    userTypes.MIDWIFE,
+    userTypes.CELEBRAL_CAREGIVER,
   ])
   type: string;
 
