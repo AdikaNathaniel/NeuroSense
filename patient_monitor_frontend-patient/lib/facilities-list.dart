@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 class FacilitiesListPage extends StatefulWidget {
   const FacilitiesListPage({Key? key}) : super(key: key);
@@ -58,6 +59,39 @@ class _FacilitiesListPageState extends State<FacilitiesListPage> {
     }
   }
 
+  Future<void> _launchURL(String url) async {
+    if (url.isEmpty || url == 'No Email' || url == 'No Phone' || url == 'No Website') return;
+    
+    final Uri uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not launch $url')),
+      );
+    }
+  }
+
+  Future<void> _launchEmail(String email) async {
+    if (email.isEmpty || email == 'No Email') return;
+    
+    final Uri uri = Uri.parse('mailto:$email');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not launch email')),
+      );
+    }
+  }
+
+  Future<void> _launchPhone(String phone) async {
+    if (phone.isEmpty || phone == 'No Phone') return;
+    
+    final Uri uri = Uri.parse('tel:$phone');
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not launch phone')),
+      );
+    }
+  }
+
   Widget _buildFacilityCard(Map<String, dynamic> facility) {
     final location = facility['location'] ?? {};
     final year = facility['establishedYear']?.toString() ?? 'Not specified';
@@ -105,10 +139,29 @@ class _FacilitiesListPageState extends State<FacilitiesListPage> {
               ],
             ),
             const SizedBox(height: 16),
-            _buildInfoRow(Icons.email, facility['email'] ?? 'No Email'),
-            _buildInfoRow(Icons.phone, facility['phoneNumber'] ?? 'No Phone'),
+            
+            // Clickable Email
+            _buildClickableInfoRow(
+              Icons.email, 
+              facility['email'] ?? 'No Email',
+              onTap: () => _launchEmail(facility['email'] ?? ''),
+            ),
+            
+            // Clickable Phone
+            _buildClickableInfoRow(
+              Icons.phone, 
+              facility['phoneNumber'] ?? 'No Phone',
+              onTap: () => _launchPhone(facility['phoneNumber'] ?? ''),
+            ),
+            
             _buildInfoRow(Icons.calendar_today, 'Established: $year'),
-            _buildInfoRow(Icons.language, facility['website'] ?? 'No Website'),
+            
+            // Clickable Website
+            _buildClickableInfoRow(
+              Icons.language, 
+              facility['website'] ?? 'No Website',
+              onTap: () => _launchURL(facility['website'] ?? ''),
+            ),
             
             const SizedBox(height: 8),
             const Divider(),
@@ -169,6 +222,36 @@ class _FacilitiesListPageState extends State<FacilitiesListPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildClickableInfoRow(IconData icon, String text, {VoidCallback? onTap}) {
+    final isClickable = onTap != null && text != 'No Email' && text != 'No Phone' && text != 'No Website';
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: InkWell(
+        onTap: isClickable ? onTap : null,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, size: 20, color: Colors.green),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: isClickable ? Colors.blue : Colors.black,
+                  decoration: isClickable ? TextDecoration.underline : null,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

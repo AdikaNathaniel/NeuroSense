@@ -235,6 +235,12 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Create Facility Profile'),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -474,8 +480,6 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
     super.dispose();
   }
 }
-
-
 
 
 // Link For CLCD-Ghana...Remove Ashaley Botwe,Ghana to just Ashaley Botwe

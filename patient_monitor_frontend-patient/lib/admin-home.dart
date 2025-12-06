@@ -7,7 +7,8 @@ import 'support-settings.dart';
 import 'users_summary.dart';
 import 'set_profile.dart';
 import 'map.dart';
-import 'create-facility.dart'; // Import the facility page
+// import 'create-facility.dart'; // Import the facility page
+import 'admin-facility.dart';
 
 class AdminHomePage extends StatefulWidget {
   final String userEmail;
@@ -134,17 +135,17 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     },
                   ),
                   
-                  // Facility Profile row
-                  _buildProfileItem(
-                    icon: Icons.business,
-                    text: 'Create Facility Profile',
-                    onTap: () {
-                      Navigator.pop(context);
-                      setState(() {
-                        _selectedPage = 'Facility Profile';
-                      });
-                    },
-                  ),
+                  // // Facility Profile row
+                  // _buildProfileItem(
+                  //   icon: Icons.business,
+                  //   text: 'Create Facility Profile',
+                  //   onTap: () {
+                  //     Navigator.pop(context);
+                  //     setState(() {
+                  //       _selectedPage = 'Facility Profile';
+                  //     });
+                  //   },
+                  // ),
                   
                   const SizedBox(height: 20),
                   
@@ -338,11 +339,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ),
               ListTile(
                 leading: const Icon(Icons.business, color: Colors.green),
-                title: const Text('Facility Profile'),
-                selected: _selectedPage == 'Facility Profile',
+                title: const Text('Celebral Facility'),
+                selected: _selectedPage == 'Celebral Facility',
                 onTap: () {
                   setState(() {
-                    _selectedPage = 'Facility Profile';
+                    _selectedPage = 'Celebral Facility';
                   });
                   Navigator.pop(context);
                 },
@@ -363,8 +364,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
         return NotificationSettingsPage(userEmail: widget.userEmail);
       case 'Support':
         return SupportSettingsPage(userEmail: widget.userEmail);
-      case 'Facility Profile':
-        return FacilityProfilePage(); // This will display the facility creation page
+      case 'Celebral Facility':
+        return FacilityManagementPage(userEmail: widget.userEmail);
       default:
         return UserListPage(userEmail: widget.userEmail);
     }

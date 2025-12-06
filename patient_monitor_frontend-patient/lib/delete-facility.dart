@@ -64,7 +64,10 @@ class _DeleteFacilityPageState extends State<DeleteFacilityPage> {
             },
             icon: const Icon(Icons.delete),
             label: const Text("Delete Facility"),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
           ),
         ],
       ),
@@ -174,15 +177,6 @@ class _DeleteFacilityPageState extends State<DeleteFacilityPage> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Enter the exact name of the facility you want to delete',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
-                      ),
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: _nameController,
@@ -190,8 +184,7 @@ class _DeleteFacilityPageState extends State<DeleteFacilityPage> {
                           labelText: 'Facility Name',
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(Icons.business),
-                          hintText: 'e.g., Cerebral Hope Rehabilitation Center',
-                          helperText: 'Enter the exact facility name as registered',
+                          hintText: 'e.g Cerebral Center',
                         ),
                         validator: (value) =>
                             value?.isEmpty ?? true ? 'Please enter a facility name' : null,
@@ -203,12 +196,12 @@ class _DeleteFacilityPageState extends State<DeleteFacilityPage> {
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _onDeletePressed,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.green,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            disabledBackgroundColor: Colors.red.withOpacity(0.5),
+                            disabledBackgroundColor: Colors.green.withOpacity(0.5),
                           ),
                           child: isLoading
                               ? const Row(
@@ -253,31 +246,31 @@ class _DeleteFacilityPageState extends State<DeleteFacilityPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.orange[50],
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.orange[100]!),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.warning, color: Colors.orange, size: 20),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Note: This action is permanent and cannot be undone. '
-                        'All data related to this facility will be deleted.',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.orange[800],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            //   const SizedBox(height: 20),
+              // FIXED: Removed const from Container and Row
+            //   Container(
+            //     padding: const EdgeInsets.all(12),
+            //     decoration: BoxDecoration(
+            //       color: Colors.green[50],
+            //       borderRadius: BorderRadius.circular(8),
+            //       border: Border.all(color: Colors.green[100] ?? Colors.green.shade100),
+            //     ),
+            //     child: Row(
+            //       children: [
+            //         const Icon(Icons.warning, color: Colors.green, size: 20),
+            //         const SizedBox(width: 8),
+            //         Expanded(
+            //           child: Text(
+            //             'This action is permanent and cannot be undone.',
+            //             style: TextStyle(
+            //               fontSize: 12,
+            //               color: Colors.green[800] ?? Colors.green.shade800,
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
             ],
           ),
         ),
