@@ -1,4 +1,5 @@
 import { IsOptional, IsString, IsNumber, IsBoolean } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class FilterFacilityDto {
   @IsOptional()
@@ -19,13 +20,16 @@ export class FilterFacilityDto {
 
   @IsOptional()
   @IsBoolean()
+  @Type(() => Boolean)
   isActive?: boolean;
 
   @IsOptional()
   @IsNumber()
-  page?: number;
+  @Type(() => Number)
+  page?: number = 1;
 
   @IsOptional()
   @IsNumber()
-  limit?: number;
+  @Type(() => Number)
+  limit?: number = 10;
 }
