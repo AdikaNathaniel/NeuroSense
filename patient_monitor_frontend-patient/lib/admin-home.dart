@@ -5,9 +5,9 @@ import 'admin-notification.dart';
 import 'login_page.dart'; 
 import 'support-settings.dart';
 import 'users_summary.dart';
-
 import 'set_profile.dart';
 import 'map.dart';
+import 'create-facility.dart'; // Import the facility page
 
 class AdminHomePage extends StatefulWidget {
   final String userEmail;
@@ -134,6 +134,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     },
                   ),
                   
+                  // Facility Profile row
+                  _buildProfileItem(
+                    icon: Icons.business,
+                    text: 'Create Facility Profile',
+                    onTap: () {
+                      Navigator.pop(context);
+                      setState(() {
+                        _selectedPage = 'Facility Profile';
+                      });
+                    },
+                  ),
+                  
                   const SizedBox(height: 20),
                   
                   // Logout button
@@ -209,43 +221,45 @@ class _AdminHomePageState extends State<AdminHomePage> {
     );
   }
 
+  Color _getAppBarColor(String page) {
+    switch (page) {
+      case 'Facility Profile':
+        return Colors.green;
+      case 'Users':
+      case 'Notifications':
+      case 'Support':
+      default:
+        return Colors.green;
+    }
+  }
+
+  String _getAppBarTitle(String page) {
+    switch (page) {
+      case 'Facility Profile':
+        return 'Create Facility Profile';
+      default:
+        return page;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isHomePage = _selectedPage == 'Users';
+    
     return Scaffold(
-      appBar: _selectedPage == 'Users' 
-          ? AppBar(
-              title: const Text('All Users'),
-              centerTitle: true,
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-              leading: Builder(
+      appBar: AppBar(
+        title: Text(_getAppBarTitle(_selectedPage)),
+        centerTitle: true,
+        backgroundColor: _getAppBarColor(_selectedPage),
+        foregroundColor: Colors.white,
+        leading: isHomePage
+            ? Builder(
                 builder: (context) => IconButton(
                   icon: const Icon(Icons.menu),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                 ),
-              ),
-              actions: [
-                IconButton(
-                  icon: CircleAvatar(
-                    radius: 16,
-                    child: Text(
-                      widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'A',
-                      style: const TextStyle(color: Colors.green, fontSize: 16),
-                    ),
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    _showUserInfoDialog(context);
-                  },
-                ),
-              ],
-            )
-          : AppBar(
-              title: Text(_selectedPage),
-              centerTitle: true,
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-              leading: IconButton(
+              )
+            : IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   setState(() {
@@ -253,23 +267,23 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   });
                 },
               ),
-              actions: [
-                IconButton(
-                  icon: CircleAvatar(
-                    radius: 16,
-                    child: Text(
-                      widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'A',
-                      style: const TextStyle(color: Colors.green, fontSize: 16),
-                    ),
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: () {
-                    _showUserInfoDialog(context);
-                  },
-                ),
-              ],
+        actions: [
+          IconButton(
+            icon: CircleAvatar(
+              radius: 16,
+              child: Text(
+                widget.userEmail.isNotEmpty ? widget.userEmail[0].toUpperCase() : 'A',
+                style: const TextStyle(color: Colors.green, fontSize: 16),
+              ),
+              backgroundColor: Colors.white,
             ),
-      drawer: Drawer(
+            onPressed: () {
+              _showUserInfoDialog(context);
+            },
+          ),
+        ],
+      ),
+      drawer: isHomePage ? Drawer(
         child: SafeArea(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -322,10 +336,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   Navigator.pop(context);
                 },
               ),
+              ListTile(
+                leading: const Icon(Icons.business, color: Colors.green),
+                title: const Text('Facility Profile'),
+                selected: _selectedPage == 'Facility Profile',
+                onTap: () {
+                  setState(() {
+                    _selectedPage = 'Facility Profile';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
             ],
           ),
         ),
-      ),
+      ) : null,
       body: _buildContent(_selectedPage),
     );
   }
@@ -338,11 +363,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
         return NotificationSettingsPage(userEmail: widget.userEmail);
       case 'Support':
         return SupportSettingsPage(userEmail: widget.userEmail);
+      case 'Facility Profile':
+        return FacilityProfilePage(); // This will display the facility creation page
       default:
         return UserListPage(userEmail: widget.userEmail);
     }
   }
 }
+
+// Rest of the code remains the same (UserListPage, User, UserCard classes)...
 
 // UserListPage with updated UI
 class UserListPage extends StatefulWidget {
@@ -792,16 +821,6 @@ class UserCard extends StatelessWidget {
                         ),
                     ],
                   ),
-                  
-                  // ID (small and discreet)
-                  // const SizedBox(height: 6),
-                  // Text(
-                  //   'ID: ${user.id.substring(0, 8)}...',
-                  //   style: TextStyle(
-                  //     fontSize: 10,
-                  //     color: Colors.grey[500],
-                  //   ),
-                  // ),
                 ],
               ),
             ),

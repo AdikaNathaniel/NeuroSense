@@ -13,21 +13,80 @@ export class FacilityService {
     @InjectModel(Facility.name) private facilityModel: Model<Facility>,
   ) {}
 
+  /**
+   * Normalizes facility name by:
+   * 1. Replacing multiple spaces with single space
+   * 2. Trimming whitespace from beginning and end
+   * 3. Normalizing spaces around parentheses
+   */
+  private normalizeFacilityName(name: string): string {
+    if (!name) return name;
+    
+    // Replace multiple spaces with single space and trim
+    let normalized = name.replace(/\s+/g, ' ').trim();
+    
+    // Normalize spaces around parentheses
+    normalized = normalized.replace(/\s*\(\s*/g, ' (');  // Ensure single space before (
+    normalized = normalized.replace(/\s*\)\s*/g, ') ');  // Ensure single space after )
+    normalized = normalized.replace(/\s+/g, ' ').trim(); // Clean up any extra spaces
+    
+    return normalized;
+  }
+
+  /**
+   * URL decodes and normalizes a facility name for searching
+   */
+  private prepareSearchName(facilityName: string): string {
+    try {
+      // Decode URL-encoded characters
+      const decodedName = decodeURIComponent(facilityName);
+      // Normalize the name for consistent comparison
+      return this.normalizeFacilityName(decodedName);
+    } catch (error) {
+      // If decoding fails, use the original name
+      return this.normalizeFacilityName(facilityName);
+    }
+  }
+
   async create(createFacilityDto: CreateFacilityDto): Promise<Facility> {
     try {
-      // Check if facility already exists
+      // Normalize facility name before saving
+      createFacilityDto.facilityName = this.normalizeFacilityName(
+        createFacilityDto.facilityName
+      );
+
+      // Check if facility already exists (with normalized name)
       const existingFacility = await this.facilityModel.findOne({
-        facilityName: createFacilityDto.facilityName,
+        facilityName: { $regex: new RegExp(`^${createFacilityDto.facilityName}$`, 'i') },
       });
 
       if (existingFacility) {
         throw new BadRequestException('Facility with this name already exists');
       }
 
-    //   // Set specialization to Cerebral Palsy by default if not provided
-    //   if (!createFacilityDto.specialization) {
-    //     createFacilityDto.specialization = 'Cerebral Palsy Rehabilitation';
-    //   }
+      // Normalize location fields as well
+      if (createFacilityDto.location) {
+        if (createFacilityDto.location.address) {
+          createFacilityDto.location.address = this.normalizeFacilityName(
+            createFacilityDto.location.address
+          );
+        }
+        if (createFacilityDto.location.city) {
+          createFacilityDto.location.city = this.normalizeFacilityName(
+            createFacilityDto.location.city
+          );
+        }
+        if (createFacilityDto.location.state) {
+          createFacilityDto.location.state = this.normalizeFacilityName(
+            createFacilityDto.location.state
+          );
+        }
+        if (createFacilityDto.location.country) {
+          createFacilityDto.location.country = this.normalizeFacilityName(
+            createFacilityDto.location.country
+          );
+        }
+      }
 
       const createdFacility = new this.facilityModel(createFacilityDto);
       return createdFacility.save();
@@ -59,17 +118,27 @@ export class FacilityService {
 
     // Build search query
     if (search) {
+      const normalizedSearch = this.normalizeFacilityName(search);
       query.$or = [
-        { facilityName: { $regex: search, $options: 'i' } },
+        { facilityName: { $regex: normalizedSearch, $options: 'i' } },
         { email: { $regex: search, $options: 'i' } },
-        { 'location.city': { $regex: search, $options: 'i' } },
+        { 'location.city': { $regex: normalizedSearch, $options: 'i' } },
       ];
     }
 
     // Filter by location
-    if (city) query['location.city'] = { $regex: city, $options: 'i' };
-    if (state) query['location.state'] = { $regex: state, $options: 'i' };
-    if (country) query['location.country'] = { $regex: country, $options: 'i' };
+    if (city) {
+      const normalizedCity = this.normalizeFacilityName(city);
+      query['location.city'] = { $regex: normalizedCity, $options: 'i' };
+    }
+    if (state) {
+      const normalizedState = this.normalizeFacilityName(state);
+      query['location.state'] = { $regex: normalizedState, $options: 'i' };
+    }
+    if (country) {
+      const normalizedCountry = this.normalizeFacilityName(country);
+      query['location.country'] = { $regex: normalizedCountry, $options: 'i' };
+    }
     
     // Filter by active status
     if (isActive !== undefined) query.isActive = isActive;
@@ -95,34 +164,84 @@ export class FacilityService {
   }
 
   async findOne(facilityName: string): Promise<Facility> {
+    // Prepare the search name (decode URL and normalize)
+    const searchName = this.prepareSearchName(facilityName);
+    
+    // Try exact match with normalized name
     const facility = await this.facilityModel.findOne({ 
-      facilityName: { $regex: new RegExp(`^${facilityName}$`, 'i') } 
+      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
     }).exec();
 
     if (!facility) {
-      throw new NotFoundException(`Facility with name "${facilityName}" not found`);
+      // If not found, try a more flexible search (allowing minor variations)
+      const escapedName = searchName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regexPattern = `^\\s*${escapedName.replace(/\s+/g, '\\s*')}\\s*$`;
+      
+      const flexibleMatch = await this.facilityModel.findOne({ 
+        facilityName: { $regex: new RegExp(regexPattern, 'i') } 
+      }).exec();
+
+      if (!flexibleMatch) {
+        throw new NotFoundException(`Facility with name "${facilityName}" not found`);
+      }
+      
+      return flexibleMatch;
     }
 
     return facility;
   }
 
   async update(facilityName: string, updateFacilityDto: UpdateFacilityDto): Promise<Facility> {
+    // Prepare the search name
+    const searchName = this.prepareSearchName(facilityName);
+    
     const facility = await this.facilityModel.findOne({ 
-      facilityName: { $regex: new RegExp(`^${facilityName}$`, 'i') } 
+      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
     });
 
     if (!facility) {
       throw new NotFoundException(`Facility with name "${facilityName}" not found`);
     }
 
-    // Prevent updating facility name if it's being changed to an existing one
-    if (updateFacilityDto.facilityName && updateFacilityDto.facilityName !== facilityName) {
-      const existingFacility = await this.facilityModel.findOne({
-        facilityName: updateFacilityDto.facilityName,
-      });
+    // Normalize the new facility name if provided
+    if (updateFacilityDto.facilityName) {
+      updateFacilityDto.facilityName = this.normalizeFacilityName(
+        updateFacilityDto.facilityName
+      );
+      
+      // Prevent updating facility name if it's being changed to an existing one
+      if (updateFacilityDto.facilityName !== facility.facilityName) {
+        const existingFacility = await this.facilityModel.findOne({
+          facilityName: { $regex: new RegExp(`^${updateFacilityDto.facilityName}$`, 'i') },
+        });
 
-      if (existingFacility) {
-        throw new BadRequestException('Facility with this name already exists');
+        if (existingFacility) {
+          throw new BadRequestException('Facility with this name already exists');
+        }
+      }
+    }
+
+    // Normalize location fields if provided
+    if (updateFacilityDto.location) {
+      if (updateFacilityDto.location.address) {
+        updateFacilityDto.location.address = this.normalizeFacilityName(
+          updateFacilityDto.location.address
+        );
+      }
+      if (updateFacilityDto.location.city) {
+        updateFacilityDto.location.city = this.normalizeFacilityName(
+          updateFacilityDto.location.city
+        );
+      }
+      if (updateFacilityDto.location.state) {
+        updateFacilityDto.location.state = this.normalizeFacilityName(
+          updateFacilityDto.location.state
+        );
+      }
+      if (updateFacilityDto.location.country) {
+        updateFacilityDto.location.country = this.normalizeFacilityName(
+          updateFacilityDto.location.country
+        );
       }
     }
 
@@ -131,8 +250,11 @@ export class FacilityService {
   }
 
   async remove(facilityName: string): Promise<{ message: string }> {
+    // Prepare the search name
+    const searchName = this.prepareSearchName(facilityName);
+    
     const result = await this.facilityModel.deleteOne({ 
-      facilityName: { $regex: new RegExp(`^${facilityName}$`, 'i') } 
+      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
     });
 
     if (result.deletedCount === 0) {
@@ -143,11 +265,13 @@ export class FacilityService {
   }
 
   async searchFacilities(query: string): Promise<Facility[]> {
+    const normalizedQuery = this.normalizeFacilityName(query);
+    
     return this.facilityModel.find({
       $or: [
-        { facilityName: { $regex: query, $options: 'i' } },
-        { 'location.city': { $regex: query, $options: 'i' } },
-        { 'location.state': { $regex: query, $options: 'i' } }
+        { facilityName: { $regex: normalizedQuery, $options: 'i' } },
+        { 'location.city': { $regex: normalizedQuery, $options: 'i' } },
+        { 'location.state': { $regex: normalizedQuery, $options: 'i' } }
       ],
       isActive: true,
     }).limit(10).exec();
@@ -176,5 +300,57 @@ export class FacilityService {
       inactive: total - active,
       byCountry: stats,
     };
+  }
+
+  // Optional: Add ID-based methods for better API design
+  async findById(id: string): Promise<Facility> {
+    const facility = await this.facilityModel.findById(id).exec();
+
+    if (!facility) {
+      throw new NotFoundException(`Facility with ID "${id}" not found`);
+    }
+
+    return facility;
+  }
+
+  async updateById(id: string, updateFacilityDto: UpdateFacilityDto): Promise<Facility> {
+    // Normalize the new facility name if provided
+    if (updateFacilityDto.facilityName) {
+      updateFacilityDto.facilityName = this.normalizeFacilityName(
+        updateFacilityDto.facilityName
+      );
+      
+      // Check if new name already exists
+      const existingFacility = await this.facilityModel.findOne({
+        facilityName: { $regex: new RegExp(`^${updateFacilityDto.facilityName}$`, 'i') },
+        _id: { $ne: id }, // Exclude current facility
+      });
+
+      if (existingFacility) {
+        throw new BadRequestException('Facility with this name already exists');
+      }
+    }
+
+    const facility = await this.facilityModel.findByIdAndUpdate(
+      id,
+      { $set: updateFacilityDto },
+      { new: true, runValidators: true }
+    ).exec();
+
+    if (!facility) {
+      throw new NotFoundException(`Facility with ID "${id}" not found`);
+    }
+
+    return facility;
+  }
+
+  async removeById(id: string): Promise<{ message: string }> {
+    const result = await this.facilityModel.findByIdAndDelete(id).exec();
+
+    if (!result) {
+      throw new NotFoundException(`Facility with ID "${id}" not found`);
+    }
+
+    return { message: `Facility deleted successfully` };
   }
 }

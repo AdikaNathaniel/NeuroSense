@@ -7,6 +7,7 @@ import 'users_summary.dart';
 import 'pregnancy-calculator.dart';
 import 'admin-home.dart';
 import 'awopa-summarised.dart';
+import 'facilities-list.dart'; 
 
 class LoginPinPage extends StatefulWidget {
   final String userEmail; 
@@ -88,21 +89,21 @@ class _LoginPinPageState extends State<LoginPinPage> {
 
     final userType = widget.userType.toLowerCase();
     
-    if (userType == 'doctor') {
+    if (userType == 'celebral-physician') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => AWOPASummarisedPage(userEmail: widget.userEmail),
         ),
       );
-    } else if (userType == 'pregnant woman') {
+    } else if (userType == 'celebral-mother') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => PregnancyCalculatorScreen(userEmail: widget.userEmail),
         ),
       );
-    } else if (userType == 'wellness user') {
+    } else if (userType == 'celebral-caregiver') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -110,7 +111,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
         ),
       );
     }
-    else if (userType == 'family relative') {
+    else if (userType == 'relative') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -124,8 +125,15 @@ class _LoginPinPageState extends State<LoginPinPage> {
           builder: (context) => AdminHomePage(userEmail: widget.userEmail)
         ),
       );
+    } else if (userType == 'regular-user') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FacilitiesListPage()
+        ),
+      );
     } else {
-      _showErrorDialog("Unknown user type: $userType");
+      _showErrorDialog("Unknown user type: ${widget.userType}");
     }
   }
 
@@ -180,7 +188,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      widget.userType,
+                      _formatUserTypeName(widget.userType),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -227,6 +235,25 @@ class _LoginPinPageState extends State<LoginPinPage> {
         ],
       ),
     );
+  }
+
+  String _formatUserTypeName(String userType) {
+    switch (userType.toLowerCase()) {
+      case 'admin':
+        return 'Admin';
+      case 'celebral-mother':
+        return 'Cerebral Mother';
+      case 'celebral-caregiver':
+        return 'Cerebral Caregiver';
+      case 'celebral-physician':
+        return 'Cerebral Physician';
+      case 'relative':
+        return 'Relative';
+      case 'regular-user':
+        return 'Regular User';
+      default:
+        return userType;
+    }
   }
 
   void _showErrorDialog(String message) {
@@ -391,7 +418,7 @@ class _LoginPinPageState extends State<LoginPinPage> {
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
-                                      widget.userType,
+                                      _formatUserTypeName(widget.userType),
                                       style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
