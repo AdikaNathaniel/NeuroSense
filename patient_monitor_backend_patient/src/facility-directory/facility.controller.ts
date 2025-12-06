@@ -41,6 +41,9 @@ export class FacilityController {
     return this.facilityService.findAll(filterDto);
   }
 
+  // IMPORTANT: Specific routes MUST come before parameterized routes
+  // Otherwise ':facilityName' will catch 'search' and 'stats' as facility names
+  
   @Get('search')
   async search(@Query('q') query: string): Promise<Facility[]> {
     return this.facilityService.searchFacilities(query);
@@ -51,6 +54,28 @@ export class FacilityController {
     return this.facilityService.getFacilityStats();
   }
 
+  // ID-based routes (optional but recommended for better API design)
+  @Get('id/:id')
+  async findById(@Param('id') id: string): Promise<Facility> {
+    return this.facilityService.findById(id);
+  }
+
+  @Put('id/:id')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async updateById(
+    @Param('id') id: string,
+    @Body() updateFacilityDto: UpdateFacilityDto,
+  ): Promise<Facility> {
+    return this.facilityService.updateById(id, updateFacilityDto);
+  }
+
+  @Delete('id/:id')
+  @HttpCode(HttpStatus.OK)
+  async removeById(@Param('id') id: string): Promise<{ message: string }> {
+    return this.facilityService.removeById(id);
+  }
+
+  // Parameterized routes MUST come last
   @Get(':facilityName')
   async findOne(@Param('facilityName') facilityName: string): Promise<Facility> {
     return this.facilityService.findOne(facilityName);

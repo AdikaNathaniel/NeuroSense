@@ -48,6 +48,67 @@ export class FacilityService {
     }
   }
 
+  /**
+   * Escapes special regex characters in a string
+   */
+  private escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  /**
+   * Finds a facility by name using multiple fallback strategies
+   * Strategy 1: Exact normalized match (case-insensitive)
+   * Strategy 2: Flexible whitespace match
+   * Strategy 3: Fetch all and compare in-memory (last resort)
+   */
+  private async findFacilityByName(facilityName: string): Promise<Facility | null> {
+    // Prepare the search name (decode URL and normalize)
+    const searchName = this.prepareSearchName(facilityName);
+    
+    // Strategy 1: Try exact match with escaped regex
+    const escapedName = this.escapeRegex(searchName);
+    let facility = await this.facilityModel.findOne({ 
+      facilityName: { $regex: new RegExp(`^${escapedName}$`, 'i') } 
+    }).exec();
+
+    if (facility) {
+      return facility;
+    }
+
+    // Strategy 2: Try flexible whitespace matching
+    const flexiblePattern = `^\\s*${escapedName.replace(/\s+/g, '\\s+')}\\s*$`;
+    facility = await this.facilityModel.findOne({ 
+      facilityName: { $regex: new RegExp(flexiblePattern, 'i') } 
+    }).exec();
+
+    if (facility) {
+      return facility;
+    }
+
+    // Strategy 3: Fetch all facilities and compare in-memory (case-insensitive)
+    // This is a last resort for edge cases
+    const normalizedSearchLower = searchName.toLowerCase();
+    const allFacilities = await this.facilityModel.find().exec();
+    
+    facility = allFacilities.find(f => {
+      const normalizedFacilityName = this.normalizeFacilityName(f.facilityName).toLowerCase();
+      return normalizedFacilityName === normalizedSearchLower;
+    });
+
+    if (facility) {
+      return facility;
+    }
+
+    // Strategy 4: Try partial match (contains) as absolute last resort
+    facility = allFacilities.find(f => {
+      const normalizedFacilityName = this.normalizeFacilityName(f.facilityName).toLowerCase();
+      return normalizedFacilityName.includes(normalizedSearchLower) || 
+             normalizedSearchLower.includes(normalizedFacilityName);
+    });
+
+    return facility || null;
+  }
+
   async create(createFacilityDto: CreateFacilityDto): Promise<Facility> {
     try {
       // Normalize facility name before saving
@@ -56,8 +117,9 @@ export class FacilityService {
       );
 
       // Check if facility already exists (with normalized name)
+      const escapedName = this.escapeRegex(createFacilityDto.facilityName);
       const existingFacility = await this.facilityModel.findOne({
-        facilityName: { $regex: new RegExp(`^${createFacilityDto.facilityName}$`, 'i') },
+        facilityName: { $regex: new RegExp(`^${escapedName}$`, 'i') },
       });
 
       if (existingFacility) {
@@ -119,25 +181,29 @@ export class FacilityService {
     // Build search query
     if (search) {
       const normalizedSearch = this.normalizeFacilityName(search);
+      const escapedSearch = this.escapeRegex(normalizedSearch);
       query.$or = [
-        { facilityName: { $regex: normalizedSearch, $options: 'i' } },
+        { facilityName: { $regex: escapedSearch, $options: 'i' } },
         { email: { $regex: search, $options: 'i' } },
-        { 'location.city': { $regex: normalizedSearch, $options: 'i' } },
+        { 'location.city': { $regex: escapedSearch, $options: 'i' } },
       ];
     }
 
     // Filter by location
     if (city) {
       const normalizedCity = this.normalizeFacilityName(city);
-      query['location.city'] = { $regex: normalizedCity, $options: 'i' };
+      const escapedCity = this.escapeRegex(normalizedCity);
+      query['location.city'] = { $regex: escapedCity, $options: 'i' };
     }
     if (state) {
       const normalizedState = this.normalizeFacilityName(state);
-      query['location.state'] = { $regex: normalizedState, $options: 'i' };
+      const escapedState = this.escapeRegex(normalizedState);
+      query['location.state'] = { $regex: escapedState, $options: 'i' };
     }
     if (country) {
       const normalizedCountry = this.normalizeFacilityName(country);
-      query['location.country'] = { $regex: normalizedCountry, $options: 'i' };
+      const escapedCountry = this.escapeRegex(normalizedCountry);
+      query['location.country'] = { $regex: escapedCountry, $options: 'i' };
     }
     
     // Filter by active status
@@ -164,40 +230,17 @@ export class FacilityService {
   }
 
   async findOne(facilityName: string): Promise<Facility> {
-    // Prepare the search name (decode URL and normalize)
-    const searchName = this.prepareSearchName(facilityName);
-    
-    // Try exact match with normalized name
-    const facility = await this.facilityModel.findOne({ 
-      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
-    }).exec();
+    const facility = await this.findFacilityByName(facilityName);
 
     if (!facility) {
-      // If not found, try a more flexible search (allowing minor variations)
-      const escapedName = searchName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regexPattern = `^\\s*${escapedName.replace(/\s+/g, '\\s*')}\\s*$`;
-      
-      const flexibleMatch = await this.facilityModel.findOne({ 
-        facilityName: { $regex: new RegExp(regexPattern, 'i') } 
-      }).exec();
-
-      if (!flexibleMatch) {
-        throw new NotFoundException(`Facility with name "${facilityName}" not found`);
-      }
-      
-      return flexibleMatch;
+      throw new NotFoundException(`Facility with name "${facilityName}" not found`);
     }
 
     return facility;
   }
 
   async update(facilityName: string, updateFacilityDto: UpdateFacilityDto): Promise<Facility> {
-    // Prepare the search name
-    const searchName = this.prepareSearchName(facilityName);
-    
-    const facility = await this.facilityModel.findOne({ 
-      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
-    });
+    const facility = await this.findFacilityByName(facilityName);
 
     if (!facility) {
       throw new NotFoundException(`Facility with name "${facilityName}" not found`);
@@ -211,8 +254,9 @@ export class FacilityService {
       
       // Prevent updating facility name if it's being changed to an existing one
       if (updateFacilityDto.facilityName !== facility.facilityName) {
+        const escapedName = this.escapeRegex(updateFacilityDto.facilityName);
         const existingFacility = await this.facilityModel.findOne({
-          facilityName: { $regex: new RegExp(`^${updateFacilityDto.facilityName}$`, 'i') },
+          facilityName: { $regex: new RegExp(`^${escapedName}$`, 'i') },
         });
 
         if (existingFacility) {
@@ -250,28 +294,26 @@ export class FacilityService {
   }
 
   async remove(facilityName: string): Promise<{ message: string }> {
-    // Prepare the search name
-    const searchName = this.prepareSearchName(facilityName);
-    
-    const result = await this.facilityModel.deleteOne({ 
-      facilityName: { $regex: new RegExp(`^${searchName}$`, 'i') } 
-    });
+    const facility = await this.findFacilityByName(facilityName);
 
-    if (result.deletedCount === 0) {
+    if (!facility) {
       throw new NotFoundException(`Facility with name "${facilityName}" not found`);
     }
 
-    return { message: `Facility "${facilityName}" deleted successfully` };
+    await this.facilityModel.deleteOne({ _id: facility._id });
+
+    return { message: `Facility "${facility.facilityName}" deleted successfully` };
   }
 
   async searchFacilities(query: string): Promise<Facility[]> {
     const normalizedQuery = this.normalizeFacilityName(query);
+    const escapedQuery = this.escapeRegex(normalizedQuery);
     
     return this.facilityModel.find({
       $or: [
-        { facilityName: { $regex: normalizedQuery, $options: 'i' } },
-        { 'location.city': { $regex: normalizedQuery, $options: 'i' } },
-        { 'location.state': { $regex: normalizedQuery, $options: 'i' } }
+        { facilityName: { $regex: escapedQuery, $options: 'i' } },
+        { 'location.city': { $regex: escapedQuery, $options: 'i' } },
+        { 'location.state': { $regex: escapedQuery, $options: 'i' } }
       ],
       isActive: true,
     }).limit(10).exec();
@@ -321,8 +363,9 @@ export class FacilityService {
       );
       
       // Check if new name already exists
+      const escapedName = this.escapeRegex(updateFacilityDto.facilityName);
       const existingFacility = await this.facilityModel.findOne({
-        facilityName: { $regex: new RegExp(`^${updateFacilityDto.facilityName}$`, 'i') },
+        facilityName: { $regex: new RegExp(`^${escapedName}$`, 'i') },
         _id: { $ne: id }, // Exclude current facility
       });
 
