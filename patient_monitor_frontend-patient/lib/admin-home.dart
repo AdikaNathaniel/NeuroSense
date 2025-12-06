@@ -243,7 +243,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
           : AppBar(
               title: Text(_selectedPage),
               centerTitle: true,
-              backgroundColor: Colors.greenAccent,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
@@ -595,15 +595,15 @@ class UserCard extends StatelessWidget {
     } else if (typeLower.contains('relative')) {
       userTypeIcon = Icons.family_restroom;
       userTypeText = 'Relative';
-      userTypeColor = Colors.blue;
+      userTypeColor = Colors.green;
     } else if (typeLower.contains('pregnant') || typeLower.contains('mother')) {
       userTypeIcon = Icons.pregnant_woman;
       userTypeText = 'Mother';
-      userTypeColor = Colors.pink;
+      userTypeColor = Colors.green;
     } else if (typeLower.contains('caregiver')) {
       userTypeIcon = Icons.health_and_safety;
       userTypeText = 'Caregiver';
-      userTypeColor = Colors.orange;
+      userTypeColor = Colors.green;
     } else {
       userTypeIcon = Icons.account_circle;
       userTypeText = user.type;
@@ -679,10 +679,10 @@ class UserCard extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                         decoration: BoxDecoration(
-                          color: user.isVerified ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+                          color: user.isVerified ? Colors.green.withOpacity(0.1) : Colors.green.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: user.isVerified ? Colors.green : Colors.orange,
+                            color: user.isVerified ? Colors.green : Colors.green,
                             width: 1,
                           ),
                         ),
@@ -692,7 +692,7 @@ class UserCard extends StatelessWidget {
                             Icon(
                               user.isVerified ? Icons.verified : Icons.pending,
                               size: 12,
-                              color: user.isVerified ? Colors.green : Colors.orange,
+                              color: user.isVerified ? Colors.green : Colors.green,
                             ),
                             const SizedBox(width: 4),
                             Text(
@@ -700,7 +700,7 @@ class UserCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w500,
-                                color: user.isVerified ? Colors.green : Colors.orange,
+                                color: user.isVerified ? Colors.green : Colors.green,
                               ),
                             ),
                           ],

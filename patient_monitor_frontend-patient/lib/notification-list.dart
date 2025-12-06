@@ -75,7 +75,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
       appBar: AppBar(
         title: const Text("All Notifications"),
         centerTitle: true,
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         actions: [
           IconButton(

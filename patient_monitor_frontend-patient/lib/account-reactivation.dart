@@ -33,8 +33,8 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Account Reactivation',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          'Account Reactivation'
+          // style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Colors.green,
@@ -140,7 +140,7 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
                     : const Text(
-                        'Reactivate Account',
+                        'Reactivate',
                         style: TextStyle(fontSize: 16),
                       ),
               ),
@@ -176,7 +176,7 @@ class _AccountReactivationPageState extends State<AccountReactivationPage> {
           Text(
             'Account Reactivated Successfully!',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Colors.green.shade800,
+                  color: Colors.green,
                   fontWeight: FontWeight.bold,
                 ),
             textAlign: TextAlign.center,
