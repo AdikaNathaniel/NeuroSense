@@ -25,10 +25,20 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
   Uint8List? _webImage;
   String? _imageName;
   
+  // Store the uploaded image URL
+  String? _uploadedImageUrl;
+  
   // Track whether user wants to upload image or provide URL
   bool _useImageUrl = false;
   
+  // Track if image is being uploaded
+  bool _isUploadingImage = false;
+  
   final picker = ImagePicker();
+
+  // ImgBB API Key - You need to get this from https://api.imgbb.com/
+
+
 
   // Controllers
   final facilityNameController = TextEditingController();
@@ -46,29 +56,151 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
   bool isSubmitting = false;
 
   Future<void> _pickImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    
-    if (pickedFile != null) {
-      if (kIsWeb) {
-        // For web platform
+    try {
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1920,
+        maxHeight: 1920,
+        imageQuality: 85,
+      );
+      
+      if (pickedFile != null) {
+        setState(() {
+          _isUploadingImage = true;
+        });
+
+        // Read the image bytes
         final bytes = await pickedFile.readAsBytes();
-        setState(() {
-          _webImage = bytes;
-          _imageName = pickedFile.name;
-          _useImageUrl = false; // Switch to image upload mode
-        });
-      } else {
-        // For mobile platforms
-        setState(() {
-          _imageFile = io.File(pickedFile.path);
-          _useImageUrl = false; // Switch to image upload mode
-        });
+        
+        // Upload to ImgBB and get URL
+        final imageUrl = await _uploadImageToImgBB(bytes, pickedFile.name);
+        
+        if (imageUrl != null) {
+          setState(() {
+            if (kIsWeb) {
+              _webImage = bytes;
+              _imageName = pickedFile.name;
+            } else {
+              _imageFile = io.File(pickedFile.path);
+            }
+            _uploadedImageUrl = imageUrl;
+            _useImageUrl = false;
+            _isUploadingImage = false;
+          });
+          
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Image uploaded successfully!'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
+        } else {
+          setState(() {
+            _isUploadingImage = false;
+          });
+          
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Failed to upload image. Please try again or use Image URL.'),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 3),
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      setState(() {
+        _isUploadingImage = false;
+      });
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
 
+  Future<String?> _uploadImageToImgBB(Uint8List imageBytes, String fileName) async {
+    try {
+      // Convert image bytes to base64
+      final base64Image = base64Encode(imageBytes);
+      
+      // ImgBB upload endpoint
+      final uri = Uri.parse('https://api.imgbb.com/1/upload');
+      
+      final response = await http.post(
+        uri,
+        body: {
+          'key': _imgbbApiKey,
+          'image': base64Image,
+          'name': fileName,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data['success'] == true) {
+          // Return the direct image URL
+          return data['data']['url'] as String;
+        }
+      }
+      
+      print('ImgBB upload failed: ${response.statusCode} - ${response.body}');
+      return null;
+    } catch (e) {
+      print('Error uploading to ImgBB: $e');
+      return null;
+    }
+  }
+
   Future<void> _submitForm() async {
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all required fields'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    // Validate that we have an image (either uploaded or URL provided)
+    String? finalImageUrl;
+    
+    if (_useImageUrl) {
+      // User provided URL directly
+      if (imageUrlController.text.trim().isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please provide an image URL'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+        return;
+      }
+      finalImageUrl = imageUrlController.text.trim();
+    } else {
+      // User uploaded image
+      if (_uploadedImageUrl == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please upload an image first'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+        return;
+      }
+      finalImageUrl = _uploadedImageUrl;
+    }
 
     setState(() {
       isSubmitting = true;
@@ -76,81 +208,105 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
 
     try {
       final uri = Uri.parse('https://neurosense-palsy.fly.dev/api/v1/facilities');
-      final request = http.MultipartRequest('POST', uri);
-
-      String? imageUrl;
       
-      // Handle image - either upload file or use provided URL
-      if (!_useImageUrl && ((kIsWeb && _webImage != null) || (!kIsWeb && _imageFile != null))) {
-        // Upload image file
-        if (kIsWeb && _webImage != null) {
-          request.files.add(
-            http.MultipartFile.fromBytes(
-              'image',
-              _webImage!,
-              filename: _imageName ?? 'facility_image.jpg',
-            ),
-          );
-        } else if (!kIsWeb && _imageFile != null) {
-          request.files.add(
-            await http.MultipartFile.fromPath('image', _imageFile!.path),
-          );
+      // Validate and parse established year
+      int? establishedYear;
+      if (establishedYearController.text.trim().isNotEmpty) {
+        establishedYear = int.tryParse(establishedYearController.text.trim());
+        if (establishedYear == null) {
+          throw Exception('Invalid year format');
         }
-      } else if (_useImageUrl && imageUrlController.text.isNotEmpty) {
-        // Use provided URL
-        request.fields['image'] = imageUrlController.text.trim();
       }
-
-      // Prepare location object
-      final location = {
-        'address': addressController.text.trim(),
-        'city': cityController.text.trim(),
-        'state': stateController.text.trim(),
-        'country': countryController.text.trim(),
-      };
-
-      // Add form fields
-      request.fields.addAll({
+      
+      // Prepare the JSON body exactly as the API expects
+      final Map<String, dynamic> body = {
         'facilityName': facilityNameController.text.trim(),
+        'image': finalImageUrl,
         'email': emailController.text.trim(),
         'phoneNumber': phoneController.text.trim(),
+        'location': {
+          'address': addressController.text.trim(),
+          'city': cityController.text.trim(),
+          'state': stateController.text.trim(),
+          'country': countryController.text.trim(),
+        },
         'description': descriptionController.text.trim(),
         'website': websiteController.text.trim(),
-        'establishedYear': establishedYearController.text.trim(),
-        'location[address]': location['address']!,
-        'location[city]': location['city']!,
-        'location[state]': location['state']!,
-        'location[country]': location['country']!,
-      });
+      };
 
-      final response = await request.send();
+      // Only add establishedYear if it's valid
+      if (establishedYear != null) {
+        body['establishedYear'] = establishedYear;
+      }
+
+      print('Sending request to: $uri');
+      print('Request body: ${jsonEncode(body)}');
+
+      // Send as JSON with proper headers
+      final response = await http.post(
+        uri,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode(body),
+      );
       
-      if (response.statusCode == 201) {
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+      
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // Parse response
+        final responseData = jsonDecode(response.body);
+        
         // Show success dialog
-        await _showSuccessDialog();
-        _resetForm();
+        if (mounted) {
+          await _showSuccessDialog(responseData);
+          _resetForm();
+        }
       } else {
-        final responseBody = await response.stream.bytesToString();
+        // Try to parse error message
+        String errorMessage = 'Error: ${response.statusCode}';
+        try {
+          final errorData = jsonDecode(response.body);
+          if (errorData['message'] != null) {
+            errorMessage = errorData['message'].toString();
+          } else if (errorData['error'] != null) {
+            errorMessage = errorData['error'].toString();
+          }
+        } catch (e) {
+          errorMessage += ' - ${response.body}';
+        }
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 5),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('Exception occurred: $e');
+      if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: ${response.statusCode} - $responseBody'),
+            content: Text('Error: $e'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Error: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
     } finally {
-      setState(() => isSubmitting = false);
+      if (mounted) {
+        setState(() => isSubmitting = false);
+      }
     }
   }
 
-  Future<void> _showSuccessDialog() async {
+  Future<void> _showSuccessDialog(Map<String, dynamic>? responseData) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -159,10 +315,17 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
           title: const Text('Success'),
           content: SingleChildScrollView(
             child: ListBody(
-              children: const <Widget>[
-                Icon(Icons.check_circle, color: Colors.green, size: 60),
-                SizedBox(height: 20),
-                Text('Facility Profile Successfully submitted!'),
+              children: <Widget>[
+                const Icon(Icons.check_circle, color: Colors.green, size: 60),
+                const SizedBox(height: 20),
+                const Text('Facility Profile Successfully submitted!'),
+                if (responseData != null && responseData['result'] != null) ...[
+                  const SizedBox(height: 10),
+                  Text(
+                    'Facility ID: ${responseData['result']['_id']}',
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
               ],
             ),
           ),
@@ -197,39 +360,67 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
       _imageFile = null;
       _webImage = null;
       _imageName = null;
+      _uploadedImageUrl = null;
       _useImageUrl = false;
     });
   }
 
   Widget _buildImageWidget() {
-    // If user wants to use URL, show placeholder
-    if (_useImageUrl) {
-      return CircleAvatar(
-        radius: 60,
-        backgroundColor: Colors.green[100],
-        child: const Icon(Icons.link, size: 40, color: Colors.green),
-      );
-    }
-    
-    // Show uploaded image
-    if (kIsWeb && _webImage != null) {
-      return CircleAvatar(
-        radius: 60,
-        backgroundImage: MemoryImage(_webImage!),
-      );
-    } else if (!kIsWeb && _imageFile != null) {
-      return CircleAvatar(
-        radius: 60,
-        backgroundImage: FileImage(_imageFile!),
-      );
-    } else {
-      // Default placeholder
+    // Show loading indicator when uploading
+    if (_isUploadingImage) {
       return CircleAvatar(
         radius: 60,
         backgroundColor: Colors.grey[300],
-        child: const Icon(Icons.business, size: 60, color: Colors.grey),
+        child: const CircularProgressIndicator(strokeWidth: 3),
       );
     }
+
+    // If user uploaded image, show it
+    if (!_useImageUrl && _uploadedImageUrl != null) {
+      if (kIsWeb && _webImage != null) {
+        return CircleAvatar(
+          radius: 60,
+          backgroundImage: MemoryImage(_webImage!),
+        );
+      } else if (!kIsWeb && _imageFile != null) {
+        return CircleAvatar(
+          radius: 60,
+          backgroundImage: FileImage(_imageFile!),
+        );
+      }
+    }
+    
+    // If user provided URL and has entered one, try to show preview
+    if (_useImageUrl && imageUrlController.text.trim().isNotEmpty) {
+      return CircleAvatar(
+        radius: 60,
+        backgroundColor: Colors.grey[300],
+        child: ClipOval(
+          child: Image.network(
+            imageUrlController.text.trim(),
+            width: 120,
+            height: 120,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.link, size: 40, color: Colors.orange);
+            },
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 2),
+              );
+            },
+          ),
+        ),
+      );
+    }
+    
+    // Default placeholder
+    return CircleAvatar(
+      radius: 60,
+      backgroundColor: Colors.grey[300],
+      child: const Icon(Icons.business, size: 60, color: Colors.grey),
+    );
   }
 
   @override
@@ -261,27 +452,28 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                         child: Stack(
                           children: [
                             _buildImageWidget(),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(Icons.camera_alt, color: Colors.white),
-                                  onPressed: _pickImage,
+                            if (!_useImageUrl && !_isUploadingImage)
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.camera_alt, color: Colors.white),
+                                    onPressed: _pickImage,
+                                  ),
                                 ),
                               ),
-                            ),
                           ],
                         ),
                       ),
                       
                       const SizedBox(height: 16),
                       
-                      // Toggle between image upload and URL - Fixed overflow
+                      // Toggle between image upload and URL
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -306,13 +498,13 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                                   _useImageUrl = selected;
                                 });
                               },
-                              selectedColor: Colors.green[100],
+                              selectedColor: Colors.orange[100],
                             ),
                           ],
                         ),
                       ),
                       
-                      // Image URL field (only shown when using URL)
+                      // Only show URL field if user selects "Use Image URL"
                       if (_useImageUrl) ...[
                         const SizedBox(height: 16),
                         TextFormField(
@@ -320,50 +512,117 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                           keyboardType: TextInputType.url,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.link),
-                            labelText: 'Image URL',
+                            labelText: 'Image URL *',
                             hintText: 'https://example.com/image.jpg',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(color: Colors.green, width: 2),
+                              borderSide: const BorderSide(color: Colors.orange, width: 2),
                             ),
+                            filled: true,
+                            fillColor: Colors.orange[50],
                           ),
-                          validator: _useImageUrl ? (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please provide an image URL';
-                            }
-                            if (!value.startsWith('http')) {
-                              return 'Please enter a valid URL';
+                          validator: (value) {
+                            if (_useImageUrl) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Image URL is required';
+                              }
+                              if (!value.trim().startsWith('http')) {
+                                return 'Please enter a valid URL starting with http:// or https://';
+                              }
                             }
                             return null;
-                          } : null,
+                          },
+                          onChanged: (value) {
+                            // Trigger rebuild to show image preview
+                            setState(() {});
+                          },
                         ),
                       ],
                       
                       // Helper text
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
                       Text(
                         _useImageUrl 
-                          ? 'Provide a direct link to your facility image'
-                          : 'Upload a photo of your facility',
+                          ? 'Paste a direct link to your facility image'
+                          : _uploadedImageUrl != null
+                              ? '✓ Image uploaded successfully'
+                              : 'Click the camera button to upload an image',
                         style: TextStyle(
-                          color: Colors.grey[600],
+                          color: _uploadedImageUrl != null ? Colors.green : Colors.grey[600],
                           fontSize: 12,
-                          fontStyle: FontStyle.italic,
+                          fontWeight: _uploadedImageUrl != null ? FontWeight.bold : FontWeight.normal,
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      
+                      if (_isUploadingImage) ...[
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Uploading image...',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ],
                   ),
                 ),
               ),
               
               // Facility Information Fields
-              _buildTextField(facilityNameController, "Facility Name", Icons.business),
-              _buildTextField(emailController, "Email", Icons.email, keyboardType: TextInputType.emailAddress),
-              _buildTextField(phoneController, "Phone Number", Icons.phone, keyboardType: TextInputType.phone),
+              _buildTextField(
+                facilityNameController, 
+                "Facility Name", 
+                Icons.business,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Facility name is required';
+                  }
+                  if (value.trim().length < 3) {
+                    return 'Facility name must be at least 3 characters';
+                  }
+                  return null;
+                },
+              ),
+              
+              _buildTextField(
+                emailController, 
+                "Email", 
+                Icons.email, 
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Email is required';
+                  }
+                  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value.trim())) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
+              ),
+              
+              _buildTextField(
+                phoneController, 
+                "Phone Number", 
+                Icons.phone, 
+                keyboardType: TextInputType.phone,
+                hintText: '+233200000000',
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Phone number is required';
+                  }
+                  if (value.trim().length < 10) {
+                    return 'Please enter a valid phone number';
+                  }
+                  return null;
+                },
+              ),
               
               // Location Section
               Card(
@@ -388,19 +647,50 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                 ),
               ),
               
-              _buildTextField(descriptionController, "Description", Icons.description,
+              _buildTextField(
+                descriptionController, 
+                "Description", 
+                Icons.description,
                 maxLines: 3,
                 keyboardType: TextInputType.multiline,
               ),
               
-              _buildTextField(websiteController, "Website", Icons.language,
+              _buildTextField(
+                websiteController, 
+                "Website", 
+                Icons.language,
                 keyboardType: TextInputType.url,
                 hintText: 'https://example.com',
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Website is required';
+                  }
+                  if (!value.trim().startsWith('http')) {
+                    return 'Website must start with http:// or https://';
+                  }
+                  return null;
+                },
               ),
               
-              _buildTextField(establishedYearController, "Year Established", Icons.calendar_today,
+              _buildTextField(
+                establishedYearController, 
+                "Year Established", 
+                Icons.calendar_today,
                 keyboardType: TextInputType.number,
                 hintText: 'e.g., 2012',
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Year is required';
+                  }
+                  final year = int.tryParse(value.trim());
+                  if (year == null) {
+                    return 'Please enter a valid year';
+                  }
+                  if (year < 1900 || year > DateTime.now().year) {
+                    return 'Please enter a valid year between 1900 and ${DateTime.now().year}';
+                  }
+                  return null;
+                },
               ),
               
               const SizedBox(height: 24),
@@ -415,11 +705,19 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: isSubmitting ? null : _submitForm,
+                onPressed: (isSubmitting || _isUploadingImage) ? null : _submitForm,
                 child: isSubmitting
-                    ? const CircularProgressIndicator(color: Colors.white)
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
                     : const Text(
-                        "Submit Profile"
+                        "Submit Profile",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
               ),
             ],
@@ -437,6 +735,7 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
       TextInputType? keyboardType,
       int maxLines = 1,
       String? hintText,
+      String? Function(String?)? validator,
     }
   ) {
     return Padding(
@@ -459,7 +758,12 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
           filled: true,
           fillColor: Colors.grey[50],
         ),
-        validator: (value) => value == null || value.isEmpty ? 'This field is required' : null,
+        validator: validator ?? (value) {
+          if (value == null || value.trim().isEmpty) {
+            return 'This field is required';
+          }
+          return null;
+        },
       ),
     );
   }
@@ -480,7 +784,6 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
     super.dispose();
   }
 }
-
 
 // Link For CLCD-Ghana...Remove Ashaley Botwe,Ghana to just Ashaley Botwe
 
